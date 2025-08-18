@@ -1,0 +1,34 @@
+---
+sidebar: sidebar 
+permalink: data-analytics/kafka-sc-performance.html 
+keywords: data graphs, kafka throughput, s3 tiering traffic, aff a900, resource utilization 
+summary: Realizamos pruebas de almacenamiento en niveles con cinco u ocho nodos intermediarios durante una carga de trabajo de producción-consumo con un controlador de almacenamiento NetApp de par AFF A900 HA.  Según nuestras pruebas, el tiempo de finalización y los resultados de rendimiento aumentaron con el número de nodos del intermediario hasta que la utilización de recursos del AFF A900 alcanzó el cien por ciento.  La configuración del controlador de almacenamiento ONTAP requiere un mínimo de un par HA. 
+---
+= Pruebas de rendimiento con generador de carga de trabajo de producción y consumo
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Realizamos pruebas de almacenamiento en niveles con cinco u ocho nodos intermediarios durante una carga de trabajo de producción-consumo con un controlador de almacenamiento NetApp de par AFF A900 HA.  Según nuestras pruebas, el tiempo de finalización y los resultados de rendimiento aumentaron con el número de nodos del intermediario hasta que la utilización de recursos del AFF A900 alcanzó el cien por ciento.  La configuración del controlador de almacenamiento ONTAP requiere un mínimo de un par HA.
+
+El rendimiento de la operación de recuperación de S3 aumentó linealmente en función del número de nodos del agente Confluent.  El controlador de almacenamiento ONTAP admite hasta 12 pares HA en una sola implementación.
+
+El siguiente gráfico muestra el tráfico combinado de niveles S3 con cinco u ocho nodos de intermediario.  Maximizamos el rendimiento del par HA único AFF A900 .
+
+image:kafka-sc-009.png["Este gráfico de datos muestra el tráfico combinado en niveles S3 con cinco u ocho nodos de intermediario."]
+
+El siguiente gráfico muestra el rendimiento de Kafka en aproximadamente 31,74 GBps.
+
+image:kafka-sc-010.png["Este gráfico de datos muestra el rendimiento de Kafka en aproximadamente 31,74 GBps."]
+
+También observamos un rendimiento similar en el controlador de almacenamiento ONTAP `perfstat` informe.
+
+....
+object_store_server:wle-mendocino-07-08:get_data:34080805907b/ s
+object_store_server:wle-mendocino-07-08:put_data:484236974b/ s
+....

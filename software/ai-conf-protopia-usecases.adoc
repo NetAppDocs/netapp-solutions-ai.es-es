@@ -1,0 +1,49 @@
+---
+sidebar: sidebar 
+permalink: software/ai-conf-protopia-usecases.html 
+keywords: environmental intelligence, edge device wearables, noncombatant evacuation operations, cloud migration of analytics 
+summary: El procesamiento de imágenes digitales conlleva muchas ventajas y permite a muchas organizaciones aprovechar al máximo los datos asociados a las representaciones visuales.  Esta solución de NetApp y Protopia proporciona un diseño de inferencia de IA único para proteger y privatizar los datos de IA/ML en todo el ciclo de vida de ML/DL.  Permite a los clientes conservar la propiedad de datos confidenciales, utilizar modelos de implementación de nube pública o híbrida para lograr escala y eficiencia al aliviar las preocupaciones relacionadas con la privacidad e implementar inferencias de IA en el borde. 
+---
+= Áreas de solución
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+El procesamiento de imágenes digitales conlleva muchas ventajas y permite a muchas organizaciones aprovechar al máximo los datos asociados a las representaciones visuales.  Esta solución de NetApp y Protopia proporciona un diseño de inferencia de IA único para proteger y privatizar los datos de IA/ML en todo el ciclo de vida de ML/DL.  Permite a los clientes conservar la propiedad de datos confidenciales, utilizar modelos de implementación de nube pública o híbrida para lograr escala y eficiencia al aliviar las preocupaciones relacionadas con la privacidad e implementar inferencias de IA en el borde.
+
+
+
+== Inteligencia ambiental
+
+Hay muchas formas en que las industrias pueden aprovechar el análisis geoespacial en las áreas de riesgos ambientales.  Los gobiernos y el departamento de obras públicas pueden obtener información útil sobre la salud pública y las condiciones climáticas para asesorar mejor al público durante una pandemia o un desastre natural, como los incendios forestales.  Por ejemplo, se puede identificar a un paciente positivo a COVID en espacios públicos, como aeropuertos u hospitales, sin comprometer la privacidad del individuo afectado y alertar a las autoridades respectivas y al público en los alrededores para que tomen las medidas de seguridad necesarias.
+
+
+
+== Dispositivos portátiles de borde
+
+En el ámbito militar y en los campos de batalla, se puede utilizar la inferencia de IA en el borde como dispositivos portátiles para rastrear la salud de los soldados, monitorear el comportamiento del conductor y alertar a las autoridades sobre la seguridad y los riesgos asociados al acercarse a vehículos militares mientras se preserva y protege la privacidad de los soldados.  El futuro de las fuerzas armadas se está volviendo de alta tecnología con la Internet de las cosas del campo de batalla (IoBT) y la Internet de las cosas militares (IoMT) para equipos de combate portátiles que ayudan a los soldados a identificar enemigos y desempeñarse mejor en la batalla mediante el uso de computación de borde rápida.  Proteger y preservar los datos visuales recopilados desde dispositivos periféricos, como drones y equipos portátiles, es crucial para mantener a raya a los piratas informáticos y al enemigo.
+
+
+
+== Operaciones de evacuación de no combatientes
+
+Las operaciones de evacuación de no combatientes (NEOs) son llevadas a cabo por el Departamento de Defensa para ayudar a evacuar a ciudadanos y nacionales estadounidenses, personal civil del Departamento de Defensa y personas designadas (nacionales de países anfitriones (HN) y de terceros países (TCN)) cuyas vidas están en peligro a un refugio seguro apropiado.  Los controles administrativos establecidos utilizan en gran medida procesos manuales de selección de evacuados.  Sin embargo, la precisión, la seguridad y la velocidad de la identificación de los evacuados, su seguimiento y la detección de amenazas podrían mejorarse potencialmente mediante el uso de herramientas de IA/ML altamente automatizadas combinadas con tecnologías de ofuscación de vídeo de IA/ML.
+
+
+
+== Investigación biomédica y sanitaria
+
+El procesamiento de imágenes se utiliza para diagnosticar patologías para la planificación quirúrgica a partir de imágenes 3D obtenidas por tomografía computarizada (TC) o resonancia magnética (RM).  Las normas de privacidad de HIPAA rigen cómo las organizaciones deben recopilar, procesar y borrar toda la información personal e imágenes digitales como fotografías.  Para que los datos califiquen como compartibles según las regulaciones de puerto seguro de HIPAA, se deben eliminar las imágenes fotográficas de rostro completo y cualquier imagen comparable.  Las técnicas automatizadas como los algoritmos de desidentificación o de extracción del cráneo utilizados para ocultar los rasgos faciales de un individuo en las imágenes de TC/RM estructurales se han convertido en una parte esencial del proceso de intercambio de datos para las instituciones de investigación biomédica.
+
+
+
+== Migración a la nube de análisis de IA/ML
+
+Los clientes empresariales tradicionalmente han entrenado e implementado modelos de IA/ML en sus instalaciones.  Por razones de economías de escala y eficiencia, estos clientes se están expandiendo para trasladar funciones de IA/ML a implementaciones de nube pública, híbrida o multinube.  Sin embargo, están limitados por qué datos pueden exponerse a otras infraestructuras.  Las soluciones de NetApp abordan una gama completa de amenazas de ciberseguridad necesarias para https://www.netapp.com/data-protection/?internal_promo=mdw_aiml_ww_all_awareness-coas_blog["protección de datos"^] y evaluación de seguridad y, cuando se combina con la transformación de datos de Protopia, minimiza los riesgos asociados con la migración de cargas de trabajo de IA/ML de procesamiento de imágenes a la nube.
+
+Para conocer casos de uso adicionales para la computación de borde y la inferencia de IA en otras industrias, consultelink:../infra/ai-lenovo-edge-intro.html["TR-4886 Inferencia de IA en el borde"^] y el blog de IA de NetApp , https://www.netapp.com/blog/federated-learning-intelligence-vs-privacy/["Inteligencia versus privacidad"^] .

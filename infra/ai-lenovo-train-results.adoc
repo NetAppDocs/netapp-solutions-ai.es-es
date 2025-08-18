@@ -1,0 +1,27 @@
+---
+sidebar: sidebar 
+permalink: infra/ai-lenovo-train-results.html 
+keywords: test results, data, 
+summary: Esta sección resume los resultados de las pruebas en esta solución. 
+---
+= Resultados de la prueba
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+La siguiente tabla resume los resultados de todas las pruebas realizadas para esta solución.
+
+|===
+| Descripción de la prueba | Resumen de resultados 
+
+
+| Entrenamiento de reconocimiento de imágenes: múltiples trabajos simultáneos | Rendimiento altamente eficiente.  Todos los trabajos se ejecutaron a máxima velocidad incluso cuando el clúster estaba completamente utilizado.  Los sistemas de almacenamiento de NetApp brindaron un rendimiento de entrenamiento comparable al almacenamiento SSD local y al mismo tiempo permitieron compartir datos fácilmente entre servidores. 
+
+
+| Entrenamiento de reconocimiento de imágenes: escalamiento horizontal | Altamente eficiente para hasta cuatro nodos.  En ese momento, la ampliación horizontal era menos eficiente, pero aún factible.  El uso de una red computacional de mayor velocidad mejora la escalabilidad.  El sistema de almacenamiento NetApp ofreció un rendimiento de entrenamiento comparable al almacenamiento SSD local y al mismo tiempo permitió compartir datos fácilmente entre servidores. 
+|===

@@ -1,0 +1,19 @@
+---
+sidebar: sidebar 
+permalink: data-analytics/sb-4154.html 
+keywords:  
+summary:  
+---
+= Análisis de datos moderno: diferentes soluciones para diferentes estrategias analíticas
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Este documento técnico describe las estrategias de soluciones de análisis de datos modernos de NetApp .  Incluye detalles sobre los resultados comerciales, los desafíos de los clientes, las tendencias tecnológicas, la arquitectura heredada de la competencia, los flujos de trabajo modernos, los casos de uso, las industrias, la nube, los socios tecnológicos, los transportadores de datos, NetApp Active IQ Digital Advisor (también conocido como Digital Advisor), NetApp DataOps Toolkit, Hadoop a Spark, almacenamiento definido por software con NetApp Trident Protect, contenedores, gestión de datos empresariales, archivado y niveles para lograr los objetivos de IA y análisis, y cómo NetApp y los clientes juntos están modernizando su arquitectura de datos.
+
+link:https://www.netapp.com/pdf.html?item=/media/58015-sb-4154.pdf["Análisis de datos moderno: diferentes soluciones para diferentes estrategias analíticas"^]

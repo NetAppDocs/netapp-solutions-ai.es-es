@@ -1,0 +1,23 @@
+---
+sidebar: sidebar 
+permalink: software/ai-osmlops-jhub-ingest.html 
+keywords: AI, control plane, MLOps, JupyterHub 
+summary: Ingesta de datos con NetApp SnapMirror 
+---
+= Ingerir datos en JupyterHub con NetApp SnapMirror
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+NetApp SnapMirror es una tecnología de replicación que le permite replicar datos entre sistemas de almacenamiento NetApp .  SnapMirror se puede utilizar para ingerir datos de entornos remotos en JupyterHub.
+
+
+
+== Ejemplo de flujo de trabajo y demostración
+
+Referirse alink:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Accelerating-Data-Ingestion-and-AI-ML-Experimentation-with-NetApp-SnapMirror-and/ba-p/457814["Esta publicación del blog de Tech ONTAP"] para obtener un ejemplo detallado de flujo de trabajo y una demostración del uso de NetApp SnapMirror para ingerir datos en JupyterHub.

@@ -1,0 +1,36 @@
+---
+sidebar: sidebar 
+permalink: vector-db/ai-vdb-dr-snapmirror.html 
+keywords: vector database 
+summary: 'Recuperación ante desastres con NetApp SnapMirror : solución de base de datos vectorial para NetApp' 
+---
+= Recuperación ante desastres mediante NetApp SnapMirror
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+En esta sección se analiza la recuperación ante desastres (DR) con SnapMirror para la solución de base de datos vectorial para NetApp.
+
+
+
+== Recuperación ante desastres mediante NetApp SnapMirror
+
+image:vector-database-dr-fsxn-gcnv.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+La recuperación ante desastres es crucial para mantener la integridad y disponibilidad de una base de datos vectorial, especialmente dada su función en la gestión de datos de alta dimensión y la ejecución de búsquedas de similitud complejas.  Una estrategia de recuperación ante desastres bien planificada e implementada garantiza que los datos no se pierdan ni se vean comprometidos en caso de incidentes imprevistos, como fallas de hardware, desastres naturales o ciberataques.  Esto es especialmente importante para las aplicaciones que dependen de bases de datos vectoriales, donde la pérdida o corrupción de datos podría provocar importantes interrupciones operativas y pérdidas financieras.  Además, un plan de recuperación ante desastres sólido también garantiza la continuidad del negocio al minimizar el tiempo de inactividad y permitir la rápida restauración de los servicios.  Esto se logra a través del producto de replicación de datos SnapMirror de NetApp en diferentes ubicaciones geográficas, copias de seguridad periódicas y mecanismos de conmutación por error.  Por lo tanto, la recuperación ante desastres no es sólo una medida de protección, sino un componente crítico de una gestión responsable y eficiente de bases de datos vectoriales.
+
+SnapMirror de NetApp proporciona replicación de datos de un controlador de almacenamiento NetApp ONTAP a otro, y se utiliza principalmente para recuperación ante desastres (DR) y soluciones híbridas.  En el contexto de una base de datos vectorial, esta herramienta facilita la transición fluida de datos entre entornos locales y en la nube.  Esta transición se logra sin necesidad de realizar conversiones de datos ni refactorizar aplicaciones, lo que mejora la eficiencia y la flexibilidad de la gestión de datos en múltiples plataformas.
+
+La solución híbrida de NetApp en un escenario de base de datos vectorial puede aportar más ventajas:
+
+. Escalabilidad: la solución de nube híbrida de NetApp ofrece la capacidad de escalar sus recursos según sus requisitos.  Puede utilizar recursos locales para cargas de trabajo regulares y predecibles y recursos en la nube como Amazon FSx ONTAP para NetApp ONTAP y Google Cloud NetApp Volume (NetApp Volumes) para horas pico o cargas inesperadas.
+. Eficiencia de costos: el modelo de nube híbrida de NetApp le permite optimizar sus costos al utilizar recursos locales para cargas de trabajo regulares y pagar por los recursos de la nube solo cuando los necesita.  Este modelo de pago por uso puede resultar bastante rentable con una oferta de servicios instaclustr de NetApp .  Para los principales proveedores de servicios locales y en la nube, instaclustr brinda soporte y consultoría.
+. Flexibilidad: la nube híbrida de NetApp le brinda la flexibilidad de elegir dónde procesar sus datos.  Por ejemplo, puede optar por realizar operaciones vectoriales complejas en sus instalaciones donde tiene hardware más potente y operaciones menos intensivas en la nube.
+. Continuidad del negocio: en caso de desastre, tener sus datos en una nube híbrida de NetApp puede garantizar la continuidad del negocio.  Puede cambiar rápidamente a la nube si sus recursos locales se ven afectados.  Podemos aprovechar NetApp SnapMirror para trasladar los datos desde las instalaciones locales a la nube y viceversa.
+. Innovación: Las soluciones de nube híbrida de NetApp también pueden permitir una innovación más rápida al brindar acceso a servicios y tecnologías de nube de vanguardia.  Las innovaciones de NetApp en la nube, como Amazon FSx ONTAP para NetApp ONTAP, Azure NetApp Files y Google Cloud NetApp Volumes, son productos innovadores y NAS preferidos de los proveedores de servicios en la nube.
+

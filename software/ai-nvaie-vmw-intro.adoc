@@ -1,0 +1,23 @@
+---
+sidebar: sidebar 
+permalink: software/ai-nvaie-vmw-intro.html 
+keywords: NetApp AI, AI, Artificial Intelligence, ML, Machine Learning, NVIDIA, NVIDIA AI Enterprise, NVAIE, VMware 
+summary: NVIDIA AI Enterprise es una suite integral de software de IA y análisis de datos nativo de la nube, optimizada para que cada organización pueda tener éxito con la IA. 
+---
+= NVIDIA AI Enterprise con NetApp y VMware
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+Mike Oglesby, NetApp
+
+[role="lead"]
+Para los arquitectos y administradores de TI, las herramientas de IA pueden ser complicadas y desconocidas.  Además, muchas plataformas de IA no están preparadas para el uso empresarial.  NVIDIA AI Enterprise, impulsado por NetApp y VMware, se creó para ofrecer una arquitectura de IA optimizada y de clase empresarial.
+
+NVIDIA AI Enterprise es una suite integral de software de inteligencia artificial y análisis de datos nativa de la nube, optimizada, certificada y respaldada por NVIDIA para ejecutarse en VMware vSphere con sistemas certificados NVIDIA.  Este software facilita la implementación, la gestión y el escalamiento simples y rápidos de cargas de trabajo de IA en el entorno de nube híbrida moderno.  NVIDIA AI Enterprise, con tecnología de NetApp y VMware, ofrece gestión de datos y cargas de trabajo de IA de nivel empresarial en un paquete simplificado y familiar.
+
+image:nvaie-001.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]

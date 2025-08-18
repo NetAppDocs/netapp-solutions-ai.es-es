@@ -1,0 +1,75 @@
+---
+sidebar: sidebar 
+permalink: data-analytics/hdcs-sh-conclusion.html 
+keywords: conclusion, summary, data protection, hadoop, more information, Acknowledgements 
+summary: Esta sección proporciona un resumen de los casos de uso y las soluciones proporcionadas por NetApp para cumplir con varios requisitos de protección de datos de Hadoop. 
+---
+= Conclusión
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta sección proporciona un resumen de los casos de uso y las soluciones proporcionadas por NetApp para cumplir con varios requisitos de protección de datos de Hadoop.  Al utilizar la estructura de datos impulsada por NetApp, los clientes pueden:
+
+* Tenga la flexibilidad de elegir las soluciones de protección de datos adecuadas aprovechando las ricas capacidades de gestión de datos de NetApp y la integración con los flujos de trabajo nativos de Hadoop.
+* Reduce el tiempo de copia de seguridad de su clúster Hadoop en casi un 70%.
+* Elimina cualquier efecto en el rendimiento resultante de las copias de seguridad del clúster Hadoop.
+* Proporciona protección de datos multicloud y acceso a datos de diferentes proveedores de nube simultáneamente a una única fuente de datos analíticos.
+* Cree copias de clústeres Hadoop rápidas y que ahorran espacio utilizando la tecnología FlexClone .
+
+
+
+
+== Dónde encontrar información adicional
+
+Para obtener más información sobre la información descrita en este documento, consulte los siguientes documentos y/o sitios web:
+
+* Soluciones de análisis de big data de NetApp
++
+https://www.netapp.com/us/solutions/applications/big-data-analytics/index.aspx["https://www.netapp.com/us/solutions/applications/big-data-analytics/index.aspx"^]
+
+* Carga de trabajo de Apache Spark con almacenamiento de NetApp
++
+https://www.netapp.com/pdf.html?item=/media/26877-nva-1157-deploy.pdf["https://www.netapp.com/pdf.html?item=/media/26877-nva-1157-deploy.pdf"^]
+
+* Soluciones de almacenamiento de NetApp para Apache Spark
++
+https://www.netapp.com/media/16864-tr-4570.pdf["https://www.netapp.com/media/16864-tr-4570.pdf"^]
+
+* Apache Hadoop en la red de datos habilitada por NetApp
++
+https://www.netapp.com/media/16877-tr-4529.pdf["https://www.netapp.com/media/16877-tr-4529.pdf"^]
+
+
+
+
+
+== Expresiones de gratitud
+
+* Paul Burland, Representante de ventas, Ventas del distrito de Victoria de ANZ, NetApp
+* Hoseb Dermanilian, Gerente de Desarrollo Comercial, NetApp
+* Lee Dorrier, Director de MPSG, NetApp
+* David Thiessen, ingeniero de sistemas, ANZ Victoria District SE, NetApp
+
+
+
+
+== Historial de versiones
+
+|===
+| Versión | Fecha | Historial de versiones del documento 
+
+
+| Versión 1.0 | enero de 2018 | Lanzamiento inicial 
+
+
+| Versión 2.0 | octubre de 2021 | Actualizado con el caso de uso n.° 5: Acelerar la carga de trabajo analítica 
+
+
+| Versión 3.0 | noviembre de 2023 | Se eliminaron los detalles de NIPAM 
+|===

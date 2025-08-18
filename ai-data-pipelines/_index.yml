@@ -1,0 +1,78 @@
+---
+indexpage:
+  title: Soluciones de gestión de datos y MLOps de NetApp
+  summary: Optimice sus flujos de trabajo de IA/ML con las soluciones integrales de
+    gestión de datos y MLOps de NetApp.  Desde plataformas de código abierto hasta
+    herramientas de nivel empresarial, nuestras soluciones permiten el desarrollo,
+    la implementación y el escalamiento eficiente de modelos en entornos de nube híbrida
+    al tiempo que garantizan la consistencia y el rendimiento de los datos.
+  lead: Optimice sus flujos de trabajo de IA/ML con las soluciones integrales de gestión
+    de datos y MLOps de NetApp.  Desde plataformas de código abierto hasta herramientas
+    de nivel empresarial, nuestras soluciones permiten el desarrollo, la implementación
+    y el escalamiento eficiente de modelos en entornos de nube híbrida al tiempo que
+    garantizan la consistencia y el rendimiento de los datos.
+  tiles:
+  - title: Plataformas MLOps de código abierto
+    links:
+    - title: MLOps de código abierto con NetApp
+      url: "../software/ai-osmlops-intro.html"
+    - title: Configuración de NetApp Trident para AIPod
+      url: "../software/ai-osmlops-trident-backend.html"
+    - title: Implementación e integración de Apache Airflow
+      url: "../software/ai-osmlops-airflow-deploy.html"
+    - title: Implementación de JupyterHub y operaciones de datos
+      url: "../software/ai-osmlops-jhub-deploy.html"
+    - title: Implementación y trazabilidad de MLflow
+      url: "../software/ai-osmlops-mlflow-deploy.html"
+  - title: Flujos de trabajo avanzados de MLOps
+    links:
+    - title: Implementación y cuadernos de Kubeflow
+      url: "../software/ai-osmlops-kubeflow-deploy.html"
+    - title: Entrena modelos de reconocimiento de imágenes con Kubeflow
+      url: "../software/ai-osmlops-kubeflow-train.html"
+    - title: Ejecución de carga de trabajo de IA de un solo nodo
+      url: "../software/ai-osmlops-train-singlenode.html"
+    - title: Ejecución de carga de trabajo de IA distribuida
+      url: "../software/ai-osmlops-train-distributed.html"
+    - title: Ingesta de datos con SnapMirror
+      url: "../software/ai-osmlops-jhub-ingest.html"
+  - title: Soluciones MLOps empresariales
+    links:
+    - title: MLOps híbridos con Domino Data Lab
+      url: "../software/ai-hybrid-ddlnexus-intro.html"
+    - title: Acceso a datos entre entornos con Domino
+      url: "../software/ai-hybrid-ddlnexus-data.html"
+    - title: NVIDIA AI Enterprise con NetApp y VMware
+      url: "../software/ai-nvaie-vmw-intro.html"
+    - title: Integración del software NVIDIA NGC
+      url: "../software/ai-nvaie-vmw-ngcsetup.html"
+  - title: Integración de Cloud MLOps y AWS
+    links:
+    - title: Amazon FSx para MLOps de ONTAP
+      url: "../cloud/ai-mlops-fsxn-intro.html"
+    - title: Integrar FSx ONTAP como S3 privado en SageMaker
+      url: "../cloud/ai-mlops-fsxn-s3.html"
+    - title: Entrenamiento de modelos de FSx ONTAP para SageMaker
+      url: "../cloud/ai-mlops-fsxn-sagemaker.html"
+    - title: Cree una canalización de MLOps simplificada con FSx
+      url: "../cloud/ai-mlops-fsxn-cictcd.html"
+  - title: Bases de datos vectoriales y aplicaciones de IA
+    links:
+    - title: Solución de base de datos vectorial con NetApp
+      url: "../vector-db/ai-vdb-solution-with-netapp.html"
+    - title: Configuración del clúster Milvus con Kubernetes
+      url: "../vector-db/ai-vdb-milvus-setup.html"
+    - title: Protección de bases de datos vectoriales con SnapCenter
+      url: "../vector-db/ai-vdb-dp-snapcenter.html"
+    - title: Validación del rendimiento de la base de datos vectorial
+      url: "../vector-db/ai-vdb-perf-validation.html"
+    - title: Casos de uso de bases de datos vectoriales
+      url: "../vector-db/ai-vdb-usecases.html"
+  - title: Herramientas de gestión y almacenamiento de datos
+    links:
+    - title: Kit de herramientas DataOps de NetApp
+      url: "../software/dataops-toolkit.html"
+    - title: Lago de datos StorageGRID para la conducción autónoma
+      url: "../infra/ai-storagegrid-datalake-adas.html"
+    - title: Recuperación ante desastres con SnapMirror
+      url: "../vector-db/ai-vdb-dr-snapmirror.html"

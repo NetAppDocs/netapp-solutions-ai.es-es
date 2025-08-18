@@ -1,0 +1,130 @@
+---
+sidebar: sidebar 
+permalink: software/ai-osmlops-train-singlenode.html 
+keywords: Single-Node, AI, Kubernetes, cluster, PVC 
+summary: 'MLOps de código abierto con NetApp : Ejecute una carga de trabajo de IA de un solo nodo' 
+---
+= Ejecutar una carga de trabajo de IA de un solo nodo
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Para ejecutar un trabajo de IA y ML de un solo nodo en su clúster de Kubernetes, realice las siguientes tareas desde el host de salto de implementación.  Con Trident, puede hacer que un volumen de datos, que potencialmente contenga petabytes de datos, sea accesible a una carga de trabajo de Kubernetes de manera rápida y sencilla.  Para que dicho volumen de datos sea accesible desde un pod de Kubernetes, simplemente especifique una PVC en la definición del pod.
+
+
+NOTE: Esta sección asume que ya ha contenedorizado (en el formato de contenedor Docker) la carga de trabajo de IA y ML específica que está intentando ejecutar en su clúster de Kubernetes.
+
+. Los siguientes comandos de ejemplo muestran la creación de un trabajo de Kubernetes para una carga de trabajo de referencia de TensorFlow que utiliza el conjunto de datos ImageNet.  Para obtener más información sobre el conjunto de datos ImageNet, consulte http://www.image-net.org["Sitio web de ImageNet"^] .
++
+Este trabajo de ejemplo solicita ocho GPU y, por lo tanto, puede ejecutarse en un solo nodo de trabajo de GPU que tenga ocho o más GPU.  Este trabajo de ejemplo podría enviarse en un clúster en el que no hay un nodo de trabajo con ocho o más GPU presente o que actualmente está ocupado con otra carga de trabajo.  Si es así, el trabajo permanece en estado pendiente hasta que dicho nodo de trabajo esté disponible.
+
++
+Además, para maximizar el ancho de banda de almacenamiento, el volumen que contiene los datos de entrenamiento necesarios se monta dos veces dentro del pod que crea este trabajo.  Otro volumen también está montado en la cápsula.  Este segundo volumen se utilizará para almacenar resultados y métricas.  Estos volúmenes se referencian en la definición del trabajo mediante los nombres de las PVC.  Para obtener más información sobre los trabajos de Kubernetes, consulte https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/["documentación oficial de Kubernetes"^] .
+
++
+Un `emptyDir` volumen con un `medium` valor de `Memory` está montado en `/dev/shm` en el pod que crea este trabajo de ejemplo.  El tamaño predeterminado de la `/dev/shm` El volumen virtual que crea automáticamente el entorno de ejecución del contenedor Docker a veces puede ser insuficiente para las necesidades de TensorFlow.  Montaje de un `emptyDir` El volumen como en el siguiente ejemplo proporciona un volumen suficientemente grande. `/dev/shm` volumen virtual.  Para obtener más información sobre `emptyDir` volúmenes, véase el https://kubernetes.io/docs/concepts/storage/volumes/["documentación oficial de Kubernetes"^] .
+
++
+Al contenedor único que se especifica en esta definición de trabajo de ejemplo se le asigna un `securityContext > privileged` valor de `true` .  Este valor significa que el contenedor efectivamente tiene acceso root en el host.  Esta anotación se utiliza en este caso porque la carga de trabajo específica que se está ejecutando requiere acceso root.  Específicamente, una operación de limpieza de caché que realiza la carga de trabajo requiere acceso root.  Sea esto o no `privileged: true` La anotación es necesaria dependiendo de los requisitos de la carga de trabajo específica que esté ejecutando.
+
++
+....
+$ cat << EOF > ./netapp-tensorflow-single-imagenet.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: netapp-tensorflow-single-imagenet
+spec:
+  backoffLimit: 5
+  template:
+    spec:
+      volumes:
+      - name: dshm
+        emptyDir:
+          medium: Memory
+      - name: testdata-iface1
+        persistentVolumeClaim:
+          claimName: pb-fg-all-iface1
+      - name: testdata-iface2
+        persistentVolumeClaim:
+          claimName: pb-fg-all-iface2
+      - name: results
+        persistentVolumeClaim:
+          claimName: tensorflow-results
+      containers:
+      - name: netapp-tensorflow-py2
+        image: netapp/tensorflow-py2:19.03.0
+        command: ["python", "/netapp/scripts/run.py", "--dataset_dir=/mnt/mount_0/dataset/imagenet", "--dgx_version=dgx1", "--num_devices=8"]
+        resources:
+          limits:
+            nvidia.com/gpu: 8
+        volumeMounts:
+        - mountPath: /dev/shm
+          name: dshm
+        - mountPath: /mnt/mount_0
+          name: testdata-iface1
+        - mountPath: /mnt/mount_1
+          name: testdata-iface2
+        - mountPath: /tmp
+          name: results
+        securityContext:
+          privileged: true
+      restartPolicy: Never
+EOF
+$ kubectl create -f ./netapp-tensorflow-single-imagenet.yaml
+job.batch/netapp-tensorflow-single-imagenet created
+$ kubectl get jobs
+NAME                                       COMPLETIONS   DURATION   AGE
+netapp-tensorflow-single-imagenet          0/1           24s        24s
+....
+. Confirme que el trabajo que creó en el paso 1 se esté ejecutando correctamente.  El siguiente comando de ejemplo confirma que se creó un solo pod para el trabajo, como se especifica en la definición del trabajo, y que este pod se está ejecutando actualmente en uno de los nodos de trabajo de la GPU.
++
+....
+$ kubectl get pods -o wide
+NAME                                             READY   STATUS      RESTARTS   AGE
+IP              NODE            NOMINATED NODE
+netapp-tensorflow-single-imagenet-m7x92          1/1     Running     0          3m    10.233.68.61    10.61.218.154   <none>
+....
+. Confirme que el trabajo que creó en el paso 1 se complete exitosamente.  Los siguientes comandos de ejemplo confirman que el trabajo se completó correctamente.
++
+....
+$ kubectl get jobs
+NAME                                             COMPLETIONS   DURATION   AGE
+netapp-tensorflow-single-imagenet                1/1           5m42s      10m
+$ kubectl get pods
+NAME                                                   READY   STATUS      RESTARTS   AGE
+netapp-tensorflow-single-imagenet-m7x92                0/1     Completed   0          11m
+$ kubectl logs netapp-tensorflow-single-imagenet-m7x92
+[netapp-tensorflow-single-imagenet-m7x92:00008] PMIX ERROR: NO-PERMISSIONS in file gds_dstore.c at line 702
+[netapp-tensorflow-single-imagenet-m7x92:00008] PMIX ERROR: NO-PERMISSIONS in file gds_dstore.c at line 711
+Total images/sec = 6530.59125
+================ Clean Cache !!! ==================
+mpirun -allow-run-as-root -np 1 -H localhost:1 bash -c 'sync; echo 1 > /proc/sys/vm/drop_caches'
+=========================================
+mpirun -allow-run-as-root -np 8 -H localhost:8 -bind-to none -map-by slot -x NCCL_DEBUG=INFO -x LD_LIBRARY_PATH -x PATH python /netapp/tensorflow/benchmarks_190205/scripts/tf_cnn_benchmarks/tf_cnn_benchmarks.py --model=resnet50 --batch_size=256 --device=gpu --force_gpu_compatible=True --num_intra_threads=1 --num_inter_threads=48 --variable_update=horovod --batch_group_size=20 --num_batches=500 --nodistortions --num_gpus=1 --data_format=NCHW --use_fp16=True --use_tf_layers=False --data_name=imagenet --use_datasets=True --data_dir=/mnt/mount_0/dataset/imagenet --datasets_parallel_interleave_cycle_length=10 --datasets_sloppy_parallel_interleave=False --num_mounts=2 --mount_prefix=/mnt/mount_%d --datasets_prefetch_buffer_size=2000 --datasets_use_prefetch=True --datasets_num_private_threads=4 --horovod_device=gpu > /tmp/20190814_105450_tensorflow_horovod_rdma_resnet50_gpu_8_256_b500_imagenet_nodistort_fp16_r10_m2_nockpt.txt 2>&1
+....
+. *Opcional:* Limpiar los artefactos del trabajo.  Los siguientes comandos de ejemplo muestran la eliminación del objeto de trabajo que se creó en el paso 1.
++
+Cuando elimina el objeto de trabajo, Kubernetes elimina automáticamente todos los pods asociados.
+
++
+....
+$ kubectl get jobs
+NAME                                             COMPLETIONS   DURATION   AGE
+netapp-tensorflow-single-imagenet                1/1           5m42s      10m
+$ kubectl get pods
+NAME                                                   READY   STATUS      RESTARTS   AGE
+netapp-tensorflow-single-imagenet-m7x92                0/1     Completed   0          11m
+$ kubectl delete job netapp-tensorflow-single-imagenet
+job.batch "netapp-tensorflow-single-imagenet" deleted
+$ kubectl get jobs
+No resources found.
+$ kubectl get pods
+No resources found.
+....
+

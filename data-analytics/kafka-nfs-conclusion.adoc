@@ -1,0 +1,19 @@
+---
+sidebar: sidebar 
+permalink: data-analytics/kafka-nfs-conclusion.html 
+keywords: conclusion 
+summary: La solución de NetApp para el tonto problema del cambio de nombre proporciona una forma de almacenamiento simple, económica y administrada de manera centralizada para cargas de trabajo que antes eran incompatibles con NFS. 
+---
+= Conclusión
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+La solución de NetApp para el tonto problema del cambio de nombre proporciona una forma de almacenamiento simple, económica y administrada de manera centralizada para cargas de trabajo que antes eran incompatibles con NFS.
+
+Este nuevo paradigma permite a los clientes crear clústeres de Kafka más manejables que son más fáciles de migrar y reflejar para fines de recuperación ante desastres y protección de datos.  También hemos visto que NFS proporciona beneficios adicionales, como una menor utilización de la CPU y un tiempo de recuperación más rápido, una eficiencia de almacenamiento drásticamente mejorada y un mejor rendimiento a través de NetApp ONTAP.

@@ -1,0 +1,23 @@
+---
+sidebar: sidebar 
+permalink: blogs.html 
+summary: Lea blogs de IA/ML que destacan las tendencias de la industria, las innovaciones y el impacto en el mundo real, así como recursos para desarrolladores, conocimientos de la comunidad y herramientas prácticas para trabajar con las soluciones de IA de NetApp . 
+keywords: netapp, solutions, blogs 
+---
+= Lea blogs de soluciones de IA de los expertos de NetApp
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Lea los blogs de IA/ML que destacan las tendencias de la industria, las innovaciones y el impacto en el mundo real, así como recursos para desarrolladores, conocimientos de la comunidad y herramientas prácticas para trabajar con las soluciones de IA de NetApp .
+
+.Tendencias de IA y perspectivas de la industria
+Explore las tendencias de la industria, las innovaciones y el impacto de la IA en el mundo real en varios sectores. link:++https://www.netapp.com/blog/#t=Blogs&sort=%40publish_date_mktg%20descending&layout=card&f:@facet_language_mktg=["Inglés"] &f:@facet_soultion_mktg=[IA,Analítica,inteligencia artificial]++[Lea blogs de IA en NetApp.com^]
+
+.Recursos y comunidad para desarrolladores
+Información técnica, herramientas prácticas y contenido impulsado por la comunidad para profesionales de IA/ML.link:https://netapp.io/category/ai-ml/["Lea blogs de IA en el Pub"^]

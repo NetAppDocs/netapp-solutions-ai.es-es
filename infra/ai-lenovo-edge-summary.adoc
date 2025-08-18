@@ -1,0 +1,17 @@
+---
+sidebar: sidebar 
+permalink: infra/ai-lenovo-edge-summary.html 
+keywords:  
+summary:  
+---
+= Resumen
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Varios escenarios de aplicación emergentes, como los sistemas avanzados de asistencia al conductor (ADAS), la Industria 4.0, las ciudades inteligentes y la Internet de las cosas (IoT), requieren el procesamiento de flujos de datos continuos con una latencia cercana a cero.  Este documento describe una arquitectura de computación y almacenamiento para implementar inferencia de inteligencia artificial (IA) basada en GPU en controladores de almacenamiento NetApp y servidores Lenovo ThinkSystem en un entorno de borde que cumple con estos requisitos.  Este documento también proporciona datos de rendimiento para el punto de referencia de inferencia MLPerf, estándar de la industria, que evalúa varias tareas de inferencia en servidores perimetrales equipados con GPU NVIDIA T4.  Investigamos el rendimiento de escenarios de inferencia fuera de línea, de flujo único y de múltiples flujos y demostramos que la arquitectura con un sistema de almacenamiento en red compartido rentable tiene un gran rendimiento y proporciona un punto central para la gestión de datos y modelos para múltiples servidores de borde.

@@ -1,0 +1,128 @@
+---
+sidebar: sidebar 
+permalink: software/ai-hybrid-ddlnexus-data.html 
+keywords: NetApp AI, AI, Artificial Intelligence, ML, Machine Learning, NVIDIA, Hybrid, Hybrid Cloud, Hybrid Multicloud, Cloud, AWS, Amazon, Amazon Web Services, FSx ONTAP, FSx, NetApp ONTAP, FlexCache, SnapMirror, BlueXP 
+summary: 'MLOps multicloud híbridos con Domino Data Lab y NetApp : acceda a los mismos datos en diferentes entornos' 
+---
+= Acceda a los mismos datos en diferentes entornos
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta sección describe las tareas que deben realizarse para acceder a los mismos datos en diferentes entornos informáticos.  En la plataforma Domino MLOps, los entornos computacionales se denominan "planos de datos".  Siga las tareas descritas en esta sección si sus datos residen en un volumen de NetApp en un plano de datos, pero necesita acceder a ellos en otro plano de datos.  Este tipo de escenario a menudo se denomina "bursting" o, cuando el entorno de destino es la nube, "cloud bursting".  Esta capacidad suele ser necesaria cuando se trabaja con recursos informáticos limitados o sobrecargados.  Por ejemplo, si su clúster de cómputo local tiene exceso de solicitudes, es posible que desee programar cargas de trabajo en la nube, donde se puedan iniciar de inmediato.
+
+Hay dos opciones recomendadas para acceder a un volumen de NetApp que reside en un plano de datos diferente.  Estas opciones se describen en las subsecciones siguientes.  Elija una de estas opciones según sus necesidades específicas.  Los beneficios y desventajas de las dos opciones se describen en la siguiente tabla.
+
+|===
+| Opción | Beneficios | Desventajas 
+
+
+| Opción 1 - Caché | - Flujo de trabajo más simple - Capacidad de almacenar en caché un subconjunto de datos según las necesidades - Capacidad de volver a escribir datos en la fuente - No hay copia remota para administrar | - Mayor latencia en el acceso inicial a los datos a medida que se hidrata la caché. 
+
+
+| Opción 2 - Espejo | - Copia completa del volumen de origen - Sin aumento de latencia debido a la hidratación de la caché (una vez completada la operación de duplicación) | - Debe esperar a que se complete la operación de espejo antes de acceder a los datos - Debe administrar una copia remota - No hay capacidad para volver a escribir en la fuente 
+|===
+
+
+== Opción 1: Crear una caché de un volumen que reside en un plano de datos diferente
+
+Conlink:https://docs.netapp.com/us-en/ontap/flexcache/accelerate-data-access-concept.html["Tecnología NetApp FlexCache"] , puede crear un caché de un volumen de NetApp que resida en un plano de datos diferente.  Por ejemplo, si tiene un volumen de NetApp en su plano de datos local y necesita acceder a ese volumen en su plano de datos de AWS, puede crear un caché del volumen en AWS.  En esta sección se describen las tareas que deben realizarse para crear un caché de un volumen de NetApp que reside en un plano de datos diferente.
+
+
+
+=== Crear un volumen FlexCache en el entorno de destino
+
+
+NOTE: Si el entorno de destino es su centro de datos local, creará el volumen FlexCache en su sistema ONTAP local.  Si el entorno de destino es AWS, creará el volumen FlexCache en su instancia de Amazon FSx ONTAP .
+
+Primero, debe crear un volumen FlexCache en el entorno de destino.
+
+Recomendamos utilizar BlueXP para crear el volumen FlexCache .  Para crear un volumen FlexCache con BlueXP, siga las instrucciones descritas en lalink:https://docs.netapp.com/us-en/bluexp-volume-caching/["Documentación de BlueXP volume caching"] .
+
+Si prefiere no utilizar BlueXP, puede utilizar el Administrador del sistema ONTAP o la CLI de ONTAP para crear el volumen FlexCache .  Para crear un volumen FlexCache con el Administrador del sistema, consulte las instrucciones descritas en lalink:https://docs.netapp.com/us-en/ontap/task_nas_flexcache.html["Documentación de ONTAP"] .  Para crear un volumen FlexCache con la CLI de ONTAP , consulte las instrucciones descritas en lalink:https://docs.netapp.com/us-en/ontap/flexcache/index.html["Documentación de ONTAP"] .
+
+Si desea automatizar este proceso, puede utilizar ellink:https://docs.netapp.com/us-en/bluexp-automation/["API de BlueXP"] , ellink:https://devnet.netapp.com/restapi.php["API REST de ONTAP"] , o ellink:https://docs.ansible.com/ansible/latest/collections/netapp/ontap/index.html["Colección Ansible de ONTAP"] .
+
+
+NOTE: El Administrador del sistema no está disponible en Amazon FSx ONTAP.
+
+
+
+=== Exponer el volumen FlexCache a Domino
+
+A continuación, debe exponer el volumen FlexCache a la plataforma Domino MLOps.  Para exponer el volumen FlexCache a Domino, siga las instrucciones descritas en la subsección 'Exponer volúmenes NFS existentes que no fueron aprovisionados por Trident' del documento.link:ai-hybrid-ddlnexus-vols.html["Sección 'Exponer volúmenes NetApp existentes a Domino'"] de esta solución.
+
+Ahora, podrá montar el volumen FlexCache al iniciar trabajos y espacios de trabajo en el plano de datos de destino como se muestra en las siguientes capturas de pantalla.
+
+
+
+==== Antes de crear el volumen FlexCache
+
+image:ddlnexus-004.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+
+
+==== Después de exponer el volumen FlexCache a Domino
+
+image:ddlnexus-005.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+
+
+== Opción 2: replicar un volumen que reside en un plano de datos diferente
+
+Conlink:https://www.netapp.com/cyber-resilience/data-protection/data-backup-recovery/snapmirror-data-replication/["Tecnología de replicación de datos SnapMirror de NetApp"] , puede crear una copia de un volumen de NetApp que resida en un plano de datos diferente.  Por ejemplo, si tiene un volumen de NetApp en su plano de datos local y necesita acceder a ese volumen en su plano de datos de AWS, puede crear una copia del volumen en AWS.  En esta sección se describen las tareas que deben realizarse para crear una copia de un volumen de NetApp que reside en un plano de datos diferente.
+
+
+
+=== Crear una relación SnapMirror
+
+Primero, debe crear una relación SnapMirror entre su volumen de origen y un nuevo volumen de destino en el entorno de destino.  Tenga en cuenta que el volumen de destino se creará como parte del proceso de creación de la relación SnapMirror .
+
+Recomendamos utilizar BlueXP para crear la relación SnapMirror .  Para crear una relación SnapMirror con BlueXP, siga las instrucciones que se describen en lalink:https://docs.netapp.com/us-en/bluexp-replication/["Documentación de BlueXP replication"] .
+
+Si prefiere no utilizar BlueXP, puede utilizar el Administrador del sistema ONTAP o la CLI de ONTAP para crear la relación SnapMirror .  Para crear una relación SnapMirror con el Administrador del sistema, consulte las instrucciones descritas en lalink:https://docs.netapp.com/us-en/ontap/task_dp_configure_mirror.html["Documentación de ONTAP"] .  Para crear una relación SnapMirror con la CLI de ONTAP , consulte las instrucciones descritas en lalink:https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-replication-workflow-concept.html["Documentación de ONTAP"] .
+
+Si desea automatizar este proceso, puede utilizar ellink:https://docs.netapp.com/us-en/bluexp-automation/["API de BlueXP"] , ellink:https://devnet.netapp.com/restapi.php["API REST de ONTAP"] , o ellink:https://docs.ansible.com/ansible/latest/collections/netapp/ontap/index.html["Colección Ansible de ONTAP"] .
+
+
+NOTE: El Administrador del sistema no está disponible en Amazon FSx ONTAP.
+
+
+
+=== Romper la relación de SnapMirror
+
+A continuación, debe romper la relación SnapMirror para activar el volumen de destino para el acceso a los datos.  Espere hasta que se complete la replicación inicial antes de realizar este paso.
+
+
+NOTE: Puede determinar si la replicación está completa o no verificando el estado del espejo en BlueXP, el Administrador del sistema ONTAP o la CLI de ONTAP .  Cuando se complete la replicación, el estado del espejo será "snapmirrored".
+
+Recomendamos utilizar BlueXP para romper la relación SnapMirror .  Para romper una relación de SnapMirror con BlueXP, siga las instrucciones que se describen en lalink:https://docs.netapp.com/us-en/bluexp-replication/task-managing-replication.html["Documentación de BlueXP replication"] .
+
+Si prefiere no utilizar BlueXP, puede utilizar el Administrador del sistema ONTAP o la CLI de ONTAP para romper la relación de SnapMirror .  Para romper una relación de SnapMirror con el Administrador del sistema, consulte las instrucciones descritas en lalink:https://docs.netapp.com/us-en/ontap/task_dp_serve_data_from_destination.html["Documentación de ONTAP"] .  Para romper una relación de SnapMirror con la CLI de ONTAP , consulte las instrucciones descritas en lalink:https://docs.netapp.com/us-en/ontap/data-protection/make-destination-volume-writeable-task.html["Documentación de ONTAP"] .
+
+Si desea automatizar este proceso, puede utilizar ellink:https://docs.netapp.com/us-en/bluexp-automation/["API de BlueXP"] , ellink:https://devnet.netapp.com/restapi.php["API REST de ONTAP"] , o ellink:https://docs.ansible.com/ansible/latest/collections/netapp/ontap/index.html["Colección Ansible de ONTAP"] .
+
+
+
+=== Exponer el volumen de destino a Domino
+
+A continuación, debe exponer el volumen de destino a la plataforma Domino MLOps.  Para exponer el volumen de destino a Domino, siga las instrucciones descritas en la subsección 'Exponer volúmenes NFS existentes que no fueron aprovisionados por Trident' del documento.link:ai-hybrid-ddlnexus-vols.html["Sección 'Exponer volúmenes NetApp existentes a Domino'"] de esta solución.
+
+Ahora, podrá montar el volumen de destino al iniciar trabajos y espacios de trabajo en el plano de datos de destino como se muestra en las siguientes capturas de pantalla.
+
+
+
+==== Antes de crear la relación SnapMirror
+
+image:ddlnexus-004.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+
+
+==== Después de exponer el volumen de destino a Domino
+
+image:ddlnexus-005.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]

@@ -1,0 +1,31 @@
+---
+sidebar: sidebar 
+permalink: infra/ai-aipod-nv-intro.html 
+keywords: NetApp AI, AI, Artificial Intelligence, ML, Machine Learning, NVIDIA, NVIDIA AI Enterprise, NVIDIA BasePOD, NVIDIA DGX 
+summary: NetApp AIPod con sistemas NVIDIA DGX es una arquitectura de referencia lista para la empresa basada en NVIDIA BasePOD para aprendizaje profundo e inteligencia artificial que utiliza sistemas de almacenamiento NetApp ONTAP AFF y sistemas de redes y DGX de NVIDIA . 
+---
+= NVA-1173 NetApp AIPod con sistemas NVIDIA DGX: Introducción
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+image:poweredbynvidia.png["200,200,Error: Falta imagen gráfica"]
+
+[role="lead"]
+Ingeniería de soluciones de NetApp
+
+
+
+== Resumen ejecutivo
+
+El AIPod de NetApp con sistemas NVIDIA DGX y los sistemas de almacenamiento conectados a la nube de NetApp simplifican las implementaciones de infraestructura para cargas de trabajo de aprendizaje automático (ML) e inteligencia artificial (IA) al eliminar la complejidad del diseño y las conjeturas.  Basado en el diseño NVIDIA DGX BasePOD™ para brindar un rendimiento computacional excepcional para cargas de trabajo de próxima generación, AIPod con sistemas NVIDIA DGX agrega sistemas de almacenamiento NetApp AFF que permiten a los clientes comenzar de a poco y crecer sin interrupciones mientras administran de manera inteligente los datos desde el borde hasta el núcleo, la nube y viceversa.  NetApp AIPod es parte de la cartera más amplia de soluciones de inteligencia artificial de NetApp , que se muestra en la siguiente figura.
+
+_Cartera de soluciones de IA de NetApp_
+
+image:aipod-nv-portfolio.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+Este documento describe los componentes clave de la arquitectura de referencia AIPod , la conectividad del sistema y la información de configuración, los resultados de las pruebas de validación y la guía para el dimensionamiento de la solución.  Este documento está dirigido a los ingenieros de soluciones de NetApp y sus socios, así como a los tomadores de decisiones estratégicas de clientes interesados en implementar una infraestructura de alto rendimiento para cargas de trabajo de ML/DL y análisis.

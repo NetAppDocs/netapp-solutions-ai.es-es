@@ -1,0 +1,21 @@
+---
+sidebar: sidebar 
+permalink: videos.html 
+summary: Serie de videos y demostraciones que analizan las características de muchas de las soluciones de NetApp 
+keywords: netapp, solutions, videos, demos 
+---
+= Soluciones NetApp : Vídeos y demostraciones
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Descripción general de los videos y demostraciones que destacan características específicas de muchas de las soluciones de NetApp.
+
+* link:https://www.youtube.com/playlist?list=PLdXI3bZJEw7nSrRhuolRPYqvSlGLuTOAO["Soluciones de IA de NetApp"^]
+* link:https://www.youtube.com/playlist?list=PLdXI3bZJEw7n1sWK-QGq4QMI1VBJS-ZZW["Operaciones MLO"^]
+

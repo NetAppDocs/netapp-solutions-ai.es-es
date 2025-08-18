@@ -1,0 +1,43 @@
+---
+sidebar: sidebar 
+permalink: data-analytics/dremio-lakehouse-conclusion.html 
+keywords: conclusion 
+summary: Este documento proporciona pautas recomendadas para usar Dremio con almacenamiento NetApp , incluidas pruebas de certificación TPCDS, ajustes y detalles de casos de uso del cliente. 
+---
+= Conclusión
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+En conclusión, este informe técnico ha proporcionado detalles de implementación completos de q Hybrid Iceberg Lakehouse con Dremio junto con varias fuentes de datos de controladores de almacenamiento de NetApp , incluidos ONTAP S3, NAS y StorageGRID.  El proceso de implementación se ejecutó con éxito y se utilizó la herramienta de evaluación comparativa TPC-DS para realizar 99 consultas SQL en las diferentes fuentes de datos.  El informe también ha explorado casos de uso de clientes dentro de NetApp, demostrando la versatilidad y eficacia de Dremio para satisfacer diversos requisitos comerciales.  Además, se examinó un caso de uso específico que involucraba a un cliente de ventas de autopartes, destacando la aplicación práctica y los beneficios de aprovechar Dremio para el análisis y la obtención de información de datos.
+
+En general, este documento sirve como un recurso valioso para comprender la implementación y el uso de Dremio con controladores de almacenamiento NetApp , mostrando sus capacidades y potencial para impulsar la toma de decisiones basada en datos y la optimización en diversas industrias.
+
+
+
+== Dónde encontrar información adicional
+
+Para obtener más información sobre la información que se describe en este documento, revise los siguientes documentos y/o sitios web:
+
+* Instalación de Zookeeper
++
+https://medium.com/@ahmetfurkandemir/distributed-hadoop-cluster-1-spark-with-all-dependincies-03c8ec616166[]
+
+* Dremio
++
+https://docs.dremio.com/current/get-started/cluster-deployments/deployment-models/standalone/standalone-tarball/[]
+
+* Configuración de Dremio con storageGRID
++
+https://docs.netapp.com/us-en/storagegrid-enable/tools-apps-guides/configure-dremio-storagegrid.html#configure-dremio-data-source[]
+
+* Caso de uso de NetApp
++
+https://www.dremio.com/customers/netapp/[]
+
+

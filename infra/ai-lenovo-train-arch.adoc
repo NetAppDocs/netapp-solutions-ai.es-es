@@ -1,0 +1,29 @@
+---
+sidebar: sidebar 
+permalink: infra/ai-lenovo-train-arch.html 
+keywords: adjustments 
+summary: La configuración utilizada para la validación se puede ajustar para adaptarse a otros casos de uso. 
+---
+= Ajustes de arquitectura
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+La configuración utilizada para esta validación se puede ajustar para adaptarse a otros casos de uso.
+
+
+
+== Ajustes de la CPU
+
+Utilizamos un procesador Skylake Intel Xeon Platinum 8360Y para esta validación, según lo recomendado por Lenovo.  Esperamos que la CPU Cascade Lake equivalente, un procesador Intel Xeon Gold 6330, ofrezca un rendimiento similar porque esta carga de trabajo no está limitada por la CPU.
+
+
+
+== Aumento de la capacidad de almacenamiento
+
+Según sus necesidades de capacidad de almacenamiento, puede aumentar el almacenamiento compartido (volumen NFS) a pedido, siempre que tenga estantes de discos y modelos de controlador adicionales.  Puede hacerlo desde la CLI o desde la interfaz web de NetApp del controlador de almacenamiento como usuario administrador.

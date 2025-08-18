@@ -1,0 +1,23 @@
+---
+sidebar: sidebar 
+permalink: videos/ai-ml-videos.html 
+keywords: video, demonstration, deployment 
+summary:  
+---
+= Vea videos sobre soluciones de IA con NetApp
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Descubra cómo NetApp potencia las iniciativas de inteligencia artificial y aprendizaje automático.  Estas listas de reproducción de videos seleccionadas muestran soluciones de inteligencia artificial de NetApp y flujos de trabajo de MLOps, destacando estrategias de implementación, automatización y gestión de datos para análisis avanzados.
+
+.Soluciones de IA de NetApp
+Lista de reproducción de videos completa que cubre la infraestructura de IA, los sistemas convergentes y las implementaciones de IA empresarial.link:https://www.youtube.com/playlist?list=PLdXI3bZJEw7nSrRhuolRPYqvSlGLuTOAO["Vea la lista de reproducción de soluciones de IA de NetApp"^]
+
+.Operaciones de aprendizaje automático (MLOps)
+Serie de videos sobre flujos de trabajo de MLOps, canales de datos y mejores prácticas operativas.link:https://www.youtube.com/playlist?list=PLdXI3bZJEw7n1sWK-QGq4QMI1VBJS-ZZW["Mira la lista de reproducción de MLOps"^]

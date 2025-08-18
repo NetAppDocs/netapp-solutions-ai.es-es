@@ -1,0 +1,95 @@
+---
+sidebar: sidebar 
+permalink: data-analytics/kafka-certification.html 
+keywords: certification, setup, configuration, benchmark 
+summary: Hemos realizado la certificación con Confluent Platform con Kafka para almacenamiento por niveles en NetApp StorageGRID. 
+---
+= Verificación confluente
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Realizamos la verificación con Confluent Platform 6.2 Tiered Storage en NetApp StorageGRID.  Los equipos de NetApp y Confluent trabajaron juntos en esta verificación y ejecutaron los casos de prueba necesarios para la verificación.
+
+
+
+== Configuración de la plataforma Confluent
+
+Utilizamos la siguiente configuración para la verificación.
+
+Para la verificación, utilizamos tres guardianes del zoológico, cinco corredores, cinco servidores de ejecución de scripts de prueba, servidores de herramientas con nombre con 256 GB de RAM y 16 CPU.  Para el almacenamiento de NetApp , utilizamos StorageGRID con un balanceador de carga SG1000 con cuatro SGF6024.  El almacenamiento y los intermediarios se conectaron a través de conexiones de 100 GbE.
+
+La siguiente figura muestra la topología de red de la configuración utilizada para la verificación de Confluent.
+
+image:confluent-kafka-007.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+Los servidores de herramientas actúan como clientes de aplicaciones que envían solicitudes a los nodos Confluent.
+
+
+
+== Configuración de almacenamiento en niveles de Confluent
+
+La configuración de almacenamiento por niveles requiere los siguientes parámetros en Kafka:
+
+....
+Confluent.tier.archiver.num.threads=16
+confluent.tier.fetcher.num.threads=32
+confluent.tier.enable=true
+confluent.tier.feature=true
+confluent.tier.backend=S3
+confluent.tier.s3.bucket=kafkasgdbucket1-2
+confluent.tier.s3.region=us-west-2
+confluent.tier.s3.cred.file.path=/data/kafka/.ssh/credentials
+confluent.tier.s3.aws.endpoint.override=http://kafkasgd.rtpppe.netapp.com:10444/
+confluent.tier.s3.force.path.style.access=true
+....
+Para la verificación, utilizamos StorageGRID con el protocolo HTTP, pero HTTPS también funciona.  La clave de acceso y la clave secreta se almacenan en el nombre de archivo proporcionado en el `confluent.tier.s3.cred.file.path` parámetro.
+
+
+
+== Almacenamiento de objetos de NetApp - StorageGRID
+
+Configuramos la configuración de sitio único en StorageGRID para la verificación.
+
+image:confluent-kafka-008.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+
+
+== Pruebas de verificación
+
+Completamos los siguientes cinco casos de prueba para la verificación.  Estas pruebas se ejecutan en el marco Trogdor.  Las dos primeras fueron pruebas de funcionalidad y las tres restantes fueron pruebas de rendimiento.
+
+
+
+=== Prueba de corrección del almacén de objetos
+
+Esta prueba determina si todas las operaciones básicas (por ejemplo, obtener/colocar/eliminar) en la API del almacén de objetos funcionan bien de acuerdo con las necesidades del almacenamiento en niveles.  Es una prueba básica que todo servicio de almacenamiento de objetos debe esperar pasar antes de las siguientes pruebas.  Es una prueba asertiva que o se aprueba o se suspende.
+
+
+
+=== Prueba de corrección de la funcionalidad de niveles
+
+Esta prueba determina si la funcionalidad de almacenamiento en niveles de extremo a extremo funciona bien con una prueba asertiva que pasa o falla.  La prueba crea un tema de prueba que, de manera predeterminada, está configurado con niveles habilitados y un tamaño de conjunto activo muy reducido.  Produce un flujo de eventos para el tema de prueba recién creado, espera a que los intermediarios archiven los segmentos en el almacén de objetos y luego consume el flujo de eventos y valida que el flujo consumido coincida con el flujo producido.  La cantidad de mensajes producidos en el flujo de eventos es configurable, lo que permite al usuario generar una carga de trabajo suficientemente grande según las necesidades de las pruebas.  El tamaño reducido del conjunto activo garantiza que las búsquedas del consumidor fuera del segmento activo se atiendan solo desde el almacén de objetos; esto ayuda a probar la exactitud del almacén de objetos para las lecturas.  Hemos realizado esta prueba con y sin inyección de falla en el almacén de objetos.  Simulamos una falla de nodo deteniendo el servicio del administrador de servicios en uno de los nodos en StorageGRID y validando que la funcionalidad de extremo a extremo funciona con el almacenamiento de objetos.
+
+
+
+=== Punto de referencia de búsqueda de niveles
+
+Esta prueba validó el rendimiento de lectura del almacenamiento de objetos en niveles y verificó las solicitudes de lectura de obtención de rango bajo una carga pesada de los segmentos generados por el punto de referencia.  En este punto de referencia, Confluent desarrolló clientes personalizados para atender las solicitudes de búsqueda de niveles.
+
+
+
+=== Referencia de carga de trabajo de producción y consumo
+
+Esta prueba generó indirectamente una carga de trabajo de escritura en el almacén de objetos a través del archivado de segmentos.  La carga de trabajo de lectura (segmentos leídos) se generó desde el almacenamiento de objetos cuando los grupos de consumidores obtuvieron los segmentos.  Esta carga de trabajo fue generada por el script de prueba.  Esta prueba verificó el rendimiento de lectura y escritura en el almacenamiento de objetos en subprocesos paralelos.  Realizamos pruebas con y sin inyección de fallas en el almacén de objetos tal como lo hicimos para la prueba de corrección de la funcionalidad de niveles.
+
+
+
+=== Punto de referencia de la carga de trabajo de retención
+
+Esta prueba verificó el rendimiento de eliminación de un almacén de objetos bajo una carga de trabajo pesada de retención de temas.  La carga de trabajo de retención se generó utilizando un script de prueba que produce muchos mensajes en paralelo a un tema de prueba.  El tema de prueba fue configurar una configuración de retención agresiva basada en el tamaño y el tiempo que provocó que el flujo de eventos se purgara continuamente del almacén de objetos.  Los segmentos fueron luego archivados.  Esto provocó una gran cantidad de eliminaciones en el almacenamiento de objetos por parte del agente y la recopilación del rendimiento de las operaciones de eliminación del almacén de objetos.

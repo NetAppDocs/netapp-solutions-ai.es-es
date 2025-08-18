@@ -1,0 +1,63 @@
+---
+sidebar: sidebar 
+permalink: infra/ai-lenovo-edge-plan.html 
+keywords: test, plan, mlperf, inference, benchmarks 
+summary: Este documento sigue el código de MLPerf Inference v0.7, el código y las reglas de MLPerf Inference v1.1.  Ejecutamos puntos de referencia diseñados para la inferencia en el borde tal como se define en las tablas presentadas en esta sección. 
+---
+= Plan de pruebas
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Este documento sigue la inferencia MLPerf v0.7 https://github.com/mlperf/inference_results_v0.7/tree/master/closed/Lenovo["código"^] Inferencia MLPerf v1.1 https://github.com/mlcommons/inference_results_v1.1/tree/main/closed/Lenovo["código"^] , y https://github.com/mlcommons/inference_policies/blob/master/inference_rules.adoc["normas"^] .  Ejecutamos puntos de referencia MLPerf diseñados para la inferencia en el borde como se define en la siguiente tabla.
+
+|===
+| Área | Tarea | Modelo | Conjunto de datos | Tamaño de QSL | Calidad | Restricción de latencia de múltiples transmisiones 
+
+
+| Visión | Clasificación de imágenes | Resnet50v1.5 | ImageNet (224x224) | 1024 | 99% de FP32 | 50 ms 
+
+
+| Visión | Detección de objetos (grandes) | SSD-ResNet34 | COCO (1200x1200) | 64 | 99% de FP32 | 66 ms 
+
+
+| Visión | Detección de objetos (pequeños) | SSD - MobileNetsv1 | COCO (300x300) | 256 | 99% de FP32 | 50 ms 
+
+
+| Visión | Segmentación de imágenes médicas | 3D UNET | BraTS 2019 (224x224x160) | 16 | 99% y 99,9% de FP32 | n / A 
+
+
+| Discurso | Conversión de voz a texto | Enfermera registrada | Librispeech dev-clean | 2513 | 99% de FP32 | n / A 
+
+
+| Idioma | Procesamiento del lenguaje | BERT | Escuadrón v1.1 | 10833 | 99% de FP32 | n / A 
+|===
+La siguiente tabla presenta escenarios de referencia de Edge.
+
+|===
+| Área | Tarea | Escenarios 
+
+
+| Visión | Clasificación de imágenes | Transmisión única, sin conexión, transmisión múltiple 
+
+
+| Visión | Detección de objetos (grandes) | Transmisión única, sin conexión, transmisión múltiple 
+
+
+| Visión | Detección de objetos (pequeños) | Transmisión única, sin conexión, transmisión múltiple 
+
+
+| Visión | Segmentación de imágenes médicas | Transmisión única, sin conexión 
+
+
+| Discurso | Conversión de voz a texto | Transmisión única, sin conexión 
+
+
+| Idioma | Procesamiento del lenguaje | Transmisión única, sin conexión 
+|===
+Realizamos estas pruebas de referencia utilizando la arquitectura de almacenamiento en red desarrollada en esta validación y comparamos los resultados con los de ejecuciones locales en los servidores de borde enviados previamente a MLPerf.  La comparación sirve para determinar cuánto impacto tiene el almacenamiento compartido en el rendimiento de la inferencia.

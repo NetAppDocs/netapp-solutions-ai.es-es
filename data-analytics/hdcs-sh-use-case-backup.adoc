@@ -1,0 +1,164 @@
+---
+sidebar: sidebar 
+permalink: data-analytics/hdcs-sh-use-case-backup.html 
+keywords: use case 2, Hadoop repository, dr, disaster recovery 
+summary: En este escenario, el cliente tiene un gran repositorio de Hadoop local y desea realizar una copia de seguridad del mismo para fines de recuperación ante desastres.  Sin embargo, la solución de backup actual del cliente es costosa y tiene una ventana de backup prolongada de más de 24 horas. 
+---
+= Caso de uso 1: Copia de seguridad de datos de Hadoop
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+En este escenario, el cliente tiene un gran repositorio de Hadoop local y desea realizar una copia de seguridad del mismo para fines de recuperación ante desastres.  Sin embargo, la solución de backup actual del cliente es costosa y tiene una ventana de backup prolongada de más de 24 horas.
+
+
+
+== Requisitos y desafíos
+
+Los principales requisitos y desafíos para este caso de uso incluyen:
+
+* Compatibilidad con versiones anteriores del software:
++
+** La solución de respaldo alternativa propuesta debe ser compatible con las versiones de software actuales que se utilizan en el clúster Hadoop de producción.
+
+
+* Para cumplir con los SLA comprometidos, la solución alternativa propuesta debe lograr RPO y RTO muy bajos.
+* La copia de seguridad creada por la solución de copia de seguridad de NetApp se puede utilizar en el clúster Hadoop creado localmente en el centro de datos, así como en el clúster Hadoop que se ejecuta en la ubicación de recuperación ante desastres en el sitio remoto.
+* La solución propuesta debe ser rentable.
+* La solución propuesta debe reducir el efecto sobre el rendimiento de los trabajos de análisis en producción que se están ejecutando actualmente durante los tiempos de respaldo.
+
+
+
+
+== Solución de respaldo existente del cliente
+
+La siguiente figura muestra la solución de copia de seguridad nativa original de Hadoop.
+
+image:hdcs-sh-005.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+Los datos de producción están protegidos en cinta a través del clúster de respaldo intermedio:
+
+* Los datos HDFS1 se copian a HDFS2 ejecutando el `hadoop distcp -update <hdfs1> <hdfs2>` dominio.
+* El clúster de respaldo actúa como una puerta de enlace NFS y los datos se copian manualmente en cinta a través de Linux. `cp` Comando a través de la biblioteca de cintas.
+
+
+Los beneficios de la solución de respaldo nativa original de Hadoop incluyen:
+
+* La solución se basa en comandos nativos de Hadoop, lo que evita que el usuario tenga que aprender nuevos procedimientos.
+* La solución aprovecha la arquitectura y el hardware estándar de la industria.
+
+
+Las desventajas de la solución de copia de seguridad nativa original de Hadoop incluyen:
+
+* El tiempo de la ventana de respaldo supera las 24 horas, lo que hace que los datos de producción sean vulnerables.
+* Degradación significativa del rendimiento del clúster durante los tiempos de copia de seguridad.
+* Copiar a cinta es un proceso manual.
+* La solución de backup es costosa en términos del hardware requerido y las horas humanas requeridas para los procesos manuales.
+
+
+
+
+== Soluciones de respaldo
+
+En función de estos desafíos y requisitos, y teniendo en cuenta el sistema de respaldo existente, se sugirieron tres posibles soluciones de respaldo.  Las siguientes subsecciones describen cada una de estas tres soluciones de respaldo diferentes, denominadas solución A a solución C.
+
+
+
+=== Solución A
+
+En la Solución A, el clúster de respaldo Hadoop envía los respaldos secundarios a los sistemas de almacenamiento NFS de NetApp , lo que elimina el requisito de cinta, como se muestra en la siguiente figura.
+
+image:hdcs-sh-006.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+Las tareas detalladas para la solución A incluyen:
+
+* El clúster de producción Hadoop tiene los datos analíticos del cliente en el HDFS que requiere protección.
+* El clúster de respaldo Hadoop con HDFS actúa como una ubicación intermedia para los datos.  Solo un conjunto de discos (JBOD) proporciona el almacenamiento para HDFS en los clústeres Hadoop de producción y de respaldo.
+* Proteja los datos de producción de Hadoop desde el clúster de producción HDFS hasta el clúster de respaldo HDFS ejecutando el comando `Hadoop distcp –update –diff <hdfs1> <hdfs2>` dominio.
+
+
+
+NOTE: La instantánea de Hadoop se utiliza para proteger los datos desde la producción hasta el clúster de Hadoop de respaldo.
+
+* El controlador de almacenamiento NetApp ONTAP proporciona un volumen exportado NFS, que se aprovisiona en el clúster Hadoop de respaldo.
+* Al ejecutar el `Hadoop distcp` Al aprovechar MapReduce y varios mapeadores, los datos analíticos están protegidos desde el clúster Hadoop de respaldo a NFS.
++
+Una vez que los datos se almacenan en NFS en el sistema de almacenamiento NetApp , se utilizan las tecnologías NetApp Snapshot, SnapRestore y FlexClone para realizar copias de seguridad, restaurar y duplicar los datos de Hadoop según sea necesario.
+
+
+
+
+NOTE: Los datos de Hadoop se pueden proteger en la nube y en ubicaciones de recuperación ante desastres mediante el uso de la tecnología SnapMirror .
+
+Los beneficios de la solución A incluyen:
+
+* Los datos de producción de Hadoop están protegidos desde el clúster de respaldo.
+* Los datos HDFS están protegidos a través de NFS, lo que permite la protección en la nube y en ubicaciones de recuperación ante desastres.
+* Mejora el rendimiento al descargar las operaciones de respaldo al clúster de respaldo.
+* Elimina las operaciones manuales de cinta
+* Permite funciones de gestión empresarial a través de herramientas NetApp .
+* Requiere cambios mínimos en el entorno existente.
+* Es una solución rentable.
+
+
+La desventaja de esta solución es que requiere un clúster de respaldo y mapeadores adicionales para mejorar el rendimiento.
+
+El cliente implementó recientemente la solución A debido a su simplicidad, costo y rendimiento general.
+
+En esta solución, se pueden utilizar discos SAN de ONTAP en lugar de JBOD.  Esta opción descarga la carga de almacenamiento del clúster de respaldo a ONTAP; sin embargo, la desventaja es que se requieren conmutadores de estructura SAN.
+
+
+
+=== Solución B
+
+La solución B agrega un volumen NFS al clúster Hadoop de producción, lo que elimina la necesidad del clúster Hadoop de respaldo, como se muestra en la siguiente figura.
+
+image:hdcs-sh-007.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+Las tareas detalladas para la solución B incluyen:
+
+* El controlador de almacenamiento NetApp ONTAP aprovisiona la exportación NFS al clúster Hadoop de producción.
++
+El nativo de Hadoop `hadoop distcp` El comando protege los datos de Hadoop del clúster de producción HDFS a NFS.
+
+* Una vez que los datos se almacenan en NFS en el sistema de almacenamiento NetApp , se utilizan las tecnologías Snapshot, SnapRestore y FlexClone para realizar copias de seguridad, restaurar y duplicar los datos de Hadoop según sea necesario.
+
+
+Los beneficios de la solución B incluyen:
+
+* El clúster de producción está ligeramente modificado para la solución de respaldo, lo que simplifica la implementación y reduce los costos adicionales de infraestructura.
+* No se requiere un clúster de respaldo para la operación de respaldo.
+* Los datos de producción HDFS están protegidos en la conversión a datos NFS.
+* La solución permite funciones de gestión empresarial a través de herramientas NetApp .
+
+
+La desventaja de esta solución es que se implementa en el clúster de producción, lo que puede agregar tareas de administrador adicionales en el clúster de producción.
+
+
+
+=== Solución C
+
+En la solución C, los volúmenes SAN de NetApp se aprovisionan directamente al clúster de producción de Hadoop para el almacenamiento HDFS, como se muestra en la siguiente figura.
+
+image:hdcs-sh-008.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+Los pasos detallados para la solución C incluyen:
+
+* El almacenamiento SAN ONTAP de NetApp se aprovisiona en el clúster Hadoop de producción para el almacenamiento de datos HDFS.
+* Las tecnologías NetApp Snapshot y SnapMirror se utilizan para realizar copias de seguridad de los datos HDFS del clúster Hadoop de producción.
+* No hay ningún efecto en el rendimiento de la producción del clúster Hadoop/Spark durante el proceso de copia de seguridad instantánea porque la copia de seguridad se realiza en la capa de almacenamiento.
+
+
+
+NOTE: La tecnología Snapshot proporciona copias de seguridad que se completan en segundos, independientemente del tamaño de los datos.
+
+Los beneficios de la solución C incluyen:
+
+* Se pueden crear copias de seguridad que ahorren espacio utilizando la tecnología Snapshot.
+* Permite funciones de gestión empresarial a través de herramientas NetApp .
+

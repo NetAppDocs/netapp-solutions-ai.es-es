@@ -1,0 +1,25 @@
+---
+sidebar: sidebar 
+permalink: software/ai-hybrid-ddlnexus-intro.html 
+keywords: NetApp AI, AI, Artificial Intelligence, ML, Machine Learning, NVIDIA, Hybrid, Hybrid Cloud, Hybrid Multicloud, Cloud, AWS, Amazon, Amazon Web Services, FSx ONTAP, FSx, NetApp ONTAP, FlexCache, SnapMirror, BlueXP 
+summary: Domino Nexus es un panel único que le permite ejecutar cargas de trabajo de ciencia de datos y aprendizaje automático en cualquier clúster de cómputo, en cualquier nube, región o local. 
+---
+= MLOps multicloud híbridos con Domino Data Lab y NetApp
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+Mike Oglesby, NetApp
+
+[role="lead"]
+Actualmente, organizaciones de todo el mundo están adoptando IA para transformar sus negocios y procesos.  Debido a esto, la infraestructura informática preparada para IA suele ser escasa.  Las empresas están adoptando arquitecturas MLOps multicloud híbridas para aprovechar los entornos informáticos disponibles en diferentes regiones, centros de datos y nubes, equilibrando costos, disponibilidad y rendimiento.
+
+Domino Nexus, de Domino Data Lab, es un plano de control MLOps unificado que le permite ejecutar cargas de trabajo de ciencia de datos y aprendizaje automático en cualquier clúster de cómputo, en cualquier nube, región o local.  Unifica los silos de ciencia de datos en toda la empresa, de modo que usted tiene un solo lugar para crear, implementar y monitorear modelos.  Asimismo, las capacidades de gestión de datos en nube híbrida de NetApp le permiten llevar sus datos a sus trabajos y espacios de trabajo, sin importar dónde se estén ejecutando.  Al combinar Domino Nexus con NetApp, tiene la flexibilidad de programar cargas de trabajo en diferentes entornos sin tener que preocuparse por la disponibilidad de los datos.  En otras palabras, tiene la capacidad de enviar sus cargas de trabajo y sus datos al entorno computacional apropiado, lo que le permite acelerar sus implementaciones de IA mientras navega por las regulaciones sobre privacidad y soberanía de los datos.
+
+Esta solución demuestra la implementación de un plano de control MLOps unificado que incorpora un clúster de Kubernetes local y un clúster de Elastic Kubernetes Service (EKS) que se ejecuta en Amazon Web Services (AWS).
+
+image:ddlnexus-001.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]

@@ -1,0 +1,27 @@
+---
+sidebar: sidebar 
+permalink: data-analytics/kafka-perf.html 
+keywords: performance, tests, scalability 
+summary: Realizamos pruebas de almacenamiento en niveles con tres o cuatro nodos para cargas de trabajo de producción y consumo con la configuración NetApp StorageGRID . 
+---
+= Pruebas de rendimiento con escalabilidad
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Realizamos pruebas de almacenamiento en niveles con tres o cuatro nodos para cargas de trabajo de productores y consumidores con la configuración NetApp StorageGRID .  Según nuestras pruebas, el tiempo de finalización y los resultados de rendimiento fueron directamente proporcionales a la cantidad de nodos StorageGRID .  La configuración de StorageGRID requirió un mínimo de tres nodos.
+
+* El tiempo para completar la operación de producción y consumo disminuyó linealmente cuando aumentó el número de nodos de almacenamiento.
+
+
+image:confluent-kafka-009.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+* El rendimiento de la operación de recuperación s3 aumentó linealmente según la cantidad de nodos StorageGRID .  StorageGRID admite hasta 200 nodos StorgeGRID.
+
+
+image:confluent-kafka-010.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]

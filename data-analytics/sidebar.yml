@@ -1,0 +1,205 @@
+---
+section: data-analytics
+title: Análisis de datos modernos
+url: "/data-analytics/index.html"
+entries:
+- title: Gestión de datos en la nube con la dualidad archivo-objeto de NetApp y AWS
+    SageMaker
+  pdf-filename: Gestión de datos en la nube con la dualidad archivo-objeto de NetApp
+    y AWS SageMaker
+  entries:
+  - title: Descripción general de la solución
+    url: "/data-analytics/cdm-fod-solution-overview.html"
+  - title: Tecnología de soluciones
+    url: "/data-analytics/cdm-fod-solution-technology.html"
+  - title: Dualidad de datos para científicos de datos y otras aplicaciones
+    url: "/data-analytics/cdm-fod-data-duality.html"
+  - title: Conclusión
+    url: "/data-analytics/cdm-fod-conclusion.html"
+- title: Cargas de trabajo de Apache Kafka con almacenamiento NFS de NetApp
+  pdf-filename: Cargas de trabajo de Apache Kafka con almacenamiento NFS de NetApp
+  entries:
+  - title: Introducción
+    url: "/data-analytics/kafka-nfs-introduction.html"
+  - title: Solución de NetApp para un problema de cambio de nombre tonto en la carga
+      de trabajo de NFS a Kafka
+    url: "/data-analytics/kafka-nfs-silly-rename-solution.html"
+  - title: 'Validación funcional: Solución para un cambio de nombre tonto'
+    url: "/data-analytics/kafka-nfs-silly-rename-validate.html"
+  - title: "¿Por qué NetApp NFS para cargas de trabajo de Kafka?"
+    url: "/data-analytics/kafka-nfs-why-netapp.html"
+  - title: Descripción general del rendimiento y validación en AWS - Cloud Volume
+      ONTAP
+    url: "/data-analytics/kafka-nfs-perf-aws.html"
+  - title: Descripción general del rendimiento y validación en AWS - FSx para NetApp
+      ONTAP
+    url: "/data-analytics/kafka-nfs-perf-aws-fsxn.html"
+  - title: Descripción general del rendimiento y validación con AFF local
+    url: "/data-analytics/kafka-nfs-perf-aff.html"
+  - title: Conclusión
+    url: "/data-analytics/kafka-nfs-conclusion.html"
+  - title: Dónde encontrar información adicional
+    url: "/data-analytics/kafka-nfs-additional-info.html"
+- title: Confluent Kafka con controladores de almacenamiento NetApp ONTAP
+  pdf-filename: Confluent Kafka con controladores de almacenamiento NetApp ONTAP
+  entries:
+  - title: Descripción general
+    url: "/data-analytics/kafka-ontap-overview.html"
+  - title: Solución
+    url: "/data-analytics/kafka-sc-solution.html"
+  - title: Descripción general de la tecnología
+    url: "/data-analytics/kafka-sc-technology-overview.html"
+  - title: Validación del rendimiento de Confluent
+    url: "/data-analytics/kafka-sc-confluent-perf.html"
+  - title: Pruebas de rendimiento con generador de carga de trabajo de producción
+      y consumo
+    url: "/data-analytics/kafka-sc-performance.html"
+  - title: Pautas de mejores prácticas de rendimiento
+    url: "/data-analytics/kafka-sc-best-practice.html"
+  - title: Conclusión
+    url: "/data-analytics/kafka-sc-conclusion.html"
+- title: Soluciones de almacenamiento de NetApp para Apache Spark
+  pdf-filename: Soluciones de almacenamiento de NetApp para Apache Spark
+  entries:
+  - title: Descripción general de la solución
+    url: "/data-analytics/apache-spark-solution-overview.html"
+  - title: Público objetivo
+    url: "/data-analytics/apache-spark-target-audience.html"
+  - title: Tecnología de soluciones
+    url: "/data-analytics/apache-spark-solution-technology.html"
+  - title: Descripción general de las soluciones Spark de NetApp
+    url: "/data-analytics/spark-solutions-overview.html"
+  - title: Resumen de casos de uso
+    url: "/data-analytics/apache-spark-use-cases-summary.html"
+  - title: Principales casos de uso y arquitecturas de IA, ML y DL
+    url: "/data-analytics/spark-ai-use-cases.html"
+  - title: Resultados de las pruebas
+    url: "/data-analytics/apache-spark-testing-results.html"
+  - title: Solución de nube híbrida
+    url: "/data-analytics/spark-hybrid-cloud.html"
+  - title: Scripts de Python para cada caso de uso principal
+    url: "/data-analytics/spark-python-scripts.html"
+  - title: Conclusión
+    url: "/data-analytics/apache-spark-conclusion.html"
+  - title: Dónde encontrar información adicional
+    url: "/data-analytics/spark-additional-info.html"
+- title: 'Análisis de Big Data: Datos a Inteligencia Artificial'
+  pdf-filename: 'Análisis de Big Data: Datos a Inteligencia Artificial'
+  entries:
+  - title: Introducción
+    url: "/data-analytics/bda-ai-introduction.html"
+  - title: Desafíos del cliente
+    url: "/data-analytics/bda-ai-customer-challenges.html"
+  - title: Solución de transferencia de datos
+    url: "/data-analytics/bda-ai-data-mover-solution.html"
+  - title: Solución de transferencia de datos para IA
+    url: "/data-analytics/bda-ai-data-mover.html"
+  - title: GPFS a NetApp ONTAP NFS
+    url: "/data-analytics/bda-ai-gpfs-to-netapp-ontap-nfs.html"
+  - title: HDFS y MapR-FS a ONTAP NFS
+    url: "/data-analytics/bda-ai-hdfs-maprfs-to-nfs.html"
+  - title: Beneficios empresariales
+    url: "/data-analytics/bda-ai-business-benefits.html"
+  - title: 'De GPFS a NFS: pasos detallados'
+    url: "/data-analytics/bda-ai-gpfs-to-nfs.html"
+  - title: MapR-FS a ONTAP NFS
+    url: "/data-analytics/bda-ai-mapr-fs-to-ontap-nfs.html"
+  - title: Información adicional
+    url: "/data-analytics/bda-ai-additional-info.html"
+- title: Mejores prácticas para Confluent Kafka
+  pdf-filename: Mejores prácticas para Confluent Kafka
+  entries:
+  - title: Introducción
+    url: "/data-analytics/confluent-kafka-introduction.html"
+  - title: Detalles de la arquitectura de la solución
+    url: "/data-analytics/confluent-kafka-solution.html"
+  - title: Descripción general de la tecnología
+    url: "/data-analytics/kafka-tech-overview.html"
+  - title: Verificación confluente
+    url: "/data-analytics/kafka-certification.html"
+  - title: Pruebas de rendimiento con escalabilidad
+    url: "/data-analytics/kafka-perf.html"
+  - title: Conector s3 confluente
+    url: "/data-analytics/kafka-s3-connector.html"
+  - title: Clústeres confluentes de autorreequilibrio
+    url: "/data-analytics/kafka-rebalance.html"
+  - title: Pautas de mejores prácticas
+    url: "/data-analytics/kafka-best-practices.html"
+  - title: Apresto
+    url: "/data-analytics/confluent-kafka-sizing.html"
+  - title: Conclusión
+    url: "/data-analytics/confluent-kafka-conclusion.html"
+- title: 'Soluciones de datos en la nube híbrida de NetApp : Spark y Hadoop, basadas
+    en casos de uso de clientes'
+  pdf-filename: 'Soluciones de datos en la nube híbrida de NetApp : Spark y Hadoop,
+    basadas en casos de uso de clientes'
+  entries:
+  - title: Descripción general de la solución
+    url: "/data-analytics/hdcs-sh-solution-overview.html"
+  - title: Tejido de datos impulsado por NetApp para arquitectura de big data
+    url: "/data-analytics/hdcs-sh-data-fabric.html"
+  - title: Protección de datos de Hadoop y NetApp
+    url: "/data-analytics/hdcs-sh-hadoop-data-protection.html"
+  - title: Descripción general de los casos de uso de protección de datos de Hadoop
+    url: "/data-analytics/hdcs-sh-use-cases.html"
+  - title: 'Caso de uso 1: Copia de seguridad de datos de Hadoop'
+    url: "/data-analytics/hdcs-sh-use-case-backup.html"
+  - title: 'Caso de uso 2: Copia de seguridad y recuperación ante desastres desde
+      la nube a las instalaciones locales'
+    url: "/data-analytics/hdcs-sh-use-case-backup-dr-cloud.html"
+  - title: 'Caso de uso 3: Habilitación de DevTest en datos Hadoop existentes'
+    url: "/data-analytics/hdcs-sh-use-case-devtest.html"
+  - title: 'Caso de uso 4: Protección de datos y conectividad multicloud'
+    url: "/data-analytics/hdcs-sh-use-case-dp-multicloud.html"
+  - title: 'Caso de uso 5: Acelerar las cargas de trabajo analíticas'
+    url: "/data-analytics/hdcs-sh-use-case-analytics.html"
+  - title: Conclusión
+    url: "/data-analytics/hdcs-sh-conclusion.html"
+- title: Solución híbrida iceberg lakehouse de próxima generación de NetApp y Dremio
+  pdf-filename: Solución Iceberg Lakehouse híbrida de próxima generación de NetApp
+    y Dremio
+  entries:
+  - title: Introducción
+    url: "/data-analytics/dremio-lakehouse-introduction.html"
+  - title: Descripción general de la solución
+    url: "/data-analytics/dremio-lakehouse-solution.html"
+  - title: Requisitos tecnológicos
+    url: "/data-analytics/dremio-lakehouse-tech-overview.html"
+  - title: Procedimiento de despliegue
+    url: "/data-analytics/dremio-lakehouse-deployment.html"
+  - title: Descripción general de la verificación de la solución
+    url: "/data-analytics/dremio-lakehouse-verification.html"
+  - title: Casos de uso de clientes
+    url: "/data-analytics/dremio-lakehouse-use-cases.html"
+  - title: Conclusión
+    url: "/data-analytics/dremio-lakehouse-conclusion.html"
+- title: Diferentes soluciones para diferentes estrategias analíticas
+  pdf-filename: Diferentes soluciones para diferentes estrategias analíticas Resumen
+    de la solución
+  url: "/data-analytics/sb-4154.html"
+- title: NetApp StorageGRID con Splunk SmartStore
+  pdf-filename: NetApp StorageGRID con Splunk SmartStore
+  entries:
+  - title: Introducción
+    url: "/data-analytics/stgr-splunkss-introduction.html"
+  - title: Descripción general de la solución
+    url: "/data-analytics/stgr-splunkss-solution-overview.html"
+  - title: Beneficios de esta solución
+    url: "/data-analytics/stgr-splunkss-solution-benefits.html"
+  - title: Arquitectura de Splunk
+    url: "/data-analytics/stgr-splunkss-arch.html"
+  - title: Funciones de StorageGRID para Splunk SmartStore
+    url: "/data-analytics/stgr-splunkss-storagegrid-feat.html"
+  - title: Nivelación y ahorro de costes
+    url: "/data-analytics/stgr-splunkss-tiering-savings.html"
+  - title: Rendimiento de SmartStore de un solo sitio
+    url: "/data-analytics/stgr-splunkss-single-site-perf.html"
+  - title: Conclusión
+    url: "/data-analytics/stgr-splunkss-conclusion.html"
+- title: NetApp E-Series E5700 y Splunk Enterprise
+  pdf-filename: NetApp E-Series E5700 y Splunk Enterprise
+  url: "/data-analytics/tr-4623.html"
+- title: Implementar la carga de trabajo de Apache Spark con almacenamiento de NetApp
+  pdf-filename: Carga de trabajo Apache Spark con solución de almacenamiento NetApp
+    (Guía de implementación)
+  url: "/data-analytics/nva-1157-deploy.html"

@@ -1,0 +1,42 @@
+---
+sidebar: sidebar 
+permalink: data-analytics/kafka-best-practices.html 
+keywords: best practices, guidelines, nfs, san 
+summary: En esta sección se presentan las lecciones aprendidas de esta certificación. 
+---
+= Pautas de mejores prácticas
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+En esta sección se presentan las lecciones aprendidas de esta certificación.
+
+* Según nuestra validación, el almacenamiento de objetos S3 es la mejor opción para que Confluent conserve datos.
+* Podemos usar SAN de alto rendimiento (específicamente FC) para mantener los datos activos del broker o el disco local, porque, en la configuración de almacenamiento en niveles de Confluent, el tamaño de los datos almacenados en el directorio de datos del broker se basa en el tamaño del segmento y el tiempo de retención cuando los datos se mueven al almacenamiento de objetos.
+* Los almacenes de objetos proporcionan un mejor rendimiento cuando segment.bytes es mayor; probamos 512 MB.
+* En Kafka, la longitud de la clave o el valor (en bytes) para cada registro producido para el tema está controlada por el `length.key.value` parámetro.  Para StorageGRID, el rendimiento de ingesta y recuperación de objetos S3 aumentó a valores más altos.  Por ejemplo, 512 bytes proporcionaron una recuperación de 5,8 GBps, 1024 bytes proporcionaron una recuperación s3 de 7,5 GBps y 2048 bytes proporcionaron cerca de 10 GBps.
+
+
+La siguiente figura presenta la ingesta y recuperación de objetos S3 en función de `length.key.value` .
+
+image:confluent-kafka-011.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+* *Afinación de Kafka.*  Para mejorar el rendimiento del almacenamiento en niveles, puede aumentar TierFetcherNumThreads y TierArchiverNumThreads.  Como regla general, se recomienda aumentar TierFetcherNumThreads para que coincida con la cantidad de núcleos de CPU físicos y aumentar TierArchiverNumThreads a la mitad de la cantidad de núcleos de CPU.  Por ejemplo, en las propiedades del servidor, si tiene una máquina con ocho núcleos físicos, configure confluent.tier.fetcher.num.threads = 8 y confluent.tier.archiver.num.threads = 4.
+* *Intervalo de tiempo para eliminar temas.*  Cuando se elimina un tema, la eliminación de los archivos de segmentos de registro en el almacenamiento de objetos no comienza de inmediato.  Más bien, hay un intervalo de tiempo con un valor predeterminado de 3 horas antes de que se eliminen esos archivos.  Puede modificar la configuración, confluent.tier.topic.delete.check.interval.ms, para cambiar el valor de este intervalo.  Si elimina un tema o un clúster, también puede eliminar manualmente los objetos en el depósito correspondiente.
+* *ACL sobre temas internos de almacenamiento en niveles.*  Una práctica recomendada para las implementaciones locales es habilitar un autorizador de ACL en los temas internos utilizados para el almacenamiento en niveles.  Establezca reglas de ACL para limitar el acceso a estos datos únicamente al usuario del corredor.  Esto protege los temas internos y evita el acceso no autorizado a los metadatos y datos de almacenamiento en niveles.
+
+
+[listing]
+----
+kafka-acls --bootstrap-server localhost:9092 --command-config adminclient-configs.conf \
+--add --allow-principal User:<kafka> --operation All --topic "_confluent-tier-state"
+----
+
+NOTE: Reemplazar al usuario `<kafka>` con el principal del broker real en su implementación.
+
+Por ejemplo, el comando `confluent-tier-state` Establece ACL en el tema interno para el almacenamiento en niveles.  Actualmente, solo hay un único tema interno relacionado con el almacenamiento en niveles.  El ejemplo crea una ACL que proporciona el permiso principal de Kafka para todas las operaciones en el tema interno.

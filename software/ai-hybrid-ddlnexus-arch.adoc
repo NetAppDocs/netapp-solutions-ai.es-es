@@ -1,0 +1,40 @@
+---
+sidebar: sidebar 
+permalink: software/ai-hybrid-ddlnexus-arch.html 
+keywords: NetApp AI, AI, Artificial Intelligence, ML, Machine Learning, NVIDIA, Hybrid, Hybrid Cloud, Hybrid Multicloud, Cloud, AWS, Amazon, Amazon Web Services, FSx ONTAP, FSx, NetApp ONTAP, FlexCache, SnapMirror, BlueXP 
+summary: MLOps multicloud híbrido con Domino Data Lab y NetApp - Arquitectura 
+---
+= Arquitectura
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta solución combina las capacidades de programación de carga de trabajo multicloud híbrida de Domino Nexus con los servicios de datos de NetApp para crear una plataforma MLOps de nube híbrida unificada.  Consulte la siguiente tabla para obtener más detalles.
+
+|===
+| Componente | Nombre | Ambiente 
+
+
+| Plano de control MLOps | link:https://domino.ai/platform/nexus["Plataforma de inteligencia artificial empresarial de Domino con Domino Nexus"] | AWS 
+
+
+| Entornos informáticos de la plataforma MLOps | link:https://docs.dominodatalab.com/en/latest/admin_guide/5781ea/data-planes/["Planos de datos de Domino Nexus"] | AWS, centro de datos local 
+
+
+| Plataforma informática local | link:https://kubernetes.io["Kubernetes"]conlink:https://docs.netapp.com/us-en/trident/index.html["Trident de NetApp"] | Centro de datos local 
+
+
+| Plataforma de computación en la nube | link:https://aws.amazon.com/eks/["Servicio Amazon Elastic Kubernetes (EKS)"]conlink:https://docs.netapp.com/us-en/trident/index.html["Trident de NetApp"] | AWS 
+
+
+| Plataforma de datos local | link:https://www.netapp.com/data-storage/["Dispositivo de almacenamiento NetApp"]Desarrollado porlink:https://www.netapp.com/data-management/ontap-data-management-software/["ONTAP de NetApp"] | Centro de datos local 
+
+
+| Plataforma de datos en la nube | link:https://aws.amazon.com/fsx/netapp-ontap/["Amazon FSx ONTAP"] | AWS 
+|===
+image:ddlnexus-001.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]

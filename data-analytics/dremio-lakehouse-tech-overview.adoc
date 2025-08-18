@@ -1,0 +1,73 @@
+---
+sidebar: sidebar 
+permalink: data-analytics/dremio-lakehouse-tech-overview.html 
+keywords: storagegrid, apache, dremio, lakehouse, 
+summary: Esta sección describe la tecnología utilizada en esta solución. 
+---
+= Requisitos tecnológicos
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Las configuraciones de hardware y software que se describen a continuación se utilizaron para las validaciones realizadas en este documento.  Estas configuraciones sirven como guía para ayudarle a configurar su entorno. Sin embargo, tenga en cuenta que los componentes específicos pueden variar según los requisitos individuales del cliente.
+
+
+
+=== Requisitos de hardware
+
+|===
+| Hardware | Detalles 
+
+
+| Par HA de matriz de almacenamiento AFF de NetApp  a| 
+* A800
+* ONTAP 9.14.1
+* 48 unidades SSD-NVM de 3,49 TB
+* Dos depósitos S3: metadatos de Dremio y datos de clientes.
+
+
+
+
+| 4 x FUJITSU PRIMERGY RX2540 M4  a| 
+* 64 CPU
+* Procesador Intel Xeon Gold 6142 a 2,60 GHz
+* Memoria física de 256 GM
+* 1 puerto de red de 100 GbE
+
+
+
+
+| Redes  a| 
+* 100 GbE
+
+
+
+
+| StorageGRID | * 1 x SG100, 3 x SGF6024 * 3 x 24 x 7,68 TB * Dos buckets S3: metadatos de Dremio y datos de clientes. 
+|===
+
+
+=== Requisitos de software
+
+|===
+| Software | Detalles 
+
+
+| Dremio  a| 
+* versión - 25.0.3-202405170357270647-d2042e1b
+* Edición empresarial
+
+
+
+
+| En las instalaciones  a| 
+* Clúster Dremio de 5 nodos
+* 1 coordinador maestro y 4 ejecutores
+
+
+|===

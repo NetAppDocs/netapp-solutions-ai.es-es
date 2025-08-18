@@ -1,0 +1,38 @@
+---
+indexpage:
+  title: Casos de uso y aplicaciones de IA de NetApp
+  summary: Explore implementaciones de IA del mundo real con soluciones de NetApp
+    , desde sistemas RAG empresariales e inferencia de borde hasta prácticas de IA
+    responsables y estrategias de migración de datos.  Estos casos de uso demuestran
+    cómo NetApp habilita aplicaciones de IA en diversos entornos manteniendo la seguridad,
+    el rendimiento y la escalabilidad.
+  lead: Explore implementaciones de IA del mundo real con soluciones de NetApp , desde
+    sistemas RAG empresariales e inferencia de borde hasta prácticas de IA responsables
+    y estrategias de migración de datos.  Estos casos de uso demuestran cómo NetApp
+    permite a las organizaciones implementar aplicaciones de IA en diversos entornos
+    manteniendo la seguridad, el rendimiento y la escalabilidad.
+  tiles:
+  - title: Aplicaciones y casos de uso de inteligencia artificial empresarial
+    links:
+    - title: NetApp AIPod Mini para RAG empresarial
+      url: "../infra/ai-minipod.html"
+    - title: IA generativa y valor de NetApp
+      url: "../gen-ai/ai-wp-genai.html"
+    - title: Inferencia de inteligencia artificial de borde con NetApp y Lenovo
+      url: "../infra/ai-lenovo-edge-intro.html"
+    - title: Migración del análisis de big data a la IA
+      url: "../data-analytics/bda-ai-introduction.html"
+  - title: IA responsable
+    links:
+    - title: IA responsable con transformación de imágenes de Protopia
+      url: "../software/ai-conf-protopia-overview.html"
+    - title: Áreas de solución
+      url: "../software/ai-conf-protopia-usecases.html"
+    - title: Descripción general de la tecnología
+      url: "../software/ai-conf-protopia-tech.html"
+  - title: Soluciones de almacenamiento e infraestructura de IA
+    links:
+    - title: Diseño de Quantum StorNext con sistemas de la serie E
+      url: "../infra/ai-eseries-nva1150-design.html"
+    - title: Implemente Quantum StorNext con sistemas de la serie E
+      url: "../infra/ai-eseries-nva1150-deploy.html"

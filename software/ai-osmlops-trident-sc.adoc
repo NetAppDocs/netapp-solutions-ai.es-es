@@ -1,0 +1,91 @@
+---
+sidebar: sidebar 
+permalink: software/ai-osmlops-trident-sc.html 
+keywords: Kubernetes, StorageClasses, ONTAP, Deployment, Trident 
+summary: 'MLOps de código abierto con NetApp : ejemplos de clases de almacenamiento de Kubernetes para implementaciones de NetApp AIPod' 
+---
+= Ejemplos de clases de almacenamiento de Kubernetes para implementaciones de NetApp AIPod
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Antes de poder usar Trident para aprovisionar dinámicamente recursos de almacenamiento dentro de su clúster de Kubernetes, debe crear una o más StorageClasses de Kubernetes.  Los ejemplos que siguen representan diferentes tipos de StorageClasses que podría querer crear si está implementando componentes de esta solución en unlink:../infra/ai-aipod-nv-intro.html["NetApp AIPod"^] .  Para obtener más información sobre StorageClasses y, por ejemplo, StorageClasses para otras plataformas/entornos, consulte lalink:https://docs.netapp.com/us-en/trident/index.html["Documentación de Trident"^] .
+
+. NetApp recomienda crear una StorageClass para el Trident Backend habilitado para FlexGroup que creó en la secciónlink:ai-osmlops-trident-backend.html["Ejemplos de backends Trident para implementaciones de NetApp AIPod"] , paso 1.  Los comandos de ejemplo que siguen muestran la creación de múltiples StorageClasses que corresponden al ejemplo Backend que se creó en la secciónlink:ai-osmlops-trident-backend.html["Ejemplos de backends Trident para implementaciones de NetApp AIPod"] , paso 1 - uno que utilicelink:https://docs.netapp.com/us-en/ontap/nfs-rdma/["NFS sobre RDMA"] y uno que no.
++
+Para que un volumen persistente no se elimine cuando se elimina el PersistentVolumeClaim (PVC) correspondiente, el siguiente ejemplo utiliza un `reclaimPolicy` valor de `Retain` .  Para obtener más información sobre la `reclaimPolicy` campo, ver el oficial https://kubernetes.io/docs/concepts/storage/storage-classes/["Documentación de Kubernetes"^] .
+
++
+Nota: Las siguientes clases de almacenamiento de ejemplo utilizan un tamaño de transferencia máximo de 262144.  Para utilizar este tamaño de transferencia máximo, debe configurar el tamaño de transferencia máximo en su sistema ONTAP según corresponda.  Consulte lalink:https://docs.netapp.com/us-en/ontap/nfs-admin/nfsv3-nfsv4-performance-tcp-transfer-size-concept.html["Documentación de ONTAP"^] Para más detalles.
+
++
+Nota: Para utilizar NFS sobre RDMA, debe configurar NFS sobre RDMA en su sistema ONTAP .  Consulte lalink:https://docs.netapp.com/us-en/ontap/nfs-rdma/["Documentación de ONTAP"^] Para más detalles.
+
++
+Nota: En el siguiente ejemplo, se especifica un Backend específico en el campo storagePool en el archivo de definición StorageClass.
+
++
+....
+$ cat << EOF > ./storage-class-aipod-flexgroups-retain.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: aipod-flexgroups-retain
+provisioner: csi.trident.netapp.io
+mountOptions: ["vers=4.1", "nconnect=16", "rsize=262144", "wsize=262144"]
+parameters:
+  backendType: "ontap-nas-flexgroup"
+  storagePools: "aipod-flexgroups-iface1:.*"
+reclaimPolicy: Retain
+EOF
+$ kubectl create -f ./storage-class-aipod-flexgroups-retain.yaml
+storageclass.storage.k8s.io/aipod-flexgroups-retain created
+$ cat << EOF > ./storage-class-aipod-flexgroups-retain-rdma.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: aipod-flexgroups-retain-rdma
+provisioner: csi.trident.netapp.io
+mountOptions: ["vers=4.1", "proto=rdma", "max_connect=16", "rsize=262144", "wsize=262144"]
+parameters:
+  backendType: "ontap-nas-flexgroup"
+  storagePools: "aipod-flexgroups-iface1:.*"
+reclaimPolicy: Retain
+EOF
+$ kubectl create -f ./storage-class-aipod-flexgroups-retain-rdma.yaml
+storageclass.storage.k8s.io/aipod-flexgroups-retain-rdma created
+$ kubectl get storageclass
+NAME                             PROVISIONER             AGE
+aipod-flexgroups-retain          csi.trident.netapp.io   0m
+aipod-flexgroups-retain-rdma     csi.trident.netapp.io   0m
+....
+. NetApp también recomienda crear una StorageClass que corresponda al Trident Backend habilitado para FlexVol que creó en la secciónlink:ai-osmlops-trident-backend.html["Ejemplos de backends Trident para implementaciones de AIPod"] , paso 2.  Los comandos de ejemplo que siguen muestran la creación de una única StorageClass para volúmenes FlexVol .
++
+Nota: En el siguiente ejemplo, no se especifica un Backend particular en el campo storagePool en el archivo de definición StorageClass.  Cuando utiliza Kubernetes para administrar volúmenes mediante esta StorageClass, Trident intenta usar cualquier backend disponible que use la `ontap-nas` conductor.
+
++
+....
+$ cat << EOF > ./storage-class-aipod-flexvols-retain.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: aipod-flexvols-retain
+provisioner: netapp.io/trident
+parameters:
+  backendType: "ontap-nas"
+reclaimPolicy: Retain
+EOF
+$ kubectl create -f ./storage-class-aipod-flexvols-retain.yaml
+storageclass.storage.k8s.io/aipod-flexvols-retain created
+$ kubectl get storageclass
+NAME                             PROVISIONER             AGE
+aipod-flexgroups-retain          csi.trident.netapp.io   0m
+aipod-flexgroups-retain-rdma     csi.trident.netapp.io   0m
+aipod-flexvols-retain            csi.trident.netapp.io   0m
+....
+

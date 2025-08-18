@@ -1,0 +1,34 @@
+---
+settings:
+  name: NetApp artificial intelligence solutions
+  internal:
+    pdf_enabled: true
+    lipi_enabled: true
+  prod:
+    pdf_enabled: true
+    lipi_enabled: true
+    harmony_enabled: false
+  pdf:
+    gen-type: named-only
+    zip-level: 1
+    zip-filename: netapp-solutions-ai.zip
+  langs: es-es,us-en,de-de,fr-fr,it-it,pt-br,ja-jp,ko-kr,zh-cn,zh-tw
+sidebar:
+  entries:
+  - title: Soluciones de inteligencia artificial
+    url: "/index.html"
+  - title: Qué hay de nuevo
+    url: "/whats-new.html"
+  - section: ai-infrastructures
+  - section: ai-data-pipelines
+  - section: ai-use-cases
+  - section: data-analytics
+  - title: Vídeos
+    url: "/videos/ai-ml-videos.html"
+  - title: Blogs
+    url: "/blogs.html"
+  - title: Avisos legales
+    url: "/legal-notices.html"
+product-family:
+  name: NetApp solutions
+  repo: netapp-solutions-family

@@ -1,0 +1,26 @@
+---
+sidebar: sidebar 
+permalink: software/dataops-toolkit.html 
+keywords:  
+summary:  
+---
+= Kit de herramientas DataOps de NetApp
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+NetApp DataOps Toolkit es una herramienta basada en Python que simplifica la gestión de espacios de trabajo de desarrollo/entrenamiento y servidores de inferencia respaldados por almacenamiento NetApp de alto rendimiento y escalabilidad horizontal.  Las capacidades clave incluyen:
+
+* Aprovisione rápidamente nuevos espacios de trabajo JupyterLab de alta capacidad respaldados por almacenamiento NetApp de alto rendimiento y escalabilidad horizontal.
+* Aprovisione rápidamente nuevas instancias de NVIDIA Triton Inference Server respaldadas por almacenamiento NetApp de clase empresarial.
+* Clone casi instantáneamente espacios de trabajo de JupyterLab de alta capacidad para permitir la experimentación o la iteración rápida.
+* Guarde casi instantáneamente instantáneas de espacios de trabajo de JupyterLab de alta capacidad para realizar copias de seguridad y/o trazabilidad/establecimiento de referencia.
+* Aprovisione, clone y cree instantáneas de volúmenes de datos de alto rendimiento y alta capacidad de forma casi instantánea.
+
+
+link:https://github.com/NetApp/netapp-dataops-toolkit["Kit de herramientas DataOps de NetApp"^]

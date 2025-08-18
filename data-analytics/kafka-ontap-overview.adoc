@@ -1,0 +1,25 @@
+---
+sidebar: sidebar 
+permalink: data-analytics/kafka-ontap-overview.html 
+keywords: tr4941, 4941, introduction 
+summary: Este documento describe los puntos de referencia de rendimiento para la plataforma Confluent en NetApp ONTAP utilizando un kit de evaluación comparativa de almacenamiento por niveles. 
+---
+= TR-4941: Compatible con controladores de almacenamiento NetApp ONTAP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+Karthikeyan Nagalingam, Joe Scott, NetApp Rankesh Kumar, Confluent
+
+[role="lead"]
+Para que la plataforma Confluent sea más escalable y elástica, debe poder escalar y equilibrar cargas de trabajo muy rápidamente.  El almacenamiento por niveles permite almacenar grandes volúmenes de datos en Confluent de forma manejable, reduciendo esta carga operativa.
+
+La idea fundamental es separar el almacenamiento de datos del procesamiento de datos, lo que hace que sea mucho más fácil escalar cada uno de ellos independientemente.
+
+Cargado con innovaciones líderes en la industria, el software de gestión de datos NetApp ONTAP proporciona a Confluent muchas ventajas en cualquier lugar donde se encuentren los datos.
+
+Este documento describe los puntos de referencia de rendimiento para la plataforma Confluent en NetApp ONTAP utilizando un kit de evaluación comparativa de almacenamiento por niveles.

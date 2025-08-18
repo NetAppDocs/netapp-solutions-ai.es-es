@@ -1,0 +1,19 @@
+---
+sidebar: sidebar 
+permalink: infra/ai-lenovo-train-plan.html 
+keywords: test plan, validation, image recognition training, processes 
+summary: En esta validación, realizamos entrenamiento de reconocimiento de imágenes según lo especificado por MLPerf v2.0.  Específicamente, entrenamos el modelo ResNet v2.0 con el conjunto de datos ImageNet.  La métrica principal es el tiempo para alcanzar la precisión deseada.  También informamos el ancho de banda de entrenamiento en imágenes por segundo para evaluar mejor la eficiencia del escalamiento. 
+---
+= Plan de pruebas
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+En esta validación, realizamos entrenamiento de reconocimiento de imágenes según lo especificado por MLPerf v2.0.  En concreto, entrenamos el modelo ResNet v2.0 con el conjunto de datos ImageNet hasta alcanzar una precisión del 76,1%.  La métrica principal es el tiempo para alcanzar la precisión deseada.  También informamos el ancho de banda de entrenamiento en imágenes por segundo para evaluar mejor la eficiencia del escalamiento.
+
+El caso de prueba principal evaluó múltiples procesos de entrenamiento independientes (uno por nodo) que se ejecutaban simultáneamente.  Esto simula el caso de uso principal, un sistema compartido utilizado por múltiples científicos de datos.  El segundo caso de prueba evaluó la eficiencia de escalamiento.

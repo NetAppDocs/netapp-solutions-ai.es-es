@@ -1,0 +1,28 @@
+---
+sidebar: sidebar 
+permalink: software/ai-conf-protopia-conclusion.html 
+keywords: conclusion, ai inferencing, 
+summary: 'Los datos existen en tres estados: en reposo, en tránsito y en proceso de cálculo.  Una parte importante de cualquier servicio de inferencia de IA debe ser la protección de los datos contra amenazas durante todo el proceso.  La protección de datos durante la inferencia es fundamental porque el proceso puede exponer información privada sobre los clientes externos y la empresa que proporciona el servicio de inferencia.' 
+---
+= Conclusión
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Los datos existen en tres estados: en reposo, en tránsito y en procesamiento.  Una parte importante de cualquier servicio de inferencia de IA debe ser la protección de los datos contra amenazas durante todo el proceso.  La protección de datos durante la inferencia es fundamental porque el proceso puede exponer información privada sobre los clientes externos y la empresa que proporciona el servicio de inferencia.  Protopia AI es una solución de software no intrusiva para la inferencia de IA confidencial en el mercado actual.  Con Protopia, la IA se alimenta únicamente de la información transformada en los registros de datos que es esencial para llevar a cabo la tarea de IA/ML en cuestión y nada más.  Esta transformación estocástica no es una forma de enmascaramiento y se basa en cambiar matemáticamente la representación de los datos mediante el uso de ruido curado.
+
+Los sistemas de almacenamiento de NetApp con capacidades ONTAP ofrecen el mismo rendimiento o uno mejor que el almacenamiento SSD local y, combinados con NetApp DataOps Toolkit, ofrecen los siguientes beneficios a científicos de datos, ingenieros de datos, desarrolladores de IA/ML y tomadores de decisiones de TI empresariales o comerciales:
+
+* Intercambio de datos sin esfuerzo entre sistemas de IA, análisis y otros sistemas comerciales críticos.  Este intercambio de datos reduce la sobrecarga de infraestructura, mejora el rendimiento y agiliza la gestión de datos en toda la empresa.
+* Computación y almacenamiento escalables de forma independiente para minimizar costos y mejorar el uso de recursos.
+* Flujos de trabajo de desarrollo e implementación optimizados mediante copias Snapshot y clones integrados para espacios de trabajo de usuario instantáneos y que ahorran espacio, control de versiones integrado e implementación automatizada.
+* Protección de datos de nivel empresarial y gobernanza de datos para recuperación ante desastres, continuidad comercial y requisitos regulatorios.
+* Invocación simplificada de operaciones de gestión de datos; tome rápidamente copias instantáneas de los espacios de trabajo de los científicos de datos para realizar copias de seguridad y trazabilidad desde el kit de herramientas NetApp DataOps en cuadernos Jupyter.
+
+
+La solución de NetApp y Protopia proporciona una arquitectura flexible y escalable que es ideal para implementaciones de inferencia de IA de nivel empresarial.  Permite la protección de datos y brinda privacidad a la información confidencial donde los requisitos de inferencia de IA confidenciales pueden cumplirse con prácticas de IA responsables en implementaciones locales e híbridas.

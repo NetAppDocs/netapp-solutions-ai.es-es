@@ -1,0 +1,56 @@
+---
+sidebar: sidebar 
+permalink: software/ai-hybrid-ddlnexus-setup.html 
+keywords: NetApp AI, AI, Artificial Intelligence, ML, Machine Learning, NVIDIA, Hybrid, Hybrid Cloud, Hybrid Multicloud, Cloud, AWS, Amazon, Amazon Web Services, FSx ONTAP, FSx, NetApp ONTAP, FlexCache, SnapMirror, BlueXP 
+summary: 'MLOps multicloud híbrido con Domino Data Lab y NetApp : configuración inicial' 
+---
+= Configuración inicial
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta sección describe las tareas de configuración inicial que deben realizarse para utilizar Domino Nexus con los servicios de datos de NetApp en un entorno híbrido que incorpora un centro de datos local y AWS.
+
+
+
+== Prerrequisitos
+
+Antes de realizar los pasos que se describen en esta sección, asumimos que ya ha realizado las siguientes tareas:
+
+* Ya ha implementado y configurado su plataforma de almacenamiento NetApp ONTAP local. Para obtener más información, consulte la link:https://www.netapp.com/support-and-training/documentation/["Documentación de productos de NetApp"] .
+* Ya ha aprovisionado una instancia de Amazon FSx ONTAP en AWS. Para obtener más información, consulte la link:https://aws.amazon.com/fsx/netapp-ontap/["Página del producto Amazon FSx ONTAP"] .
+* Ya ha aprovisionado un clúster de Kubernetes en su centro de datos local. Para obtener más información, consulte la link:https://docs.dominodatalab.com/en/latest/admin_guide/b35e66/admin-guide/["Guía de administración de Domino"] .
+* Ya ha aprovisionado un clúster de Amazon EKS en AWS. Para obtener más información, consulte la link:https://docs.dominodatalab.com/en/latest/admin_guide/b35e66/admin-guide/["Guía de administración de Domino"] .
+* Ha instalado NetApp Trident en su clúster de Kubernetes local.  Además, ha configurado esta instancia de Trident para utilizar su plataforma de almacenamiento NetApp ONTAP local al aprovisionar y administrar recursos de almacenamiento. Para obtener más información, consulte la link:https://docs.netapp.com/us-en/trident/index.html["Documentación de NetApp Trident"] .
+* Ha instalado NetApp Trident en su clúster de Amazon EKS.  Además, ha configurado esta instancia de Trident para utilizar su instancia de Amazon FSx ONTAP al aprovisionar y administrar recursos de almacenamiento. Para obtener más información, consulte la link:https://docs.netapp.com/us-en/trident/index.html["Documentación de NetApp Trident"] .
+* Debe tener conectividad de red bidireccional entre su centro de datos local y su nube privada virtual (VPC) en AWS.  Para obtener más detalles sobre las distintas opciones para implementar esto, consulte lalink:https://docs.aws.amazon.com/vpc/latest/userguide/vpn-connections.html["Documentación de la red privada virtual (VPN) de Amazon"] .
+
+
+
+
+== Instalar la plataforma de inteligencia artificial empresarial Domino en AWS
+
+Para instalar la plataforma Domino Enterprise MLOps en AWS, siga las instrucciones que se describen enlink:https://docs.dominodatalab.com/en/latest/admin_guide/c1eec3/deploy-domino/["Guía de administración de Domino"] .  Debe implementar Domino en el mismo clúster de Amazon EKS que aprovisionó anteriormente.  Además, NetApp Trident ya debe estar instalado y configurado en este clúster EKS, y debe especificar una clase de almacenamiento administrada por Trident como la clase de almacenamiento compartido en su archivo de configuración de instalación domino.yml.
+
+
+NOTE: Consulte lalink:https://docs.dominodatalab.com/en/latest/admin_guide/7f4331/install-configuration-reference/#storage-classes["Guía de referencia de configuración de instalación de Domino"] para obtener detalles sobre cómo especificar una clase de almacenamiento compartido en su archivo de configuración de instalación domino.yml.
+
+
+NOTE: link:https://www.netapp.com/media/79922-tr-4952.pdf["Informe técnico TR-4952"]recorre la implementación de Domino en AWS con Amazon FSx ONTAP y puede ser una referencia útil para solucionar cualquier problema que surja.
+
+
+
+== Habilitar Domino Nexus
+
+A continuación, debes habilitar Domino Nexus.  Consulte lalink:https://docs.dominodatalab.com/en/latest/admin_guide/c65074/nexus-hybrid-architecture/["Guía de administración de Domino"] Para más detalles.
+
+
+
+== Implemente un plano de datos de Domino en su centro de datos local
+
+A continuación, debe implementar un Domino Data Plane en su centro de datos local.  Debe implementar este plano de datos en el clúster de Kubernetes local que aprovisionó previamente.  Además, NetApp Trident ya debe estar instalado y configurado en este clúster de Kubernetes.  Consulte lalink:https://docs.dominodatalab.com/en/latest/admin_guide/5781ea/data-planes/["Guía de administración de Domino"] Para más detalles.

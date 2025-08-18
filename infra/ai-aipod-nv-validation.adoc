@@ -1,0 +1,75 @@
+---
+sidebar: sidebar 
+permalink: infra/ai-aipod-nv-validation.html 
+keywords: NetApp AI, AI, Artificial Intelligence, ML, Machine Learning, NVIDIA, NVIDIA AI Enterprise, NVIDIA BasePOD, NVIDIA DGX 
+summary: 'NetApp AIPod con sistemas NVIDIA DGX: validación de soluciones y guía de dimensionamiento' 
+---
+= NVA-1173 NetApp AIPod con sistemas NVIDIA DGX: validación de soluciones y guía de dimensionamiento
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta sección se centra en la validación de la solución y la orientación sobre el dimensionamiento de los sistemas NetApp AIPod con NVIDIA DGX.
+
+
+
+== Validación de la solución
+
+La configuración de almacenamiento en esta solución se validó utilizando una serie de cargas de trabajo sintéticas utilizando la herramienta de código abierto FIO.  Estas pruebas incluyen patrones de E/S de lectura y escritura destinados a simular la carga de trabajo de almacenamiento generada por los sistemas DGX que realizan trabajos de entrenamiento de aprendizaje profundo.  La configuración de almacenamiento se validó utilizando un clúster de servidores de CPU de 2 sockets que ejecutaban las cargas de trabajo FIO simultáneamente para simular un clúster de sistemas DGX.  Cada cliente se configuró con la misma configuración de red descrita anteriormente, con el agregado de los siguientes detalles.
+
+Se utilizaron las siguientes opciones de montaje para esta validación:
+
+[cols="30%, 70%"]
+|===
+
+
+| versión=4.1 | permite pNFS para acceso paralelo a múltiples nodos de almacenamiento 
+
+
+| proto=rdma | Establece el protocolo de transferencia a RDMA en lugar del TCP predeterminado 
+
+
+| puerto=20049 | especifique el puerto correcto para el servicio RDMA NFS 
+
+
+| conexión máxima=16 | Permite la conexión troncal de sesiones NFS para agregar el ancho de banda del puerto de almacenamiento 
+
+
+| escribir=ansioso | mejora el rendimiento de escritura de las escrituras almacenadas en búfer 
+
+
+| tamaño r=262144, tamaño w=262144 | Establece el tamaño de transferencia de E/S a 256k 
+|===
+Además, los clientes se configuraron con un valor NFS max_session_slots de 1024.  Como la solución se probó utilizando NFS sobre RDMA, los puertos de redes de almacenamiento se configuraron con un enlace activo/pasivo.  Para esta validación se utilizaron los siguientes parámetros de enlace:
+
+[cols="30%, 70%"]
+|===
+
+
+| modo=copia de seguridad activa | Establece el vínculo en modo activo/pasivo 
+
+
+| principal=<nombre de la interfaz> | Las interfaces principales para todos los clientes se distribuyeron entre los conmutadores 
+
+
+| intervalo del monitor mii=100 | especifica un intervalo de monitorización de 100 ms 
+
+
+| política de conmutación por error de mac=activa | especifica que la dirección MAC del enlace activo es la MAC del enlace.  Esto es necesario para el correcto funcionamiento de RDMA a través de la interfaz vinculada. 
+|===
+El sistema de almacenamiento se configuró como se describe con dos pares A900 HA (4 controladores) con dos estantes de discos NS224 de 24 unidades de disco NVMe de 1,9 TB conectados a cada par HA.  Como se señaló en la sección de arquitectura, la capacidad de almacenamiento de todos los controladores se combinó mediante un volumen FlexGroup y los datos de todos los clientes se distribuyeron entre todos los controladores del clúster.
+
+
+
+== Guía de dimensionamiento del sistema de almacenamiento
+
+NetApp ha completado con éxito la certificación DGX BasePOD y los dos pares A90 HA probados pueden soportar fácilmente un clúster de dieciséis sistemas DGX H100.  Para implementaciones más grandes con mayores requisitos de rendimiento de almacenamiento, se pueden agregar sistemas AFF adicionales al clúster NetApp ONTAP hasta 12 pares de HA (24 nodos) en un solo clúster.  Al utilizar la tecnología FlexGroup descrita en esta solución, un clúster de 24 nodos puede proporcionar más de 79 PB y hasta 552 GBps de rendimiento en un solo espacio de nombres.  Otros sistemas de almacenamiento de NetApp , como AFF A400, A250 y C800, ofrecen opciones de menor rendimiento y/o mayor capacidad para implementaciones más pequeñas a menores costos.  Debido a que ONTAP 9 admite clústeres de modelos mixtos, los clientes pueden comenzar con un espacio inicial más pequeño y agregar más sistemas de almacenamiento o más grandes al clúster a medida que aumentan los requisitos de capacidad y rendimiento.  La siguiente tabla muestra una estimación aproximada de la cantidad de GPU A100 y H100 compatibles con cada modelo AFF .
+
+_Guía de dimensionamiento del sistema de almacenamiento NetApp_
+
+image:aipod-nv-a90-sizing.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]

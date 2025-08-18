@@ -1,0 +1,154 @@
+---
+sidebar: sidebar 
+permalink: software/ai-osmlops-jhub-deploy.html 
+keywords: AI, control plane, MLOps, JupyterHub 
+summary: 'MLOps de código abierto con NetApp : implementación de JupyterHub' 
+---
+= Implementación de JupyterHub
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta sección describe las tareas que debe completar para implementar JupyterHub en su clúster de Kubernetes.
+
+
+NOTE: Es posible implementar JupyterHub en plataformas distintas a Kubernetes.  La implementación de JupyterHub en plataformas distintas a Kubernetes está fuera del alcance de esta solución.
+
+
+
+== Prerrequisitos
+
+Antes de realizar el ejercicio de implementación que se describe en esta sección, asumimos que ya ha realizado las siguientes tareas:
+
+. Ya tienes un clúster de Kubernetes en funcionamiento.
+. Ya ha instalado y configurado NetApp Trident en su clúster de Kubernetes.  Para obtener más detalles sobre Trident, consulte lalink:https://docs.netapp.com/us-en/trident/index.html["Documentación de Trident"^] .
+
+
+
+
+== Instalar Helm
+
+JupyterHub se implementa utilizando Helm, un administrador de paquetes popular para Kubernetes.  Antes de implementar JupyterHub, debe instalar Helm en su nodo de control de Kubernetes.  Para instalar Helm, siga las instrucciones https://helm.sh/docs/intro/install/["instrucciones de instalación"^] en la documentación oficial de Helm.
+
+
+
+== Establecer la clase de almacenamiento predeterminada de Kubernetes
+
+Antes de implementar JupyterHub, debe designar una StorageClass predeterminada dentro de su clúster de Kubernetes.  Para designar una StorageClass predeterminada dentro de su clúster, siga las instrucciones que se describen en lalink:ai-osmlops-kubeflow-deploy.html["Implementación de Kubeflow"] sección.  Si ya ha designado una StorageClass predeterminada dentro de su clúster, puede omitir este paso.
+
+
+
+== Implementar JupyterHub
+
+Después de completar los pasos anteriores, ahora está listo para implementar JupyterHub.  La implementación de JupyterHub requiere los siguientes pasos:
+
+
+
+=== Configurar la implementación de JupyterHub
+
+Antes de la implementación, es una buena práctica optimizar la implementación de JupyterHub para su entorno respectivo.  Puede crear un archivo *config.yaml* y utilizarlo durante la implementación mediante el gráfico Helm.
+
+Se puede encontrar un archivo *config.yaml* de ejemplo en https://github.com/jupyterhub/zero-to-jupyterhub-k8s/blob/HEAD/jupyterhub/values.yaml[]
+
+
+NOTE: En este archivo config.yaml, puede establecer el parámetro *(singleuser.storage.dynamic.storageClass)* para NetApp Trident StorageClass.  Esta es la clase de almacenamiento que se utilizará para aprovisionar los volúmenes para espacios de trabajo de usuarios individuales.
+
+
+
+=== Agregar volúmenes compartidos
+
+Si desea utilizar un volumen compartido para todos los usuarios de JupyterHub, puede ajustar su *config.yaml* en consecuencia.  Por ejemplo, si tiene un PersistentVolumeClaim compartido llamado jupyterhub-shared-volume, podría montarlo como /home/shared en todos los pods de usuario de la siguiente manera:
+
+[source, shell]
+----
+singleuser:
+  storage:
+    extraVolumes:
+      - name: jupyterhub-shared
+        persistentVolumeClaim:
+          claimName: jupyterhub-shared-volume
+    extraVolumeMounts:
+      - name: jupyterhub-shared
+        mountPath: /home/shared
+----
+
+NOTE: Este es un paso opcional, puedes ajustar estos parámetros según tus necesidades.
+
+
+
+=== Implementar JupyterHub con Helm Chart
+
+Haga que Helm conozca el repositorio de gráficos de Helm de JupyterHub.
+
+[source, shell]
+----
+helm repo add jupyterhub https://hub.jupyter.org/helm-chart/
+helm repo update
+----
+Esto debería mostrar un resultado como el siguiente:
+
+[source, shell]
+----
+Hang tight while we grab the latest from your chart repositories...
+...Skip local chart repository
+...Successfully got an update from the "stable" chart repository
+...Successfully got an update from the "jupyterhub" chart repository
+Update Complete. ⎈ Happy Helming!⎈
+----
+Ahora instale el gráfico configurado por su config.yaml ejecutando este comando desde el directorio que contiene su config.yaml:
+
+[source, shell]
+----
+helm upgrade --cleanup-on-fail \
+  --install my-jupyterhub jupyterhub/jupyterhub \
+  --namespace my-namespace \
+  --create-namespace \
+  --values config.yaml
+----
+
+NOTE: En este ejemplo:
+
+<helm-release-name> se establece en my-jupyterhub, que será el nombre de su versión de JupyterHub.  <k8s-namespace> está configurado en my-namespace, que es el espacio de nombres donde desea instalar JupyterHub.  El indicador --create-namespace se utiliza para crear el espacio de nombres si aún no existe.  El indicador --values especifica el archivo config.yaml que contiene las opciones de configuración deseadas.
+
+
+
+=== Comprobar implementación
+
+Mientras se ejecuta el paso 2, puedes ver los pods que se crean desde el siguiente comando:
+
+[source, shell]
+----
+kubectl get pod --namespace <k8s-namespace>
+----
+Espere a que el concentrador y el módulo proxy entren en el estado de ejecución.
+
+[source, shell]
+----
+NAME                    READY     STATUS    RESTARTS   AGE
+hub-5d4ffd57cf-k68z8    1/1       Running   0          37s
+proxy-7cb9bc4cc-9bdlp   1/1       Running   0          37s
+----
+
+
+=== Acceder a JupyterHub
+
+Encuentra la IP que podemos usar para acceder a JupyterHub.  Ejecute el siguiente comando hasta que la IP EXTERNA del servicio proxy público esté disponible como en la salida del ejemplo.
+
+
+NOTE: Usamos el servicio NodePort en nuestro archivo config.yaml, que puedes ajustar a tu entorno según tu configuración (por ejemplo, LoadBalancer).
+
+[source, shell]
+----
+kubectl --namespace <k8s-namespace> get service proxy-public
+----
+[source, shell]
+----
+NAME           TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)        AGE
+proxy-public   NodePort   10.51.248.230   104.196.41.97   80:30000/TCP   1m
+----
+Para utilizar JupyterHub, ingrese la IP externa del servicio proxy público en un navegador.

@@ -1,0 +1,23 @@
+---
+sidebar: sidebar 
+permalink: data-analytics/bda-ai-customer-challenges.html 
+keywords: customer, challenge, data lake, repository, syncing, moving data 
+summary: Esta página analiza los desafíos que podría enfrentar un cliente al intentar acceder a datos de análisis de big data para operaciones de IA. 
+---
+= Desafíos del cliente
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Los clientes podrían enfrentar los siguientes desafíos al intentar acceder a datos de análisis de big data para operaciones de IA:
+
+* Los datos del cliente se encuentran en un repositorio de datos.  El lago de datos puede contener diferentes tipos de datos, como datos estructurados, no estructurados, semiestructurados, registros y datos de máquina a máquina.  Todos estos tipos de datos deben procesarse en sistemas de IA.
+* La IA no es compatible con los sistemas de archivos Hadoop.  Una arquitectura de IA típica no puede acceder directamente a los datos HDFS y HCFS, que deben trasladarse a un sistema de archivos comprensible para IA (NFS).
+* Para trasladar los datos del lago de datos a la IA normalmente se necesitan procesos especializados.  La cantidad de datos en el lago de datos puede ser muy grande.  Un cliente debe tener una forma eficiente, de alto rendimiento y rentable de trasladar datos a los sistemas de IA.
+* Sincronización de datos.  Si un cliente desea sincronizar datos entre la plataforma de big data y la IA, a veces los datos procesados a través de la IA se pueden usar con big data para el procesamiento analítico.
+
