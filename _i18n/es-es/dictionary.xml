@@ -5576,4 +5576,15 @@
   <block id="d156278e3dbb2cd83d1a870d6704c9b8" category="sidebar">Guía técnica de capacitación en IA híbrida de NetApp + Union.ai</block>
   <block id="ddf52cdc15133d3a9cb02a51bde98630" category="sidebar">Capacitación en IA híbrida con NetApp y Union.ai</block>
   <block id="9c1377c97790bfb53de65e24276a1216" category="sidebar">Entrenamiento híbrido de IA con Union.ai</block>
+  <block id="bc35ee37767e4af0acfededb3169dea7" category="list-text">Ejemplos de clientes de Instaclustr y detalles de sus casos de uso</block>
+  <block id="0212a7ff5eedcd67a7b84fa1ba480bc2" category="paragraph"><block ref="f670d08dd43af20b7e913fb27609f01d" category="inline-link-rx"></block>,<block ref="a9adf060aa8097003033bb7f27b5067d" category="inline-link-rx"></block></block>
+  <block id="32e89286d3b2abdbdfed4a3b70b56c4a" category="paragraph"><block ref="32e89286d3b2abdbdfed4a3b70b56c4a" category="inline-link-rx"></block></block>
+  <block id="04811d6350cbb9ca8a0ee30a91752819" category="paragraph"><block ref="04811d6350cbb9ca8a0ee30a91752819" category="inline-link-rx"></block></block>
+  <block id="51a14d08c34bcecf91444995375a1ff2" category="inline-link-macro">Instaclust con almacenamiento por niveles de Kafka</block>
+  <block id="e4fda4b7fc0596e39060f4d05d9a3104" category="paragraph">NetApp instaclustr también es compatible con Kafka con almacenamiento en niveles desde 3.8.1. Por favor, consulte más detalles aquí <block ref="b7922a93a5920c465bcf40e7e8f14b82" category="inline-link-macro-rx"></block></block>
+  <block id="1f2f31fd4bc8efc61a85e89732c2b1d8" category="paragraph">Instaclustr también admite funciones de reequilibrio automático y se ha implementado para múltiples clientes.</block>
+  <block id="856aa9558f6aac1cc157b1d21fa78574" category="section-title">Conectores de Kafka Connect de Instaclustr</block>
+  <block id="2b56b60f878922093facd42284848a0c" category="inline-link-macro">Más detalles</block>
+  <block id="66e7fcb114a635fe90c2f5b97045315d" category="inline-link-macro">sus detalles</block>
+  <block id="621d9727aaaf7b26ac0502b35736098f" category="paragraph">Instaclustr admite los conectores de Kafka Connect y sus detalles: <block ref="5792c576643eef1089e675cecfec7f12" category="inline-link-macro-rx"></block>. Instaclustr proporciona conectores adicionales <block ref="46bc00f72c87fbc1de536d86c545b8a8" category="inline-link-macro-rx"></block></block>
 </blocks>
