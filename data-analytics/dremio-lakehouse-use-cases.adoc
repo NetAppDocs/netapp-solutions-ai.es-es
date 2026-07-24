@@ -15,6 +15,7 @@ summary: Esta sección cubre los detalles del caso de uso del cliente de Dremio 
 
 
 
+[[netapp-activeiq-use-case]]
 == Caso de uso de NetApp ActiveIQ
 
 image:activeiqold.png["Arquitectura antigua de ActiveIQ"]
@@ -31,6 +32,7 @@ Como reemplazo de la infraestructura Hadoop/Hive, Dremio ofreció funcionalidad 
 
 
 
+[[auto-parts-sales-customer-use-case]]
 == Caso de uso de un cliente de venta de autopartes.
 
 *Desafíos*: Dentro de esta empresa global de ventas de autopartes, los grupos de planificación y análisis financiero ejecutivo y corporativo no pudieron obtener una visión consolidada de los informes de ventas y se vieron obligados a leer los informes de métricas de ventas de cada línea de negocios e intentar consolidarlos.  Esto dio lugar a que los clientes tomaran decisiones con datos que tenían al menos un día de antigüedad.  Los plazos para obtener nuevos conocimientos analíticos normalmente demoran más de cuatro semanas.  La solución de problemas en las canalizaciones de datos requeriría incluso más tiempo, sumando tres días o más al ya extenso cronograma.  El lento proceso de desarrollo de informes, así como su rendimiento, obligaron a la comunidad de analistas a esperar continuamente a que los datos se procesaran o cargaran, en lugar de permitirles descubrir nuevos conocimientos comerciales e impulsar nuevos comportamientos comerciales.  Estos entornos problemáticos estaban compuestos por numerosas bases de datos diferentes para distintas líneas de negocio, lo que daba lugar a numerosos silos de datos.  El entorno lento y fragmentado complicó la gobernanza de los datos, ya que había demasiadas formas para que los analistas elaboraran su propia versión de la verdad frente a una única fuente de verdad.  El enfoque costó más de 1,9 millones de dólares en costos de plataforma de datos y personal.  El mantenimiento de la plataforma heredada y el cumplimiento de las solicitudes de datos requerían siete ingenieros técnicos de campo (ETC) por año.  Con el aumento de las solicitudes de datos, el equipo de inteligencia de datos no pudo escalar el entorno heredado para satisfacer las necesidades futuras.

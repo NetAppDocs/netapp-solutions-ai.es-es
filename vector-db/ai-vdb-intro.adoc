@@ -18,6 +18,7 @@ Esta sección proporciona una introducción a la solución de base de datos vect
 
 
 
+[[introduction]]
 == Introducción
 
 Las bases de datos vectoriales abordan de manera efectiva los desafíos que están diseñados para manejar las complejidades de la búsqueda semántica en modelos de lenguaje grandes (LLM) y en inteligencia artificial generativa (IA).  A diferencia de los sistemas de gestión de datos tradicionales, las bases de datos vectoriales son capaces de procesar y buscar en varios tipos de datos, incluidas imágenes, vídeos, texto, audio y otras formas de datos no estructurados, utilizando el contenido de los datos en sí en lugar de etiquetas o rótulos.

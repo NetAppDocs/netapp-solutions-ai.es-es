@@ -18,6 +18,7 @@ En esta validación de arquitectura de referencia, utilizamos una configuración
 
 
 
+[[netapp-setup]]
 === Configuración de NetApp
 
 * Inicialización del sistema de almacenamiento
@@ -42,12 +43,14 @@ Siga los pasos a continuación para S3 (Servicio de almacenamiento simple):
 
 
 
+[[zookeeper-setup]]
 === Configuración de Zookeeper
 
 Puede utilizar la configuración del zoológico proporcionada por Dremio.  En esta validación, utilizamos un zookeeper independiente. Seguimos los pasos mencionados en este enlace web. https://medium.com/@ahmetfurkandemir/distributed-hadoop-cluster-1-spark-with-all-dependincies-03c8ec616166[]
 
 
 
+[[dremio-setup]]
 === Configuración de Dremio
 
 Seguimos este enlace web para instalar Dremio mediante paquete tar.
@@ -237,6 +240,7 @@ NOTE: NetApp recomienda StorageGRID como su principal solución de almacenamient
 
 
 
+[[multiple-sources-setup]]
 === Configuración de múltiples fuentes
 
 . Configurar ONTAP S3 y storageGRID como una fuente s3 en Dremio.

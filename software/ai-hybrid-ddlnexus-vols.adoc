@@ -18,6 +18,7 @@ En esta sección se describen las tareas que deben realizarse para exponer los v
 
 
 
+[[why-expose-netapp-ontap-volumes-to-domino]]
 == ¿Por qué exponer volúmenes de NetApp ONTAP a Domino?
 
 El uso de volúmenes NetApp junto con Domino proporciona los siguientes beneficios:
@@ -30,12 +31,14 @@ El uso de volúmenes NetApp junto con Domino proporciona los siguientes benefici
 
 
 
+[[expose-existing-nfs-volumes-that-were-not-provisioned-by-trident]]
 == Exponer volúmenes NFS existentes que no fueron aprovisionados por Trident
 
 Si su volumen NFS NetApp ONTAP existente no fue aprovisionado por Trident, siga los pasos descritos en esta subsección.
 
 
 
+[[create-pv-and-pvc-in-kubernetes]]
 === Crear PV y PVC en Kubernetes
 
 
@@ -45,6 +48,7 @@ Primero, debe crear un volumen persistente (PV) y un reclamo de volumen persiste
 
 
 
+[[register-external-data-volume-in-domino]]
 === Registrar volumen de datos externos en Domino
 
 A continuación, debe registrar un volumen de datos externo en Domino.  Para registrar un volumen de datos externo, consulte lalink:https://docs.dominodatalab.com/en/latest/admin_guide/9c3564/register-external-data-volumes/["instrucciones"] en la guía de administración de Domino.  Al registrar el volumen, asegúrese de seleccionar "NFS" en el menú desplegable "Tipo de volumen".  Después de seleccionar "NFS", debería ver su PVC en la lista "Volúmenes disponibles".
@@ -53,12 +57,14 @@ image:ddlnexus-003.png["Figura que muestra el diálogo de entrada/salida o repre
 
 
 
+[[expose-existing-volumes-that-were-provisioned-by-trident]]
 == Exponer volúmenes existentes que fueron aprovisionados por Trident
 
 Si su volumen existente fue aprovisionado por Trident, siga los pasos descritos en esta subsección.
 
 
 
+[[edit-existing-pvc]]
 === Editar PVC existente
 
 Si su volumen fue aprovisionado por Trident, entonces ya tiene un reclamo de volumen persistente (PVC) correspondiente a su volumen.  Para exponer este volumen a Domino, debe editar el PVC y agregar la siguiente etiqueta a la lista de etiquetas en el `metadata.labels` campo:
@@ -68,6 +74,7 @@ Si su volumen fue aprovisionado por Trident, entonces ya tiene un reclamo de vol
 ....
 
 
+[[register-external-data-volume-in-domino]]
 === Registrar volumen de datos externos en Domino
 
 A continuación, debe registrar un volumen de datos externo en Domino.  Para registrar un volumen de datos externo, consulte lalink:https://docs.dominodatalab.com/en/latest/admin_guide/9c3564/register-external-data-volumes/["instrucciones"] en la guía de administración de Domino.  Al registrar el volumen, asegúrese de seleccionar "Genérico" en el menú desplegable "Tipo de volumen".  Después de seleccionar "Genérico", debería ver su PVC en la lista "Volúmenes disponibles".

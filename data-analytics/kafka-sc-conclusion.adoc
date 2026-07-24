@@ -18,6 +18,7 @@ Esta prueba de verificación alcanzó 31,74 GBps de rendimiento de niveles en Co
 
 
 
+[[where-to-find-additional-information]]
 == Dónde encontrar información adicional
 
 Para obtener más información sobre la información que se describe en este documento, revise los siguientes documentos y/o sitios web:

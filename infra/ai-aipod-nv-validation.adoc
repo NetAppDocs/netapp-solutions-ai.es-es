@@ -18,6 +18,7 @@ Esta sección se centra en la validación de la solución y la orientación sobr
 
 
 
+[[solution-validation]]
 == Validación de la solución
 
 La configuración de almacenamiento en esta solución se validó utilizando una serie de cargas de trabajo sintéticas utilizando la herramienta de código abierto FIO.  Estas pruebas incluyen patrones de E/S de lectura y escritura destinados a simular la carga de trabajo de almacenamiento generada por los sistemas DGX que realizan trabajos de entrenamiento de aprendizaje profundo.  La configuración de almacenamiento se validó utilizando un clúster de servidores de CPU de 2 sockets que ejecutaban las cargas de trabajo FIO simultáneamente para simular un clúster de sistemas DGX.  Cada cliente se configuró con la misma configuración de red descrita anteriormente, con el agregado de los siguientes detalles.
@@ -66,6 +67,7 @@ El sistema de almacenamiento se configuró como se describe con dos pares A900 H
 
 
 
+[[storage-system-sizing-guidance]]
 == Guía de dimensionamiento del sistema de almacenamiento
 
 NetApp ha completado con éxito la certificación DGX BasePOD y los dos pares A90 HA probados pueden soportar fácilmente un clúster de dieciséis sistemas DGX H100.  Para implementaciones más grandes con mayores requisitos de rendimiento de almacenamiento, se pueden agregar sistemas AFF adicionales al clúster NetApp ONTAP hasta 12 pares de HA (24 nodos) en un solo clúster.  Al utilizar la tecnología FlexGroup descrita en esta solución, un clúster de 24 nodos puede proporcionar más de 79 PB y hasta 552 GBps de rendimiento en un solo espacio de nombres.  Otros sistemas de almacenamiento de NetApp , como AFF A400, A250 y C800, ofrecen opciones de menor rendimiento y/o mayor capacidad para implementaciones más pequeñas a menores costos.  Debido a que ONTAP 9 admite clústeres de modelos mixtos, los clientes pueden comenzar con un espacio inicial más pequeño y agregar más sistemas de almacenamiento o más grandes al clúster a medida que aumentan los requisitos de capacidad y rendimiento.  La siguiente tabla muestra una estimación aproximada de la cantidad de GPU A100 y H100 compatibles con cada modelo AFF .

@@ -18,18 +18,21 @@ Esta sección describe las tareas de configuración inicial que deben realizarse
 
 
 
+[[prerequisites]]
 == Prerrequisitos
 
 Antes de realizar los pasos que se describen en esta sección, asumimos que ya ha implementado el software de host NVIDIA AI Enterprise siguiendo las instrucciones que se describen en lalink:ai-nvaie-vmw-setup.html["Configuración inicial"] página.
 
 
 
+[[create-an-ubuntu-guest-vm-with-vgpu]]
 == Crear una máquina virtual invitada de Ubuntu con vGPU
 
 Primero, debes crear una máquina virtual invitada Ubuntu 20.04 con vGPU.  Para crear una máquina virtual invitada Ubuntu 20.04 con vGPU, siga las instrucciones que se detallan en ellink:https://docs.nvidia.com/ai-enterprise/deployment-guide-vmware/0.1.0/first-vm.html["Guía de implementación empresarial de NVIDIA AI"] .
 
 
 
+[[download-and-install-nvidia-guest-software]]
 == Descargar e instalar el software invitado de NVIDIA
 
 A continuación, debe instalar el software invitado NVIDIA necesario dentro de la máquina virtual invitada que creó en el paso anterior.  Para descargar e instalar el software invitado NVIDIA necesario dentro de la máquina virtual invitada, siga las instrucciones descritas en las secciones 5.1 a 5.4 del manual.link:https://docs.nvidia.com/ai-enterprise/latest/quick-start-guide/index.html["Guía de inicio rápido de NVIDIA AI Enterprise"] .
@@ -39,12 +42,14 @@ NOTE: Al realizar las tareas de verificación descritas en la sección 5.4, es p
 
 
 
+[[download-aianalytics-framework-containers]]
 == Descargar contenedor(es) del marco de IA/análisis
 
 A continuación, debe descargar las imágenes de contenedor del marco de análisis o IA necesarias de NVIDIA NGC para que estén disponibles en su máquina virtual invitada.  Para descargar contenedores del marco dentro de la máquina virtual invitada, siga las instrucciones que se describen enlink:https://docs.nvidia.com/ai-enterprise/deployment-guide-vmware/0.1.0/installing-ai.html["Guía de implementación empresarial de NVIDIA AI"] .
 
 
 
+[[install-and-configure-the-netapp-dataops-toolkit]]
 == Instalar y configurar el kit de herramientas NetApp DataOps
 
 A continuación, debe instalar NetApp DataOps Toolkit para entornos tradicionales dentro de la máquina virtual invitada.  El kit de herramientas NetApp DataOps se puede utilizar para administrar volúmenes de datos escalables en su sistema ONTAP directamente desde la terminal dentro de la máquina virtual invitada.  Para instalar NetApp DataOps Toolkit dentro de la máquina virtual invitada, realice las siguientes tareas.
@@ -83,6 +88,7 @@ Created config file: '/home/user/.netapp_dataops/config.json'.
 
 
 
+[[create-a-guest-vm-template]]
 == Crear una plantilla de máquina virtual invitada
 
 Por último, debes crear una plantilla de VM basada en tu VM invitada.  Podrás usar esta plantilla para crear rápidamente máquinas virtuales invitadas para utilizar el software NVIDIA NGC.

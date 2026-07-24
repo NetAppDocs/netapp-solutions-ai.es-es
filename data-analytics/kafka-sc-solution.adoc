@@ -20,6 +20,7 @@ image:kafka-sc-003.png["Imagen que representa la descripción general de la solu
 
 
 
+[[solution-architecture-details]]
 == Detalles de la arquitectura de la solución
 
 Esta sección cubre el hardware y el software utilizados para la verificación del rendimiento en la implementación de Confluent Platform con NetApp ONTAP para almacenamiento en niveles.  La siguiente tabla cubre la arquitectura de la solución y los componentes base.

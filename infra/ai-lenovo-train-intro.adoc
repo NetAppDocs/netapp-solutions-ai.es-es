@@ -22,6 +22,7 @@ Este documento cubre las pruebas y la validación de una configuración de cómp
 
 
 
+[[target-audience]]
 == Público objetivo
 
 Este documento está dirigido a los siguientes públicos:
@@ -34,6 +35,7 @@ Este documento está dirigido a los siguientes públicos:
 
 
 
+[[solution-architecture]]
 == Arquitectura de la solución
 
 Esta solución con servidores Lenovo ThinkSystem y NetApp ONTAP con almacenamiento AFF está diseñada para manejar el entrenamiento de IA en grandes conjuntos de datos utilizando la potencia de procesamiento de las GPU junto con las CPU tradicionales.  Esta validación demuestra un alto rendimiento y una gestión óptima de datos con una arquitectura de escalamiento horizontal que utiliza uno, dos o cuatro servidores Lenovo SR670 V2 junto con un único sistema de almacenamiento NetApp AFF A400 .  La siguiente figura proporciona una descripción general de la arquitectura.

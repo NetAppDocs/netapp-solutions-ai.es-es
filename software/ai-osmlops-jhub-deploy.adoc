@@ -21,6 +21,7 @@ NOTE: Es posible implementar JupyterHub en plataformas distintas a Kubernetes.  
 
 
 
+[[prerequisites]]
 == Prerrequisitos
 
 Antes de realizar el ejercicio de implementación que se describe en esta sección, asumimos que ya ha realizado las siguientes tareas:
@@ -31,24 +32,28 @@ Antes de realizar el ejercicio de implementación que se describe en esta secci�
 
 
 
+[[install-helm]]
 == Instalar Helm
 
 JupyterHub se implementa utilizando Helm, un administrador de paquetes popular para Kubernetes.  Antes de implementar JupyterHub, debe instalar Helm en su nodo de control de Kubernetes.  Para instalar Helm, siga las instrucciones https://helm.sh/docs/intro/install/["instrucciones de instalación"^] en la documentación oficial de Helm.
 
 
 
+[[set-default-kubernetes-storageclass]]
 == Establecer la clase de almacenamiento predeterminada de Kubernetes
 
 Antes de implementar JupyterHub, debe designar una StorageClass predeterminada dentro de su clúster de Kubernetes.  Para designar una StorageClass predeterminada dentro de su clúster, siga las instrucciones que se describen en lalink:ai-osmlops-kubeflow-deploy.html["Implementación de Kubeflow"] sección.  Si ya ha designado una StorageClass predeterminada dentro de su clúster, puede omitir este paso.
 
 
 
+[[deploy-jupyterhub]]
 == Implementar JupyterHub
 
 Después de completar los pasos anteriores, ahora está listo para implementar JupyterHub.  La implementación de JupyterHub requiere los siguientes pasos:
 
 
 
+[[configure-jupyterhub-deployment]]
 === Configurar la implementación de JupyterHub
 
 Antes de la implementación, es una buena práctica optimizar la implementación de JupyterHub para su entorno respectivo.  Puede crear un archivo *config.yaml* y utilizarlo durante la implementación mediante el gráfico Helm.
@@ -60,6 +65,7 @@ NOTE: En este archivo config.yaml, puede establecer el parámetro *(singleuser.s
 
 
 
+[[adding-shared-volumes]]
 === Agregar volúmenes compartidos
 
 Si desea utilizar un volumen compartido para todos los usuarios de JupyterHub, puede ajustar su *config.yaml* en consecuencia.  Por ejemplo, si tiene un PersistentVolumeClaim compartido llamado jupyterhub-shared-volume, podría montarlo como /home/shared en todos los pods de usuario de la siguiente manera:
@@ -81,6 +87,7 @@ NOTE: Este es un paso opcional, puedes ajustar estos parámetros según tus nece
 
 
 
+[[deploy-jupyterhub-with-helm-chart]]
 === Implementar JupyterHub con Helm Chart
 
 Haga que Helm conozca el repositorio de gráficos de Helm de JupyterHub.
@@ -117,6 +124,7 @@ NOTE: En este ejemplo:
 
 
 
+[[check-deployment]]
 === Comprobar implementación
 
 Mientras se ejecuta el paso 2, puedes ver los pods que se crean desde el siguiente comando:
@@ -135,6 +143,7 @@ proxy-7cb9bc4cc-9bdlp   1/1       Running   0          37s
 ----
 
 
+[[access-jupyterhub]]
 === Acceder a JupyterHub
 
 Encuentra la IP que podemos usar para acceder a JupyterHub.  Ejecute el siguiente comando hasta que la IP EXTERNA del servicio proxy público esté disponible como en la salida del ejemplo.

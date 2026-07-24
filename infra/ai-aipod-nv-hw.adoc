@@ -18,12 +18,14 @@ Esta sección se centra en los componentes de hardware para los sistemas NetApp 
 
 
 
+[[netapp-aff-storage-systems]]
 == Sistemas de almacenamiento NetApp AFF
 
 Los sistemas de almacenamiento de última generación NetApp AFF permiten a los departamentos de TI satisfacer los requisitos de almacenamiento empresarial con un rendimiento líder en la industria, flexibilidad superior, integración en la nube y la mejor gestión de datos de su clase.  Diseñados específicamente para flash, los sistemas AFF ayudan a acelerar, administrar y proteger datos críticos para el negocio.
 
 
 
+[[aff-a90-storage-systems]]
 === Sistemas de almacenamiento AFF A90
 
 El NetApp AFF A90 con tecnología de software de gestión de datos NetApp ONTAP proporciona protección de datos integrada, capacidades antiransomware opcionales y el alto rendimiento y la resiliencia necesarios para soportar las cargas de trabajo comerciales más críticas.  Elimina las interrupciones en las operaciones de misión crítica, minimiza el ajuste del rendimiento y protege sus datos de los ataques de ransomware.  Ofrece: • Rendimiento líder en la industria • Seguridad de datos sin concesiones • Actualizaciones simplificadas y sin interrupciones
@@ -54,6 +56,7 @@ Para las implementaciones más grandes, los sistemas AFF A1K ofrecen las mayores
 
 
 
+[[nvidia-dgx-basepod]]
 == NVIDIA DGX BasePOD
 
 NVIDIA DGX BasePOD es una solución integrada que consta de componentes de hardware y software NVIDIA , soluciones MLOps y almacenamiento de terceros.  Al aprovechar las mejores prácticas de diseño de sistemas de escalamiento horizontal con productos NVIDIA y soluciones de socios validadas, los clientes pueden implementar una plataforma eficiente y manejable para el desarrollo de IA.  La Figura 1 destaca los distintos componentes de NVIDIA DGX BasePOD.
@@ -64,6 +67,7 @@ image:aipod-nv-basepod-layers.png["Figura que muestra el diálogo de entrada/sal
 
 
 
+[[nvidia-dgx-h100-systems]]
 === Sistemas NVIDIA DGX H100
 
 El sistema NVIDIA DGX H100™ es una potencia de IA acelerada por el rendimiento innovador de la GPU NVIDIA H100 Tensor Core.
@@ -80,6 +84,7 @@ image:aipod-nv-h100-rear.png["Figura que muestra el diálogo de entrada/salida o
 
 
 
+[[nvidia-networking]]
 === Redes NVIDIA
 
 

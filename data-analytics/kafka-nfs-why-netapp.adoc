@@ -25,12 +25,14 @@ Estos beneficios fueron probados y validados en casos de prueba que discutimos e
 
 
 
+[[reduced-cpu-utilization-on-kafka-broker]]
 == Uso reducido de la CPU en el bróker de Kafka
 
 Descubrimos que la utilización general de la CPU es menor que la de su contraparte DAS cuando ejecutamos cargas de trabajo similares en dos clústeres de Kafka separados que eran idénticos en sus especificaciones técnicas pero diferían en sus tecnologías de almacenamiento.  No solo la utilización general de la CPU es menor cuando el clúster de Kafka usa almacenamiento ONTAP , sino que el aumento en la utilización de la CPU demostró un gradiente más suave que en un clúster de Kafka basado en DAS.
 
 
 
+[[architectural-setup]]
 === Configuración arquitectónica
 
 La siguiente tabla muestra la configuración ambiental utilizada para demostrar una utilización reducida de la CPU.
@@ -55,6 +57,7 @@ La siguiente tabla muestra la configuración ambiental utilizada para demostrar 
 |===
 
 
+[[benchmarking-tool]]
 === Herramienta de evaluación comparativa
 
 La herramienta de evaluación comparativa utilizada en este caso de prueba es la https://openmessaging.cloud/["Mensajería abierta"^] estructura.  OpenMessaging es neutral respecto de proveedores e independiente del lenguaje; proporciona pautas industriales para finanzas, comercio electrónico, IoT y big data; y ayuda a desarrollar aplicaciones de mensajería y transmisión en sistemas y plataformas heterogéneos.  La siguiente figura muestra la interacción de los clientes de OpenMessaging con un clúster de Kafka.
@@ -80,6 +83,7 @@ image:kafka-nfs-010.png["Esta imagen muestra las especificaciones seleccionadas 
 
 
 
+[[methodology-of-testing]]
 === Metodología de pruebas
 
 . Se crearon dos clústeres similares, cada uno con su propio conjunto de enjambres de clústeres de evaluación comparativa.
@@ -105,6 +109,7 @@ sudo bin/benchmark --drivers driver-kafka/kafka-group-all.yaml workloads/1-topic
 
 
 
+[[observation]]
 === Observación
 
 Hay dos beneficios principales de usar almacenamiento NFS de NetApp con Kafka:
@@ -125,12 +130,14 @@ image:kafka-nfs-014.png["Este gráfico representa el comportamiento de un clúst
 
 
 
+[[faster-broker-recovery]]
 == Recuperación más rápida del corredor
 
 Descubrimos que los agentes de Kafka se recuperan más rápido cuando utilizan almacenamiento NFS compartido de NetApp .  Cuando un broker falla en un clúster de Kafka, este broker puede ser reemplazado por un broker en buen estado con el mismo ID de broker.  Al realizar este caso de prueba, descubrimos que, en el caso de un clúster de Kafka basado en DAS, el clúster reconstruye los datos en un agente en buen estado recién agregado, lo que consume mucho tiempo.  En el caso de un clúster Kafka basado en NFS de NetApp , el agente de reemplazo continúa leyendo datos del directorio de registro anterior y se recupera mucho más rápido.
 
 
 
+[[architectural-setup]]
 === Configuración arquitectónica
 
 La siguiente tabla muestra la configuración ambiental para un clúster de Kafka que utiliza NAS.
@@ -168,6 +175,7 @@ image:kafka-nfs-015.png["Esta imagen muestra las especificaciones elegidas para 
 
 
 
+[[methodology-of-testing]]
 === Metodología de pruebas
 
 . Se crearon dos clústeres similares:
@@ -199,6 +207,7 @@ image:kafka-nfs-016.png["Esta imagen muestra dos pantallas de terminal."]
 
 
 
+[[observation]]
 === Observación
 
 La recuperación del corredor de Kafka fue casi nueve veces más rápida.  Se descubrió que el tiempo necesario para recuperar un nodo de agente fallido era significativamente más rápido cuando se usaba almacenamiento compartido NFS de NetApp en comparación con el uso de SSD DAS en un clúster de Kafka.  Para 1 TB de datos de temas, el tiempo de recuperación de un clúster basado en DAS fue de 48 minutos, en comparación con menos de 5 minutos para un clúster Kafka basado en NetApp-NFS.
@@ -245,12 +254,14 @@ image:kafka-nfs-021.png["Este gráfico muestra el tiempo que tarda el agente en 
 
 
 
+[[storage-efficiency]]
 == Eficiencia de almacenamiento
 
 Debido a que la capa de almacenamiento del clúster Kafka se aprovisionó a través de NetApp ONTAP, obtuvimos todas las capacidades de eficiencia de almacenamiento de ONTAP.  Esto se probó generando una cantidad significativa de datos en un clúster de Kafka con almacenamiento NFS aprovisionado en Cloud Volumes ONTAP.  Pudimos ver que hubo una reducción de espacio significativa debido a las capacidades de ONTAP .
 
 
 
+[[architectural-setup]]
 === Configuración arquitectónica
 
 La siguiente tabla muestra la configuración ambiental para un clúster de Kafka que utiliza NAS.
@@ -287,6 +298,7 @@ La compresión se desactivó en el extremo del productor, lo que permitió a los
 
 
 
+[[methodology-of-testing]]
 === Metodología de pruebas
 
 . Se aprovisionó un clúster de Kafka con las especificaciones mencionadas anteriormente.
@@ -296,6 +308,7 @@ La compresión se desactivó en el extremo del productor, lo que permitió a los
 
 
 
+[[observation]]
 === Observación
 
 En el caso de los datos generados con la herramienta OMB, observamos un ahorro de espacio de aproximadamente un 33 % con una relación de eficiencia de almacenamiento de 1,70:1.  Como se ve en las siguientes figuras, el espacio lógico utilizado por los datos producidos fue de 420,3 GB y el espacio físico utilizado para almacenar los datos fue de 281,7 GB.

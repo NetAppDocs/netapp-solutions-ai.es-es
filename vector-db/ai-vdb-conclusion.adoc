@@ -18,6 +18,7 @@ Esta sección concluye la solución de base de datos vectorial para NetApp.
 
 
 
+[[conclusion]]
 == Conclusión
 
 En conclusión, este documento proporciona una descripción general completa de la implementación y la administración de bases de datos vectoriales, como Milvus y pgvector, en soluciones de almacenamiento de NetApp .  Analizamos las pautas de infraestructura para aprovechar el almacenamiento de objetos NetApp ONTAP y StorageGRID y validamos la base de datos Milvus en AWS FSx ONTAP a través del almacenamiento de archivos y objetos.
@@ -30,6 +31,7 @@ Finalmente, analizamos dos casos de uso de IA generativa: RAG con LLM y ChatAI i
 
 
 
+[[acknowledgments]]
 === Expresiones de gratitud
 
 El autor desea expresar su más sincero agradecimiento a los siguientes colaboradores y a otras personas que brindaron sus comentarios y sugerencias para que este documento sea valioso para los clientes y los campos de NetApp .
@@ -44,6 +46,7 @@ El autor desea expresar su más sincero agradecimiento a los siguientes colabora
 
 
 
+[[where-to-find-additional-information]]
 === Dónde encontrar información adicional
 
 Para obtener más información sobre la información que se describe en este documento, revise los siguientes documentos y/o sitios web:
@@ -56,6 +59,7 @@ Para obtener más información sobre la información que se describe en este doc
 
 
 
+[[version-history]]
 === Historial de versiones
 
 |===

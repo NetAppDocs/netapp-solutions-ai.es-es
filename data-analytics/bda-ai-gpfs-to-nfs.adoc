@@ -18,6 +18,7 @@ Esta sección proporciona los pasos detallados necesarios para configurar GPFS y
 
 
 
+[[configure-gpfs]]
 == Configurar GPFS
 
 . Descargue e instale Spectrum Scale Data Access para Linux en uno de los servidores.
@@ -471,6 +472,7 @@ total 5.0G
 
 
 
+[[export-gpfs-into-nfs]]
 == Exportar GPFS a NFS
 
 Para exportar GPFS a NFS, complete los siguientes pasos:
@@ -596,6 +598,7 @@ drwxr-xr-x   4 root root 4.0K Nov  5 20:35 ces
 
 
 
+[[configure-the-nfs-client]]
 == Configurar el cliente NFS
 
 Para configurar el cliente NFS, complete los siguientes pasos:

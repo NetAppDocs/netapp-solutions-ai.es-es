@@ -21,6 +21,7 @@ NOTE: Es posible implementar MLflow en plataformas distintas a Kubernetes.  La i
 
 
 
+[[prerequisites]]
 == Prerrequisitos
 
 Antes de realizar el ejercicio de implementación que se describe en esta sección, asumimos que ya ha realizado las siguientes tareas:
@@ -31,24 +32,28 @@ Antes de realizar el ejercicio de implementación que se describe en esta secci�
 
 
 
+[[install-helm]]
 == Instalar Helm
 
 MLflow se implementa utilizando Helm, un administrador de paquetes popular para Kubernetes.  Antes de implementar MLflow, debe instalar Helm en su nodo de control de Kubernetes.  Para instalar Helm, siga las instrucciones https://helm.sh/docs/intro/install/["instrucciones de instalación"^] en la documentación oficial de Helm.
 
 
 
+[[set-default-kubernetes-storageclass]]
 == Establecer la clase de almacenamiento predeterminada de Kubernetes
 
 Antes de implementar MLflow, debe designar una StorageClass predeterminada dentro de su clúster de Kubernetes.  Para designar una StorageClass predeterminada dentro de su clúster, siga las instrucciones que se describen en lalink:ai-osmlops-kubeflow-deploy.html["Implementación de Kubeflow"] sección.  Si ya ha designado una StorageClass predeterminada dentro de su clúster, puede omitir este paso.
 
 
 
+[[deploy-mlflow]]
 == Implementar MLflow
 
 Una vez que se cumplan los requisitos previos, puede comenzar con la implementación de MLflow utilizando el gráfico de Helm.
 
 
 
+[[configure-mlflow-helm-chart-deployment]]
 === Configurar la implementación del gráfico Helm de MLflow.
 
 Antes de implementar MLflow utilizando el gráfico Helm, podemos configurar la implementación para usar la clase de almacenamiento NetApp Trident y cambiar otros parámetros para adaptarlos a nuestras necesidades utilizando un archivo *config.yaml*.  Puedes encontrar un ejemplo de archivo *config.yaml* en: https://github.com/bitnami/charts/blob/main/bitnami/mlflow/values.yaml[]
@@ -58,6 +63,7 @@ NOTE: Puede configurar la clase de almacenamiento Trident en el parámetro *glob
 
 
 
+[[installing-the-helm-chart]]
 === Instalación del cuadro de mandos Helm
 
 El gráfico Helm se puede instalar con el archivo *config.yaml* personalizado para MLflow usando el siguiente comando:
@@ -71,6 +77,7 @@ NOTE: El comando implementa MLflow en el clúster de Kubernetes en la configurac
 
 
 
+[[check-deployment]]
 === Comprobar implementación
 
 Una vez finalizada la implementación del gráfico de Helm, puedes comprobar si el servicio es accesible mediante:
@@ -97,6 +104,7 @@ NOTE: Editamos el archivo config.yaml para usar el servicio NodePort para accede
 
 
 
+[[access-mlflow]]
 === Acceso a MLflow
 
 Una vez que todos los servicios relacionados con MLflow estén en funcionamiento, puede acceder a él utilizando la dirección IP de NodePort o LoadBalancer indicada (por ejemplo, `http://10.61.181.109:30002` )

@@ -15,6 +15,7 @@ Conozca las novedades en soluciones de inteligencia artificial.
 
 
 
+[[18-august-2025]]
 == 18 de agosto de 2025
 
 El sitio de NetApp Solutions ahora es ellink:https://docs.netapp.com/us-en/netapp-solutions-family/index.html["Familia de soluciones NetApp"^] , que incluye los siguientes sitios:
@@ -30,6 +31,7 @@ El sitio de NetApp Solutions ahora es ellink:https://docs.netapp.com/us-en/netap
 
 
 
+[[3-december-2025]]
 == 3 de diciembre de 2025
 
 Nueva solución:link:software/ai-hybrid-union.html["Implemente capacitación en IA híbrida con Union.ai y NetApp FlexCache"]

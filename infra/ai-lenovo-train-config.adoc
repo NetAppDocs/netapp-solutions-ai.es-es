@@ -18,6 +18,7 @@ Esta sección describe las configuraciones probadas, la infraestructura de red, 
 
 
 
+[[solution-architecture]]
 == Arquitectura de la solución
 
 Para esta validación utilizamos los componentes de la solución enumerados en la siguiente tabla.
@@ -54,6 +55,7 @@ image:a400-thinksystem-007.png["Este gráfico muestra la capa de cómputo, un Le
 
 
 
+[[storage-controller]]
 == Controlador de almacenamiento
 
 La siguiente tabla enumera la configuración de almacenamiento.

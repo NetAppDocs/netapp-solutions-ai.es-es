@@ -18,6 +18,7 @@ En esta página se describen las diferentes áreas en las que se puede utilizar 
 
 
 
+[[streaming-data]]
 == Transmisión de datos
 
 Apache Spark puede procesar datos de streaming, que se utilizan para procesos de extracción, transformación y carga (ETL) de streaming, enriquecimiento de datos, detección de eventos de activación y análisis de sesiones complejas:
@@ -32,12 +33,14 @@ Para obtener más información sobre la configuración de datos de transmisión,
 
 
 
+[[machine-learning]]
 == aprendizaje automático
 
 El marco integrado de Spark le ayuda a ejecutar consultas repetidas en conjuntos de datos utilizando la biblioteca de aprendizaje automático (MLlib).  MLlib se utiliza en áreas como agrupamiento, clasificación y reducción de dimensionalidad para algunas funciones comunes de big data, como inteligencia predictiva, segmentación de clientes para fines de marketing y análisis de sentimientos.  MLlib se utiliza en seguridad de red para realizar inspecciones en tiempo real de paquetes de datos en busca de indicios de actividad maliciosa.  Ayuda a los proveedores de seguridad a conocer nuevas amenazas y mantenerse a la vanguardia de los piratas informáticos mientras protegen a sus clientes en tiempo real.
 
 
 
+[[deep-learning]]
 == aprendizaje profundo
 
 TensorFlow es un marco de aprendizaje profundo popular utilizado en toda la industria.  TensorFlow admite el entrenamiento distribuido en un clúster de CPU o GPU.  Este entrenamiento distribuido permite a los usuarios ejecutarlo en una gran cantidad de datos con muchas capas profundas.
@@ -48,12 +51,14 @@ Los DataFrames y RDD en versiones anteriores de Spark no eran adecuados para el 
 
 
 
+[[interactive-analysis]]
 == Análisis interactivo
 
 Apache Spark es lo suficientemente rápido para realizar consultas exploratorias sin muestrear con lenguajes de desarrollo distintos de Spark, incluidos SQL, R y Python.  Spark utiliza herramientas de visualización para procesar datos complejos y visualizarlos de forma interactiva.  Spark con transmisión estructurada realiza consultas interactivas sobre datos en vivo en análisis web que le permiten ejecutar consultas interactivas sobre la sesión actual de un visitante web.
 
 
 
+[[recommender-system]]
 == Sistema de recomendación
 
 A lo largo de los años, los sistemas de recomendación han traído enormes cambios a nuestras vidas, a medida que las empresas y los consumidores han respondido a cambios dramáticos en las compras en línea, el entretenimiento en línea y muchas otras industrias.  De hecho, estos sistemas se encuentran entre las historias de éxito más evidentes de la IA en la producción.  En muchos casos de uso práctico, los sistemas de recomendación se combinan con IA conversacional o chatbots interconectados con un backend de PNL para obtener información relevante y producir inferencias útiles.
@@ -64,6 +69,7 @@ Existen varias técnicas populares que se utilizan para proporcionar recomendaci
 
 
 
+[[natural-language-processing]]
 == Procesamiento del lenguaje natural
 
 La IA conversacional, posible gracias al procesamiento del lenguaje natural (PLN), es la rama de la IA que ayuda a las computadoras a comunicarse con los humanos.  La PNL prevalece en todos los sectores industriales y en muchos casos de uso, desde asistentes inteligentes y chatbots hasta búsquedas de Google y texto predictivo.  Según un https://www.forbes.com/sites/forbestechcouncil/2021/05/07/nice-chatbot-ing-with-you/?sh=7011eff571f4["Gartner"^] Predicción: para 2022, el 70% de las personas interactuarán con plataformas de IA conversacional a diario.  Para una conversación de alta calidad entre un humano y una máquina, las respuestas deben ser rápidas, inteligentes y que suenen naturales.

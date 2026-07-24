@@ -18,6 +18,7 @@ Esta sección describe las tareas que debe completar para implementar Kubeflow e
 
 
 
+[[prerequisites]]
 == Prerrequisitos
 
 Antes de realizar el ejercicio de implementación que se describe en esta sección, asumimos que ya ha realizado las siguientes tareas:
@@ -28,6 +29,7 @@ Antes de realizar el ejercicio de implementación que se describe en esta secci�
 
 
 
+[[set-default-kubernetes-storageclass]]
 == Establecer la clase de almacenamiento predeterminada de Kubernetes
 
 Antes de implementar Kubeflow, recomendamos designar una StorageClass predeterminada dentro de su clúster de Kubernetes.  El proceso de implementación de Kubeflow puede intentar aprovisionar nuevos volúmenes persistentes utilizando la clase de almacenamiento predeterminada.  Si no se designa ninguna StorageClass como StorageClass predeterminada, la implementación puede fallar.  Para designar una StorageClass predeterminada dentro de su clúster, realice la siguiente tarea desde el host de salto de implementación.  Si ya ha designado una StorageClass predeterminada dentro de su clúster, puede omitir este paso.
@@ -56,6 +58,7 @@ ontap-ai-flexvols-retain (default)   csi.trident.netapp.io   54s
 ....
 
 
+[[kubeflow-deployment-options]]
 == Opciones de implementación de Kubeflow
 
 Hay muchas opciones diferentes para implementar Kubeflow.  Consulte lalink:https://www.kubeflow.org/docs/started/installing-kubeflow/["documentación oficial de Kubeflow"] para obtener una lista de opciones de implementación y elegir la opción que mejor se adapte a sus necesidades.

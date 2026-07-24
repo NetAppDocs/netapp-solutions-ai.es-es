@@ -21,6 +21,7 @@ NOTE: Es posible implementar Airflow en plataformas distintas a Kubernetes.  La 
 
 
 
+[[prerequisites]]
 == Prerrequisitos
 
 Antes de realizar el ejercicio de implementación que se describe en esta sección, asumimos que ya ha realizado las siguientes tareas:
@@ -31,18 +32,21 @@ Antes de realizar el ejercicio de implementación que se describe en esta secci�
 
 
 
+[[install-helm]]
 == Instalar Helm
 
 Airflow se implementa utilizando Helm, un administrador de paquetes popular para Kubernetes.  Antes de implementar Airflow, debe instalar Helm en el host de salto de implementación.  Para instalar Helm en el host de salto de implementación, siga las instrucciones https://helm.sh/docs/intro/install/["instrucciones de instalación"^] en la documentación oficial de Helm.
 
 
 
+[[set-default-kubernetes-storageclass]]
 == Establecer la clase de almacenamiento predeterminada de Kubernetes
 
 Antes de implementar Airflow, debe designar una StorageClass predeterminada dentro de su clúster de Kubernetes.  El proceso de implementación de Airflow intenta aprovisionar nuevos volúmenes persistentes utilizando la clase de almacenamiento predeterminada.  Si no se designa ninguna StorageClass como StorageClass predeterminada, la implementación falla.  Para designar una StorageClass predeterminada dentro de su clúster, siga las instrucciones que se describen en lalink:ai-osmlops-kubeflow-deploy.html["Implementación de Kubeflow"] sección.  Si ya ha designado una StorageClass predeterminada dentro de su clúster, puede omitir este paso.
 
 
 
+[[use-helm-to-deploy-airflow]]
 == Utilice Helm para implementar el flujo de aire
 
 Para implementar Airflow en su clúster de Kubernetes usando Helm, realice las siguientes tareas desde el host de salto de implementación:

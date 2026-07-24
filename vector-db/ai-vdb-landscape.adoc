@@ -18,6 +18,7 @@ Esta sección cubre la definición y el uso de una base de datos vectorial en la
 
 
 
+[[vector-database]]
 == Base de datos de vectores
 
 Una base de datos vectorial es un tipo especializado de base de datos diseñada para manejar, indexar y buscar datos no estructurados utilizando incrustaciones de modelos de aprendizaje automático.  En lugar de organizar los datos en un formato tabular tradicional, organiza los datos como vectores de alta dimensión, también conocidos como incrustaciones vectoriales.  Esta estructura única permite que la base de datos maneje datos complejos y multidimensionales de manera más eficiente y precisa.
@@ -28,6 +29,7 @@ Además, las bases de datos vectoriales son adecuadas para manejar datos tempora
 
 
 
+[[advantages-of-vector-database-for-ml-and-ai]]
 === Ventajas de las bases de datos vectoriales para ML e IA:
 
 * Búsqueda de alta dimensión: las bases de datos vectoriales se destacan en la gestión y recuperación de datos de alta dimensión, que a menudo se generan en aplicaciones de IA y ML.
@@ -39,6 +41,7 @@ Además, las bases de datos vectoriales son adecuadas para manejar datos tempora
 
 
 
+[[vector-databases-and-use-cases]]
 === Bases de datos vectoriales y casos de uso.
 
 Esta sección proporciona varias bases de datos vectoriales y detalles de sus casos de uso.

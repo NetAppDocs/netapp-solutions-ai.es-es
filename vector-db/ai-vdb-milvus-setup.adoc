@@ -18,6 +18,7 @@ En esta sección se analiza la configuración del clúster milvus para la soluci
 
 
 
+[[milvus-cluster-setup-with-kubernetes-in-on-premises]]
 == Configuración de un clúster Milvus con Kubernetes en instalaciones locales
 
 Los desafíos del cliente para escalar de forma independiente en almacenamiento y computación, administración efectiva de la infraestructura y administración de datos, Kubernetes y las bases de datos vectoriales juntas forman una solución poderosa y escalable para administrar operaciones de grandes datos.  Kubernetes optimiza los recursos y administra los contenedores, mientras que las bases de datos vectoriales manejan eficientemente datos de alta dimensión y búsquedas de similitud.  Esta combinación permite el procesamiento rápido de consultas complejas en grandes conjuntos de datos y se adapta sin problemas a volúmenes de datos crecientes, lo que la hace ideal para aplicaciones de big data y cargas de trabajo de IA.

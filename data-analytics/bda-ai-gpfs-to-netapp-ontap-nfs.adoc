@@ -20,6 +20,7 @@ image:bda-ai-005.png["Figura que muestra el diálogo de entrada/salida o represe
 
 
 
+[[gpfs-essentials]]
 == Fundamentos de GPFS
 
 Los siguientes tipos de nodos se utilizan en GPFS:
@@ -33,12 +34,14 @@ Los siguientes tipos de nodos se utilizan en GPFS:
 
 
 
+[[list-of-operations-for-gpfs-nfs-and-xcp]]
 == Lista de operaciones para GPFS, NFS y XCP
 
 Esta sección proporciona la lista de operaciones que crean GPFS, exportan GPFS como una exportación NFS y transfieren los datos mediante XCP.
 
 
 
+[[create-gpfs]]
 === Crear GPFS
 
 Para crear GPFS, complete los siguientes pasos:
@@ -62,6 +65,7 @@ Para crear GPFS, complete los siguientes pasos:
 
 
 
+[[export-gpfs-into-nfs]]
 === Exportar GPFS a NFS
 
 Para exportar el GPFS a NFS, complete los siguientes pasos:
@@ -74,6 +78,7 @@ Para exportar el GPFS a NFS, complete los siguientes pasos:
 
 
 
+[[configure-nfs-client]]
 === Configurar el cliente NFS
 
 Para configurar el cliente NFS, complete los siguientes pasos:

@@ -33,6 +33,7 @@ Este documento describe soluciones de datos en nube híbrida utilizando sistemas
 
 
 
+[[why-hadoop-data-protection]]
 == ¿Por qué proteger datos en Hadoop?
 
 En un entorno de Hadoop y Spark, se deben abordar las siguientes preocupaciones:
@@ -44,6 +45,7 @@ En un entorno de Hadoop y Spark, se deben abordar las siguientes preocupaciones:
 
 
 
+[[data-protection-challenges-for-hadoop-and-spark-customers]]
 == Desafíos de protección de datos para los clientes de Hadoop y Spark
 
 Un desafío común para los clientes de Hadoop y Spark es reducir el tiempo de respaldo y aumentar la confiabilidad del respaldo sin afectar negativamente el rendimiento en el clúster de producción durante la protección de datos.

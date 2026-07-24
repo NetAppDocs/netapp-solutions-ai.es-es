@@ -18,6 +18,7 @@ Este documento proporciona pautas recomendadas para usar Confluent Tiered Storag
 
 
 
+[[where-to-find-additional-information]]
 == Dónde encontrar información adicional
 
 Para obtener más información sobre la información que se describe en este documento, revise los siguientes documentos y/o sitios web:

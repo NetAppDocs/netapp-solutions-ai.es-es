@@ -18,6 +18,7 @@ Las configuraciones de hardware y software que se describen a continuación se u
 
 
 
+[[hardware-requirements]]
 === Requisitos de hardware
 
 |===
@@ -52,6 +53,7 @@ Las configuraciones de hardware y software que se describen a continuación se u
 |===
 
 
+[[software-requirements]]
 === Requisitos de software
 
 |===

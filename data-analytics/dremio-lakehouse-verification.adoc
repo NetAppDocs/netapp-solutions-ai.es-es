@@ -18,6 +18,7 @@ En esta sección, hemos ejecutado consultas de prueba SQL desde múltiples fuent
 
 
 
+[[sql-query-on-object-storage]]
 === Consulta SQL sobre almacenamiento de objetos
 
 . Establezca la memoria en 250 GB por servidor en dremio.env

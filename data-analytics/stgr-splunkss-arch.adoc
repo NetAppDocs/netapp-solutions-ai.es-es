@@ -18,6 +18,7 @@ Esta sección describe la arquitectura de Splunk, incluidas las definiciones cla
 
 
 
+[[key-definitions]]
 == Definiciones clave
 
 Las siguientes dos tablas enumeran los componentes de Splunk y NetApp utilizados en la implementación distribuida de Splunk.
@@ -76,6 +77,7 @@ Esta tabla enumera los componentes de la arquitectura de almacenamiento de Splun
 |===
 
 
+[[splunk-distributed-deployments]]
 == Implementaciones distribuidas de Splunk
 
 Para dar soporte a entornos más grandes en los que los datos se originan en muchas máquinas, es necesario procesar grandes volúmenes de datos.  Si muchos usuarios necesitan buscar datos, puede escalar la implementación distribuyendo instancias de Splunk Enterprise en varias máquinas.  Esto se conoce como una implementación distribuida.
@@ -125,6 +127,7 @@ Vea los siguientes beneficios de las implementaciones distribuidas de Splunk Ent
 
 
 
+[[splunk-smartstore]]
 == Tienda inteligente de Splunk
 
 SmartStore es una capacidad de indexación que permite que los almacenes de objetos remotos, como Amazon S3, almacenen datos indexados.  A medida que aumenta el volumen de datos de una implementación, la demanda de almacenamiento generalmente supera la demanda de recursos computacionales.  SmartStore le permite administrar su almacenamiento de indexador y sus recursos computacionales de manera rentable al escalar esos recursos por separado.
@@ -135,6 +138,7 @@ Con SmartStore, puede reducir el espacio de almacenamiento del indexador al mín
 
 
 
+[[splunk-smartstore-data-flow]]
 == Flujo de datos de Splunk SmartStore
 
 Cuando los datos provenientes de varias fuentes llegan a los indexadores, estos se indexan y se guardan localmente en un contenedor activo.  El indexador también replica los datos del contenedor activo en los indexadores de destino.  Hasta ahora, el flujo de datos es idéntico al flujo de datos de los índices que no son SmartStore.
@@ -151,6 +155,7 @@ El trabajo del administrador de caché es optimizar el uso del caché disponible
 
 
 
+[[software-requirements]]
 == Requisitos de software
 
 La siguiente tabla enumera los componentes de software necesarios para implementar la solución.  Los componentes de software que se utilizan en cualquier implementación de la solución pueden variar según los requisitos del cliente.
@@ -169,6 +174,7 @@ La siguiente tabla enumera los componentes de software necesarios para implement
 |===
 
 
+[[single-and-multisite-requirements]]
 == Requisitos de un solo sitio y de varios sitios
 
 En un entorno de Splunk empresarial (implementaciones medianas y grandes) donde los datos se originan en muchas máquinas y donde muchos usuarios necesitan buscar los datos, puede escalar su implementación distribuyendo instancias de Splunk Enterprise en sitios únicos y múltiples.
@@ -210,6 +216,7 @@ image:stgr-splunkss-007.png["Figura que muestra el diálogo de entrada/salida o 
 
 
 
+[[hardware-requirements]]
 == Requisitos de hardware
 
 Las siguientes tablas enumeran el número mínimo de componentes de hardware necesarios para implementar la solución.  Los componentes de hardware que se utilizan en implementaciones específicas de la solución pueden variar según los requisitos del cliente.
@@ -241,6 +248,7 @@ Esta tabla enumera el hardware utilizado para una configuración multisitio (por
 |===
 
 
+[[netapp-storagegrid-load-balancer-sg1000]]
 === Balanceador de carga NetApp StorageGRID : SG1000
 
 El almacenamiento de objetos requiere el uso de un equilibrador de carga para presentar el espacio de nombres de almacenamiento en la nube.  StorageGRID admite balanceadores de carga de terceros de proveedores líderes como F5 y Citrix, pero muchos clientes eligen el balanceador StorageGRID de nivel empresarial por su simplicidad, resiliencia y alto rendimiento.  El balanceador de carga StorageGRID está disponible como una máquina virtual, un contenedor o un dispositivo especialmente diseñado.
@@ -262,6 +270,7 @@ image:stgr-splunkss-008.png["Figura que muestra el diálogo de entrada/salida o 
 
 
 
+[[sg6060]]
 === SG6060
 
 El dispositivo StorageGRID SG6060 incluye un controlador de cómputo (SG6060) y un estante de controlador de almacenamiento (E-Series E2860) que contiene dos controladores de almacenamiento y 60 unidades.  Este aparato ofrece las siguientes características:
@@ -280,6 +289,7 @@ image:stgr-splunkss-009.png["Figura que muestra el diálogo de entrada/salida o 
 
 
 
+[[splunk-design]]
 == Diseño de Splunk
 
 La siguiente tabla enumera la configuración de Splunk para un solo sitio.

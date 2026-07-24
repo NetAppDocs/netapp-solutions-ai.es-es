@@ -18,6 +18,7 @@ Los principales casos de uso y metodología de IA, ML y DL se pueden dividir en 
 
 
 
+[[spark-nlp-pipelines-and-tensorflow-distributed-inferencing]]
 == Canalizaciones de Spark NLP e inferencia distribuida de TensorFlow
 
 La siguiente lista contiene las bibliotecas de PNL de código abierto más populares que han sido adoptadas por la comunidad de ciencia de datos en diferentes niveles de desarrollo:
@@ -40,6 +41,7 @@ El motor de aprendizaje profundo subyacente para Spark NLP es TensorFlow, una pl
 
 
 
+[[horovod-distributed-training]]
 == Capacitación distribuida de Horovod
 
 La validación central de Hadoop para el rendimiento relacionado con MapReduce se realiza con TeraGen, TeraSort, TeraValidate y DFSIO (lectura y escritura).  Los resultados de la validación de TeraGen y TeraSort se presentan en https://www.netapp.com/pdf.html?item=/media/16420-tr-3969pdf.pdf["Solución NetApp E-Series para Hadoop"] y en la sección "Niveles de almacenamiento" para AFF.
@@ -61,6 +63,7 @@ Ver la secciónlink:apache-spark-use-cases-summary.html#machine-learning["Aprend
 
 
 
+[[multi-worker-deep-learning-using-keras-for-ctr-prediction]]
 == Aprendizaje profundo multitrabajador con Keras para la predicción del CTR
 
 Con los recientes avances en plataformas y aplicaciones de ML, ahora se presta mucha atención al aprendizaje a escala.  La tasa de clics (CTR) se define como el número promedio de clics por cada cien impresiones de anuncios en línea (expresado como porcentaje).  Se adopta ampliamente como una métrica clave en varios sectores industriales y casos de uso, incluidos el marketing digital, el comercio minorista, el comercio electrónico y los proveedores de servicios.  Para obtener más detalles sobre las aplicaciones de CTR y los resultados del rendimiento del entrenamiento distribuido, consultelink:apache-spark-testing-results.html#deep-learning-models-for-ctr-prediction-performance["Modelos de aprendizaje profundo para el rendimiento de la predicción de CTR"] sección.
@@ -89,6 +92,7 @@ Además de DCN, también probamos otros modelos populares de aprendizaje profund
 
 
 
+[[architectures-used-for-validation]]
 == Arquitecturas utilizadas para la validación
 
 Para esta validación, utilizamos cuatro nodos de trabajo y un nodo maestro con un par AFF-A800 HA.  Todos los miembros del clúster estaban conectados a través de conmutadores de red 10GbE.

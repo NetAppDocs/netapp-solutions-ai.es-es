@@ -18,6 +18,7 @@ Esta sección contiene un script de Python de muestra que se puede utilizar para
 
 
 
+[[appendix-c-verifydatanetapp-py]]
 == Apéndice C: verify_data_netapp.py
 
 [source, python]

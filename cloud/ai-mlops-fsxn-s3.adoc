@@ -18,6 +18,7 @@ Esta sección proporciona una guía sobre cómo configurar FSx ONTAP como un dep
 
 
 
+[[introduction]]
 == Introducción
 
 Usando SageMaker como ejemplo, esta página proporciona orientación sobre cómo configurar FSx ONTAP como un depósito S3 privado.
@@ -26,10 +27,12 @@ Para obtener más información sobre FSx ONTAP, consulte esta presentación (lin
 
 
 
+[[user-guide]]
 == Guía del usuario
 
 
 
+[[server-creation]]
 === Creación de servidores
 
 
@@ -102,6 +105,7 @@ image:mlops-fsxn-s3-integration-012.png["Inspeccionar la consola FSx"]
 
 
 
+[[server-configuration]]
 === Configuración del servidor
 
 
@@ -231,6 +235,7 @@ Con esto concluye la integración entre FSx ONTAP y la instancia de SageMaker.
 
 
 
+[[useful-debugging-checklist]]
 == Lista de verificación de depuración útil
 
 * Asegúrese de que la instancia de SageMaker Notebook y el sistema de archivos FSx ONTAP estén en la misma VPC.
@@ -239,6 +244,7 @@ Con esto concluye la integración entre FSx ONTAP y la instancia de SageMaker.
 
 
 
+[[faq-as-of-sep-27-2023]]
 == Preguntas frecuentes (al 27 de septiembre de 2023)
 
 P: ¿Por qué recibo el error "*Se produjo un error (no implementado) al llamar a la operación CreateMultipartUpload: el comando s3 que solicitó no está implementado*" al cargar archivos en FSx ONTAP?

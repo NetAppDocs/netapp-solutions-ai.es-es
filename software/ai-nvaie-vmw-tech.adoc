@@ -18,18 +18,21 @@ Esta sección proporciona una descripción general de la tecnología para NVIDIA
 
 
 
+[[nvidia-ai-enterprise]]
 == NVIDIA AI Enterprise
 
 NVIDIA AI Enterprise es una suite integral de software de inteligencia artificial y análisis de datos nativa de la nube, optimizada, certificada y respaldada por NVIDIA para ejecutarse en VMware vSphere con sistemas certificados NVIDIA.  Este software facilita la implementación, la gestión y el escalamiento simples y rápidos de cargas de trabajo de IA en el entorno de nube híbrida moderno.
 
 
 
+[[nvidia-gpu-cloud-ngc]]
 == Nube de GPU NVIDIA (NGC)
 
 NVIDIA NGC alberga un catálogo de software optimizado para GPU para que los profesionales de IA desarrollen sus soluciones de IA.  También proporciona acceso a varios servicios de IA, incluidos NVIDIA Base Command para entrenamiento de modelos, NVIDIA Fleet Command para implementar y monitorear modelos, y NGC Private Registry para acceder y administrar de forma segura software de IA propietario.  Además, los clientes de NVIDIA AI Enterprise pueden solicitar soporte a través del portal NGC.
 
 
 
+[[vmware-vsphere]]
 == VMware vSphere
 
 VMware vSphere es la plataforma de virtualización de VMware, que transforma los centros de datos en infraestructuras informáticas agregadas que incluyen recursos de CPU, almacenamiento y redes. vSphere administra estas infraestructuras como un entorno operativo unificado y proporciona a los administradores las herramientas para administrar los centros de datos que participan en ese entorno.
@@ -38,12 +41,14 @@ Los dos componentes principales de vSphere son ESXi y vCenter Server.  ESXi es l
 
 
 
+[[netapp-ontap]]
 == ONTAP de NetApp
 
 ONTAP 9, la última generación de software de gestión de almacenamiento de NetApp, permite a las empresas modernizar la infraestructura y realizar la transición a un centro de datos preparado para la nube.  Al aprovechar las capacidades de gestión de datos líderes en la industria, ONTAP permite la gestión y protección de datos con un único conjunto de herramientas, independientemente de dónde residan esos datos.  También puede mover datos libremente a donde sea necesario: el borde, el núcleo o la nube.  ONTAP 9 incluye numerosas características que simplifican la gestión de datos, aceleran y protegen datos críticos y habilitan capacidades de infraestructura de próxima generación en arquitecturas de nube híbrida.
 
 
 
+[[simplify-data-management]]
 === Simplificar la gestión de datos
 
 La gestión de datos es crucial para las operaciones de TI de la empresa y los científicos de datos, de modo que se utilicen los recursos adecuados para las aplicaciones de IA y el entrenamiento de conjuntos de datos de IA/ML.  La siguiente información adicional sobre las tecnologías de NetApp está fuera del alcance de esta validación, pero podría ser relevante según su implementación.
@@ -57,6 +62,7 @@ El software de gestión de datos ONTAP incluye las siguientes características p
 
 
 
+[[accelerate-and-protect-data]]
 === Acelerar y proteger los datos
 
 ONTAP ofrece niveles superiores de rendimiento y protección de datos y amplía estas capacidades de las siguientes maneras:
@@ -69,6 +75,7 @@ ONTAP ofrece niveles superiores de rendimiento y protección de datos y amplía 
 
 
 
+[[future-proof-infrastructure]]
 === Infraestructura a prueba de futuro
 
 ONTAP ayuda a satisfacer necesidades comerciales exigentes y en constante cambio con las siguientes características:
@@ -80,6 +87,7 @@ ONTAP ayuda a satisfacer necesidades comerciales exigentes y en constante cambio
 
 
 
+[[netapp-dataops-toolkit]]
 == Kit de herramientas DataOps de NetApp
 
 NetApp DataOps Toolkit es una herramienta basada en Python que simplifica la gestión de espacios de trabajo de desarrollo/entrenamiento y servidores de inferencia respaldados por almacenamiento NetApp de alto rendimiento y escalabilidad horizontal.  Las capacidades clave incluyen:

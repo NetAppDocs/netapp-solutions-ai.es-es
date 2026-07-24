@@ -18,6 +18,7 @@ Esta sección presenta los componentes principales de esta solución con mayor d
 
 
 
+[[netapp-aff-systems]]
 == Sistemas AFF de NetApp
 
 Los sistemas de almacenamiento AFF de NetApp permiten a las empresas satisfacer los requisitos de almacenamiento empresarial con un rendimiento líder en la industria, flexibilidad superior, integración en la nube y la mejor gestión de datos de su clase.  Diseñados específicamente para flash, los sistemas AFF ayudan a acelerar, administrar y proteger datos críticos para el negocio.
@@ -56,12 +57,14 @@ NetApp también ofrece otros sistemas de almacenamiento, como AFF A800 y AFF A70
 
 
 
+[[netapp-ontap]]
 == ONTAP de NetApp
 
 ONTAP 9, la última generación de software de gestión de almacenamiento de NetApp, permite a las empresas modernizar la infraestructura y realizar la transición a un centro de datos preparado para la nube.  Al aprovechar las capacidades de gestión de datos líderes en la industria, ONTAP permite la gestión y protección de datos con un único conjunto de herramientas, independientemente de dónde residan esos datos.  Los datos también se pueden mover libremente a donde sea necesario: el borde, el núcleo o la nube.  ONTAP 9 incluye numerosas características que simplifican la gestión de datos, aceleran y protegen datos críticos y preparan la infraestructura para el futuro en arquitecturas de nube híbrida.
 
 
 
+[[simplify-data-management]]
 === Simplificar la gestión de datos
 
 La gestión de datos es crucial para las operaciones de TI de la empresa, de modo que se utilicen los recursos adecuados para las aplicaciones y los conjuntos de datos.  ONTAP incluye las siguientes características para agilizar y simplificar las operaciones y reducir el costo total de operación:
@@ -73,6 +76,7 @@ La gestión de datos es crucial para las operaciones de TI de la empresa, de mod
 
 
 
+[[accelerate-and-protect-data]]
 === Acelerar y proteger los datos
 
 ONTAP ofrece niveles superiores de rendimiento y protección de datos y amplía estas capacidades de las siguientes maneras:
@@ -84,6 +88,7 @@ ONTAP ofrece niveles superiores de rendimiento y protección de datos y amplía 
 
 
 
+[[future-proof-infrastructure]]
 === Infraestructura a prueba de futuro
 
 ONTAP 9 ayuda a satisfacer necesidades comerciales exigentes y en constante cambio:
@@ -95,6 +100,7 @@ ONTAP 9 ayuda a satisfacer necesidades comerciales exigentes y en constante camb
 
 
 
+[[netapp-flexgroup-volumes]]
 == Volúmenes de NetApp FlexGroup
 
 Los conjuntos de datos de entrenamiento suelen ser una colección de potencialmente miles de millones de archivos.  Los archivos pueden incluir texto, audio, video y otras formas de datos no estructurados que deben almacenarse y procesarse para poder leerse en paralelo.  El sistema de almacenamiento debe almacenar muchos archivos pequeños y debe leer esos archivos en paralelo para realizar E/S secuenciales y aleatorias.
@@ -110,6 +116,7 @@ image:a400-thinksystem-005.png["Esta imagen muestra un par HA de controladores d
 
 
 
+[[lenovo-thinksystem-portfolio]]
 == Portafolio Lenovo ThinkSystem
 
 Los servidores Lenovo ThinkSystem cuentan con hardware, software y servicios innovadores que resuelven los desafíos de los clientes hoy y ofrecen un enfoque de diseño modular, evolutivo y adaptado a sus necesidades para abordar los desafíos del mañana.  Estos servidores aprovechan las mejores tecnologías estándar de la industria junto con las innovaciones diferenciadas de Lenovo para brindar la mayor flexibilidad posible en servidores x86.
@@ -125,6 +132,7 @@ En el área de IA, Lenovo está adoptando un enfoque práctico para ayudar a las
 
 
 
+[[lenovo-sr670-v2]]
 === Lenovo SR670 V2
 
 El servidor en rack Lenovo ThinkSystem SR670 V2 ofrece un rendimiento óptimo para inteligencia artificial acelerada y computación de alto rendimiento (HPC).  El SR670 V2 admite hasta ocho GPU y es adecuado para los requisitos de carga de trabajo computacionalmente intensivos de ML, DL e inferencia.
@@ -145,6 +153,7 @@ Otras características incluyen:
 
 
 
+[[mlperf]]
 == MLPerf
 
 MLPerf es el conjunto de referencia líder en la industria para evaluar el rendimiento de la IA.  En esta validación, utilizamos su punto de referencia de clasificación de imágenes con MXNet, uno de los marcos de IA más populares.  El script de entrenamiento MXNet_benchmarks se utilizó para impulsar el entrenamiento de IA.  El script contiene implementaciones de varios modelos convencionales populares y está diseñado para ser lo más rápido posible.  Puede ejecutarse en una sola máquina o ejecutarse en modo distribuido en múltiples hosts.

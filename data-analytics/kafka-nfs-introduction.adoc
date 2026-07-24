@@ -30,6 +30,7 @@ Este documento describe los siguientes temas:
 
 
 
+[[why-use-nfs-storage-for-kafka-workloads]]
 == ¿Por qué utilizar almacenamiento NFS para cargas de trabajo de Kafka?
 
 Las cargas de trabajo de Kafka en aplicaciones de producción pueden transmitir enormes cantidades de datos entre aplicaciones.  Estos datos se guardan y almacenan en los nodos del agente de Kafka en el clúster de Kafka.  Kafka también es conocido por su disponibilidad y paralelismo, que logra dividiendo los temas en particiones y luego replicando esas particiones en todo el clúster.  Al final, esto significa que la enorme cantidad de datos que fluye a través de un clúster de Kafka generalmente se multiplica en tamaño.  NFS permite reequilibrar los datos a medida que cambia el número de corredores de forma muy rápida y sencilla.  En el caso de entornos grandes, reequilibrar los datos en DAS cuando cambia la cantidad de intermediarios consume mucho tiempo y, en la mayoría de los entornos de Kafka, la cantidad de intermediarios cambia con frecuencia.
@@ -45,6 +46,7 @@ Otros beneficios incluyen los siguientes:
 
 
 
+[[why-netapp-for-kafka-workloads]]
 == ¿Por qué NetApp para las cargas de trabajo de Kafka?
 
 La implementación de NFS de NetApp se considera un estándar de oro para el protocolo y se utiliza en innumerables entornos NAS empresariales. Además de la credibilidad de NetApp, también ofrece los siguientes beneficios:

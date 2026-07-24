@@ -18,12 +18,14 @@ Puede ajustar la configuración utilizada para la validación para que se adapte
 
 
 
+[[compute-server]]
 == Servidor de cómputo
 
 Utilizamos una CPU Intel Xeon D-2123IT, que es el nivel más bajo de CPU compatible con SE350, con cuatro núcleos físicos y TDP de 60 W.  Si bien el servidor no admite el reemplazo de CPU, es posible solicitarlo con una CPU más potente.  La CPU superior compatible es Intel Xeon D-2183IT con 16 núcleos, 100 W funcionando a 2,20 GHz.  Esto aumenta considerablemente la capacidad de cálculo de la CPU.  Si bien la CPU no fue un cuello de botella para ejecutar las cargas de trabajo de inferencia en sí, ayuda con el procesamiento de datos y otras tareas relacionadas con la inferencia.  Actualmente, NVIDIA T4 es la única GPU disponible para casos de uso perimetral; por lo tanto, actualmente no es posible actualizar o degradar la GPU.
 
 
 
+[[shared-storage]]
 == Almacenamiento compartido
 
 Para las pruebas y la validación, se utilizó el sistema NetApp AFF C190 , que tiene una capacidad de almacenamiento máxima de 50,5 TB, un rendimiento de 4,4 GBps para lecturas secuenciales y 230 000 IOPS para lecturas aleatorias pequeñas, para el propósito de este documento y ha demostrado ser adecuado para cargas de trabajo de inferencia de borde.

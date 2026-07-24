@@ -10,6 +10,7 @@ summary: NVIDIA DGX SuperPOD con NetApp AFF A90
 
 
 
+[[nva-deployment]]
 == Despliegue del NVA
 
 [role="lead"]
@@ -21,6 +22,7 @@ David Arnette, NetApp
 
 
 
+[[program-summary]]
 == Resumen del programa
 
 NVIDIA DGX SuperPOD™ ofrece una solución de centro de datos de IA llave en mano para organizaciones, que brinda sin inconvenientes computación de primer nivel, herramientas de software, experiencia e innovación continua.  DGX SuperPOD ofrece todo lo que los clientes necesitan para implementar cargas de trabajo de IA/ML y HPC con un tiempo de configuración mínimo y una productividad máxima.  La figura 1 muestra los componentes de alto nivel de DGX SuperPOD.
@@ -38,6 +40,7 @@ DGX SuperPOD ofrece los siguientes beneficios:
 
 
 
+[[solution-overview]]
 == Descripción general de la solución
 
 A medida que las organizaciones adoptan iniciativas de inteligencia artificial (IA) y aprendizaje automático (ML), la demanda de soluciones de infraestructura sólidas, escalables y eficientes nunca ha sido mayor.  En el centro de estas iniciativas se encuentra el desafío de gestionar y entrenar modelos de IA cada vez más complejos, garantizando al mismo tiempo la seguridad de los datos, la accesibilidad y la optimización de los recursos. 
@@ -51,12 +54,14 @@ Esta solución ofrece los siguientes beneficios clave:
 
 
 
+[[solution-technology]]
 === Tecnología de soluciones
 
 NVIDIA DGX SuperPOD incluye los servidores, la red y el almacenamiento necesarios para ofrecer un rendimiento comprobado para cargas de trabajo de IA exigentes.  Los sistemas NVIDIA DGX™ H200 y B200 proporcionan potencia informática de primer nivel, y los conmutadores de red Ethernet NVIDIA Quantum InfiniBand y Spectrum™ proporcionan una latencia ultrabaja y un rendimiento de red líder en la industria.  Con la incorporación de las capacidades de gestión de datos y rendimiento líderes en la industria del almacenamiento NetApp ONTAP , los clientes pueden implementar iniciativas de IA/ML más rápidamente y con menos migración de datos y sobrecarga administrativa.  Para obtener más información sobre los componentes específicos de esta solución, consulte lahttps://www.netapp.com/pdf.html?item=/media/125003-nva-1175-design-superpod-a90.pdf["GUÍA DE DISEÑO NVA-1175"] y https://docs.nvidia.com/dgx-superpod/reference-architecture-scalable-infrastructure-b200/latest/index.html["+++ Arquitectura de referencia NVIDIA DGX SuperPOD +++"] documentación.
 
 
 
+[[use-case-summary]]
 === Resumen del caso de uso
 
 NVIDIA DGX SuperPOD está diseñado para satisfacer los requisitos de rendimiento y escala de las cargas de trabajo más exigentes.
@@ -70,12 +75,14 @@ Esta solución se aplica a los siguientes casos de uso:
 
 
 
+[[technology-requirements]]
 == Requisitos tecnológicos
 
 DGX SuperPOD se basa en el concepto de una Unidad Escalable (SU) que incluye todos los componentes necesarios para brindar la conectividad y el rendimiento requeridos y eliminar cualquier cuello de botella en la infraestructura.  Los clientes pueden comenzar con una o varias SU y agregar SU adicionales según sea necesario para satisfacer sus requisitos.  Para obtener más información, consulte la https://docs.nvidia.com/dgx-superpod/reference-architecture-scalable-infrastructure-b200/latest/index.html["+++Arquitectura de referencia NVIDIA DGX SuperPOD +++"] .  Este documento describe los componentes de almacenamiento y la configuración para una sola SU.
 
 
 
+[[hardware-requirements]]
 === Requisitos de hardware
 
 En la Tabla 1 se enumeran los componentes de hardware necesarios para implementar los componentes de almacenamiento para 1SU.  Consulte el Apéndice A para conocer las piezas y cantidades específicas para 1 a 4 unidades escalables.
@@ -97,6 +104,7 @@ Tabla 1) Requisitos de hardware.
 |===
 
 
+[[software-requirements]]
 === Requisitos de software
 
 En la Tabla 2 se enumeran los componentes y versiones de software mínimos necesarios para integrar el sistema de almacenamiento AFF A90 con DGX SuperPOD.  DGX SuperPOD también implica otros componentes de software que no se enumeran aquí.  Por favor consulte lahttps://docs.nvidia.com/dgx-superpod/release-notes/latest/10-24-11.html["+++Notas de lanzamiento de DGX SuperPOD+++"] para más detalles.
@@ -124,6 +132,7 @@ Tabla 2) Requisitos de software.
 |===
 
 
+[[deployment-procedures]]
 == Procedimientos de implementación
 
 La integración del almacenamiento NetApp ONTAP con DGX SuperPOD implica las siguientes tareas:
@@ -135,6 +144,7 @@ La integración del almacenamiento NetApp ONTAP con DGX SuperPOD implica las sig
 
 
 
+[[storage-system-installation-and-configuration]]
 === Instalación y configuración del sistema de almacenamiento
 
 
@@ -452,6 +462,7 @@ spod_qos
 ----
 
 
+[[dgx-server-configuration-with-nvidia-base-command-manager]]
 === Configuración del servidor DGX con NVIDIA Base Command Manager
 
 Para preparar a los clientes DGX para utilizar el sistema de almacenamiento AFF A90 , complete las siguientes tareas.  Este proceso supone que las interfaces de red y las rutas estáticas para la estructura de almacenamiento ya se han configurado en los nodos del sistema DGX.  Los Servicios profesionales de NetApp completarán las siguientes tareas como parte del proceso de configuración avanzada.
@@ -653,12 +664,14 @@ commit
 ----
 
 
+[[conclusion]]
 == Conclusión
 
 El NVIDIA DGX SuperPOD con sistemas de almacenamiento NetApp * AFF A90 * representa un avance significativo en las soluciones de infraestructura de IA.  Al abordar desafíos clave en torno a la seguridad, la gestión de datos, la utilización de recursos y la escalabilidad, permite a las organizaciones acelerar sus iniciativas de IA mientras mantienen la eficiencia operativa, la protección de datos y la colaboración.  El enfoque integrado de la solución elimina los cuellos de botella comunes en los procesos de desarrollo de IA, lo que permite a los científicos e ingenieros de datos centrarse en la innovación en lugar de en la gestión de la infraestructura.
 
 
 
+[[where-to-find-additional-information]]
 == Dónde encontrar información adicional
 
 Para obtener más información sobre la información que se describe en este documento, revise los siguientes documentos y/o sitios web:
@@ -679,10 +692,12 @@ Para obtener más información sobre la información que se describe en este doc
 
 
 
+[[appendix-a-bill-of-materials-and-rack-elevations]]
 == Apéndice A: Lista de materiales y elevaciones de rack
 
 
 
+[[bill-of-materials]]
 === Lista de materiales
 
 La Tabla 3 muestra el número de pieza y las cantidades de los componentes de NetApp necesarios para implementar el almacenamiento para una, dos, tres y cuatro unidades escalables.
@@ -748,6 +763,7 @@ Tabla 4) Cables NVIDIA necesarios para conectar los sistemas de almacenamiento A
 |===
 
 
+[[rack-elevations]]
 === Elevaciones de rack
 
 Las figuras 4 a 6 muestran ejemplos de elevaciones de bastidor para 1 a 4 SU.

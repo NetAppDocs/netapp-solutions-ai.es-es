@@ -18,22 +18,26 @@ Este artículo es un tutorial sobre el uso de Amazon FSx for NetApp ONTAP (FSx O
 
 
 
+[[introduction]]
 == Introducción
 
 Este tutorial ofrece un ejemplo práctico de un proyecto de clasificación de visión artificial y proporciona experiencia práctica en la creación de modelos de aprendizaje automático que utilizan FSx ONTAP como fuente de datos dentro del entorno de SageMaker.  El proyecto se centra en el uso de PyTorch, un marco de aprendizaje profundo, para clasificar la calidad de los neumáticos basándose en imágenes de neumáticos.  Se enfatiza en el desarrollo de modelos de aprendizaje automático utilizando FSx ONTAP como fuente de datos en Amazon SageMaker.
 
 
 
+[[what-is-fsx-ontap]]
 == ¿Qué es FSx ONTAP?
 
 Amazon FSx ONTAP es de hecho una solución de almacenamiento totalmente administrada ofrecida por AWS.  Aprovecha el sistema de archivos ONTAP de NetApp para proporcionar almacenamiento confiable y de alto rendimiento.  Con soporte para protocolos como NFS, SMB e iSCSI, permite un acceso sin inconvenientes desde diferentes instancias de cómputo y contenedores.  El servicio está diseñado para ofrecer un rendimiento excepcional, garantizando operaciones de datos rápidas y eficientes.  También ofrece alta disponibilidad y durabilidad, garantizando que sus datos permanezcan accesibles y protegidos.  Además, la capacidad de almacenamiento de Amazon FSx ONTAP es escalable, lo que le permite ajustarla fácilmente según sus necesidades.
 
 
 
+[[prerequisite]]
 == Requisito previo
 
 
 
+[[network-environment]]
 === Entorno de red
 
 image:mlops-fsxn-sagemaker-integration-training-002.png["Entorno de red"]
@@ -42,6 +46,7 @@ FSx ONTAP (Amazon FSx ONTAP) es un servicio de almacenamiento de AWS.  Incluye u
 
 
 
+[[data-access]]
 === Acceso a datos
 
 En escenarios del mundo real, los científicos de datos normalmente utilizan los datos existentes almacenados en FSx ONTAP para construir sus modelos de aprendizaje automático.  Sin embargo, para fines de demostración, dado que el sistema de archivos FSx ONTAP está inicialmente vacío después de su creación, es necesario cargar manualmente los datos de entrenamiento.  Esto se puede lograr montando FSx ONTAP como un volumen en SageMaker.  Una vez que el sistema de archivos esté montado correctamente, puede cargar su conjunto de datos en la ubicación montada, lo que lo hará accesible para entrenar sus modelos dentro del entorno de SageMaker.  Este enfoque le permite aprovechar la capacidad de almacenamiento y las capacidades de FSx ONTAP mientras trabaja con SageMaker para el desarrollo y entrenamiento de modelos.
@@ -50,6 +55,7 @@ El proceso de lectura de datos implica configurar FSx ONTAP como un depósito S3
 
 
 
+[[integration-overview]]
 == Descripción general de la integración
 
 image:mlops-fsxn-sagemaker-integration-training-001.png["Flujo de trabajo de formación"]
@@ -58,10 +64,12 @@ El flujo de trabajo de uso de datos de entrenamiento en FSx ONTAP para crear un 
 
 
 
+[[step-by-step-integration]]
 == Integración paso a paso
 
 
 
+[[data-loader]]
 === Loader de datos
 
 Para entrenar una red de aprendizaje profundo de PyTorch con datos, se crea un cargador de datos para facilitar la alimentación de datos.  El cargador de datos no solo define el tamaño del lote, sino que también determina el procedimiento para leer y preprocesar cada registro dentro del lote.  Al configurar el cargador de datos, podemos gestionar el procesamiento de datos en lotes, lo que permite el entrenamiento de la red de aprendizaje profundo.
@@ -191,6 +199,7 @@ En el ejemplo proporcionado, se especifica un tamaño de lote de 64, lo que indi
 
 
 
+[[model-training]]
 === Entrenamiento de modelos
 
 [source, python]
@@ -245,6 +254,7 @@ Este código implementa un proceso de entrenamiento estándar de PyTorch.  Defin
 
 
 
+[[model-deployment]]
 === Implementación del modelo
 
 

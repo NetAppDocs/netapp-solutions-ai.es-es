@@ -40,6 +40,7 @@ link:https://www.netapp.com/artificial-intelligence/["https://www.netapp.com/art
 
 
 
+[[acknowledgments]]
 == Expresiones de gratitud
 
 * Josh Mineroff, director de SA para alianzas tecnológicas, Domino Data Lab

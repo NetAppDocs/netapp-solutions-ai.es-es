@@ -18,6 +18,7 @@ Hemos realizado la verificación con Confluent Platform para almacenamiento en n
 
 
 
+[[confluent-setup]]
 == Configuración confluente
 
 Para la configuración, utilizamos tres zookeepers, cinco brokers y cinco servidores de prueba con 256 GB de RAM y 16 CPU.  Para el almacenamiento de NetApp , utilizamos ONTAP con un par AFF A900 HA.  El almacenamiento y los intermediarios estaban conectados a través de conexiones de 100 GbE.
@@ -30,6 +31,7 @@ Los servidores de herramientas actúan como clientes de aplicaciones que envían
 
 
 
+[[confluent-tiered-storage-configuration]]
 == Configuración de almacenamiento en niveles de Confluent
 
 Utilizamos los siguientes parámetros de prueba:
@@ -69,6 +71,7 @@ Para la verificación, utilizamos ONTAP con el protocolo HTTP, pero HTTPS tambi�
 
 
 
+[[netapp-storage-controller-ontap]]
 == Controlador de almacenamiento NetApp – ONTAP
 
 Configuramos una única configuración de par HA en ONTAP para verificación.
@@ -77,36 +80,42 @@ image:kafka-sc-008.png["Este gráfico muestra cómo se configuró el entorno com
 
 
 
+[[verification-results]]
 == Resultados de la verificación
 
 Completamos los siguientes cinco casos de prueba para la verificación.  Las dos primeras fueron pruebas de funcionalidad y las tres restantes fueron pruebas de rendimiento.
 
 
 
+[[object-store-correctness-test]]
 === Prueba de corrección del almacén de objetos
 
 Esta prueba realiza operaciones básicas como obtener, colocar y eliminar en el almacén de objetos utilizado para el almacenamiento en niveles mediante llamadas API.
 
 
 
+[[tiering-functionality-correctness-test]]
 === Prueba de corrección de la funcionalidad de niveles
 
 Esta prueba verifica la funcionalidad de extremo a extremo del almacenamiento de objetos.  Crea un tema, produce un flujo de eventos para el tema recién creado, espera a que los intermediarios archiven los segmentos en el almacenamiento de objetos, consume el flujo de eventos y valida que el flujo consumido coincida con el flujo producido.  Hemos realizado esta prueba con y sin inyección de falla en el almacén de objetos.  Simulamos una falla de nodo deteniendo el servicio del administrador de servicios en uno de los nodos en ONTAP y validando que la funcionalidad de extremo a extremo funciona con el almacenamiento de objetos.
 
 
 
+[[tier-fetch-benchmark]]
 === Punto de referencia de búsqueda de niveles
 
 Esta prueba validó el rendimiento de lectura del almacenamiento de objetos en niveles y verificó las solicitudes de lectura de obtención de rango bajo una carga pesada de los segmentos generados por el punto de referencia.  En este punto de referencia, Confluent desarrolló clientes personalizados para atender las solicitudes de búsqueda de niveles.
 
 
 
+[[produce-consume-workload-generator]]
 === Generador de carga de trabajo de producción y consumo
 
 Esta prueba genera indirectamente una carga de trabajo de escritura en el almacén de objetos a través del archivado de segmentos.  La carga de trabajo de lectura (segmentos leídos) se generó desde el almacenamiento de objetos cuando los grupos de consumidores obtuvieron los segmentos.  Esta carga de trabajo fue generada por un script TOCC.  Esta prueba verificó el rendimiento de lectura y escritura en el almacenamiento de objetos en subprocesos paralelos.  Realizamos pruebas con y sin inyección de fallas en el almacén de objetos como lo hicimos para la prueba de corrección de la funcionalidad de niveles.
 
 
 
+[[retention-workload-generator]]
 === Generador de carga de trabajo de retención
 
 Esta prueba verificó el rendimiento de eliminación de un almacenamiento de objetos bajo una carga de trabajo pesada de retención de temas.  La carga de trabajo de retención se generó utilizando un script TOCC que produce muchos mensajes en paralelo a un tema de prueba.  El tema de prueba fue configurar una configuración de retención agresiva basada en el tamaño y el tiempo que provocó que el flujo de eventos se purgara continuamente del almacén de objetos.  Los segmentos fueron luego archivados.  Esto provocó muchas eliminaciones en el almacenamiento de objetos por parte del agente y la recopilación del rendimiento de las operaciones de eliminación del almacén de objetos.

@@ -22,6 +22,7 @@ Sathish Thyagarajan, Michael Oglesby, Arpita Mahajan NetApp
 
 
 
+[[assumptions]]
 == Suposiciones:
 
 * El usuario de despliegue tiene permisos suficientes para crear espacios de nombres e instalar Helm charts.
@@ -34,6 +35,7 @@ Sathish Thyagarajan, Michael Oglesby, Arpita Mahajan NetApp
 
 
 
+[[prerequisites]]
 == Prerrequisitos
 
 Instala Git, Python3.11 y pip para Python3.11
@@ -52,10 +54,12 @@ python3.11 -m pip --version
 ----
 
 
+[[erag-2-02-0-1-deployment-steps]]
 == Pasos de implementación de ERAG 2.0/2.0.1
 
 
 
+[[1-pull-enterprise-rag-2-0-release-from-github]]
 === 1. Descarga la versión Enterprise RAG 2.0 desde GitHub
 
 [source, cli]
@@ -72,6 +76,7 @@ git checkout tags/release-2.0.1
 ----
 
 
+[[2-install-prerequisites]]
 === 2. Instala los requisitos previos
 
 [source, cli]
@@ -86,6 +91,7 @@ ansible-galaxy collection install -r requirements.yaml --upgrade
 ----
 
 
+[[3-create-inventory-file]]
 === 3. Crear archivo de inventario
 
 [source, cli]
@@ -124,6 +130,7 @@ ansible_connection=ssh
 ----
 
 
+[[4-set-up-passwordless-ssh-to-each-node]]
 === 4. Configura SSH sin contraseña para cada nodo
 
 [source, cli]
@@ -134,6 +141,7 @@ Nota: si se utiliza un nodo de despliegue para desplegar el ERAG, asegúrate de 
 
 
 
+[[5-verify-connectivity]]
 === 5. Verifica la conectividad
 
 [source, cli]
@@ -144,6 +152,7 @@ Nota: Si no tienes configurado sudo sin contraseña en tus nodos, entonces neces
 
 
 
+[[6-edit-config-yaml-file]]
 === 6. Edita `config.yaml` el archivo
 
 Prepara el despliegue editando `inventory/<cluster-name>/config.yaml` para reflejar las características específicas de tu entorno.
@@ -182,6 +191,7 @@ kubeconfig: "<repository path>/deployment/inventory/<cluster-name>/artifacts/adm
 ----
 
 
+[[7-deploy-the-k8s-cluster-with-trident]]
 === 7. Despliega el clúster K8s (con Trident)
 
 Ejecuta ansible-playbook playbooks/infrastructure.yaml con las etiquetas configure e install para desplegar el clúster y Trident CSI.
@@ -194,18 +204,21 @@ Nota: - Si no tienes configurado sudo sin contraseña en tus nodos, entonces nec
 
 
 
+[[8-change-the-number-of-iwatch-open-descriptors]]
 === 8. Cambia el número de descriptores abiertos de iwatch
 
 Consulta el https://github.com/opea-project/Enterprise-RAG/blob/release-2.0.0/docs/application_deployment_guide.md#change-number-of-iwatch-open-descriptors["iwatch descriptores abiertos"^] para más detalles.
 
 
 
+[[9-install-kubectl]]
 === 9. Instala kubectl
 
 Consulta https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/["Instala Kubectl"] si aún no está instalado. Recupera el archivo kubeconfig de `<repository path>/deployment/inventory/<cluster-name>/artifacts/admin.conf`.
 
 
 
+[[10-install-metallb-in-kubernetes-cluster]]
 === 10. Instala MetalLB en un clúster Kubernetes
 
 Instala MetalLB usando helm en tu clúster de Kubernetes.
@@ -219,6 +232,7 @@ Consulta el https://metallb.io/installation/["Instalación de MetalLB"] para má
 
 
 
+[[11-configure-metallb]]
 === 11. Configura MetalLB
 
 MetalLB se configuró en modo de Capa 2 y se crearon los recursos IPAddressPool y L2Advertisement requeridos según las directrices de configuración documentadas.
@@ -255,6 +269,7 @@ Nota: - Usa `metallb-system` como namespace para MetalLB IPAddressPool y L2Adver
 
 
 
+[[12-update-config-yaml-with-fqdn-volume-access-mode-ingress-and-s3-details]]
 === 12. Actualiza config.yaml con FQDN, modo de acceso al volumen, ingreso y detalles de S3.
 
 Modifica el archivo config.yaml ubicado en `inventory/<cluster-name>/config.yaml` para definir el FQDN de despliegue, establecer los modos de acceso al volumen, configurar la exposición de ingress e integrar ONTAP S3.
@@ -316,6 +331,7 @@ Nota: - De forma predeterminada, la aplicación Intel® AI for Enterprise RAG in
 
 
 
+[[13-configure-scheduled-synchronization-settings]]
 === 13. Configura los ajustes de sincronización programada
 
 Al instalar la aplicación OPEA para Intel® AI for Enterprise RAG, habilita `scheduledSync` para que la aplicación ingiera automáticamente archivos nuevos o actualizados desde tus buckets de S3.
@@ -341,6 +357,7 @@ celery:
 ----
 
 
+[[14-deploy-enterprise-rag-2-02-0-1]]
 === 14. Implementa Enterprise RAG 2.0/2.0.1
 
 Antes de la instalación, valida la preparación de la infraestructura siguiendo los procedimientos descritos en link:https://github.com/opea-project/Enterprise-RAG/blob/main/docs/application_deployment_guide.md["Guía de implementación de aplicaciones Intel® AI for Enterprise RAG"]. Este paso asegura que la infraestructura subyacente esté configurada correctamente y cumpla todos los requisitos previos necesarios para una instalación exitosa de Enterprise RAG Application.
@@ -355,6 +372,7 @@ Nota: Si no tienes configurado sudo sin contraseña en tu nodo de despliegue (el
 
 
 
+[[15-create-a-dns-entry]]
 === 15. Crear una entrada DNS
 
 Crea una entrada DNS para el panel web de Enterprise RAG en tu servidor DNS. Para continuar, recupera la dirección IP externa asignada al ingress de Enterprise RAG LoadBalancer:
@@ -369,16 +387,19 @@ Nota: - El FQDN usado para la entrada DNS DEBE coincidir con el FQDN del archivo
 
 
 
+[[16-access-enterprise-rag-ui]]
 === 16. Accede a la interfaz RAG de Enterprise
 
 Accede a Enterprise RAG UI navegando a ese FQDN en tu navegador. Nota: puedes recuperar las credenciales predeterminadas de UI desde cat ansible-logs/default_credentials.txt
 
 
 
+[[troubleshooting-guide]]
 == Guía de resolución de problemas
 
 
 
+[[1-issue-keycloak-helm-installation-conflict]]
 === 1. Problema: conflicto en la instalación de Keycloak Helm
 
 Escenario: al desplegar ERAG, la instalación de Keycloak puede fallar con el siguiente error:
@@ -404,6 +425,7 @@ Nota: el estado obsoleto de la versión de Helm puede bloquear posteriores opera
 
 
 
+[[2-issue-trident-operator-helm-chart-version-not-found]]
 === 2. Problema: no se encuentra la versión del Helm Chart del operador de Trident
 
 Escenario: durante el despliegue de ERAG, la instalación del operador Trident puede fallar debido a un desajuste en la versión del Helm chart. Se puede observar el siguiente error:

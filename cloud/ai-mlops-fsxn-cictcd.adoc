@@ -18,12 +18,14 @@ Este artículo proporciona una guía para crear una canalización de MLOps con s
 
 
 
+[[introduction]]
 == Introducción
 
 En este tutorial, aprenderá cómo aprovechar varios servicios de AWS para construir una canalización MLOps simple que abarque integración continua (CI), capacitación continua (CT) e implementación continua (CD).  A diferencia de los pipelines DevOps tradicionales, MLOps requiere consideraciones adicionales para completar el ciclo operativo.  Al seguir este tutorial, obtendrá conocimientos sobre cómo incorporar CT en el ciclo MLOps, lo que permitirá el entrenamiento continuo de sus modelos y una implementación perfecta para la inferencia.  El tutorial lo guiará a través del proceso de utilización de los servicios de AWS para establecer esta canalización MLOps de extremo a extremo.
 
 
 
+[[manifest]]
 == Manifiesto
 
 |===
@@ -52,6 +54,7 @@ En este tutorial, aprenderá cómo aprovechar varios servicios de AWS para const
 |===
 
 
+[[prerequisite]]
 == Requisito previo
 
 * Un sistema de archivos FSx ONTAP preconfigurado.  Este tutorial utiliza datos almacenados en FSx ONTAP para el proceso de entrenamiento.
@@ -62,6 +65,7 @@ En este tutorial, aprenderá cómo aprovechar varios servicios de AWS para const
 
 
 
+[[architecture]]
 == Arquitectura
 
 image:mlops-fsxn-cictcd-012.png["Arquitectura"]
@@ -70,10 +74,12 @@ Esta canalización MLOps es una implementación práctica que utiliza un trabajo
 
 
 
+[[step-by-step-configuration]]
 == Configuración paso a paso
 
 
 
+[[lifecycle-configurations]]
 === Configuraciones del ciclo de vida
 
 Para configurar la función de devolución de llamada del ciclo de vida para la instancia de AWS SageMaker Notebook, deberá utilizar *Configuraciones de ciclo de vida*.  Este servicio le permite definir las acciones necesarias que se deben realizar durante el inicio de la instancia del notebook.  Específicamente, se puede implementar un script de shell dentro de las *Configuraciones del ciclo de vida* para apagar automáticamente la instancia del notebook una vez que se hayan completado los procesos de entrenamiento e implementación.  Esta es una configuración obligatoria ya que el costo es una de las principales consideraciones en MLOps.
@@ -126,6 +132,7 @@ image:mlops-fsxn-cictcd-005.png["Actualizar la configuración del ciclo de vida 
 
 
 
+[[aws-lambda-serverless-function]]
 === Función sin servidor de AWS Lambda
 
 Como se mencionó anteriormente, la *función AWS Lambda* es responsable de poner en marcha la *instancia de AWS SageMaker Notebook*.

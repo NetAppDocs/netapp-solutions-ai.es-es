@@ -85,6 +85,7 @@ La siguiente tabla muestra las versiones de software de los distintos componente
 |===
 
 
+[[storage-network-configuration]]
 == Configuración de la red de almacenamiento
 
 Esta sección describe detalles clave para la configuración de la red de almacenamiento Ethernet.  Para obtener información sobre cómo configurar la red informática InfiniBand, consulte lalink:https://nvdam.widen.net/s/nfnjflmzlj/nvidia-dgx-basepod-reference-architecture["Documentación de NVIDIA BasePOD"] .  Para obtener más detalles sobre la configuración del conmutador, consulte lalink:https://docs.nvidia.com/networking-ethernet-software/cumulus-linux-59/["Documentación de NVIDIA Cumulus Linux"] .
@@ -183,6 +184,7 @@ A continuación se describen los pasos básicos utilizados para configurar los c
 
 
 
+[[storage-system-configuration]]
 == Configuración del sistema de almacenamiento
 
 Esta sección describe detalles clave para la configuración del sistema de almacenamiento A90 para esta solución.  Para obtener más detalles sobre la configuración de los sistemas ONTAP , consulte lalink:https://docs.netapp.com/us-en/ontap/index.html["Documentación de ONTAP"] .  El siguiente diagrama muestra la configuración lógica del sistema de almacenamiento.
@@ -305,6 +307,7 @@ A continuación se describen los pasos básicos utilizados para configurar el si
 
 
 
+[[dgx-h100-configuration-for-roce-storage-access]]
 === Configuración de DGX H100 para acceso al almacenamiento RoCE
 
 Esta sección describe detalles clave para la configuración de los sistemas DGX H100.  Muchos de estos elementos de configuración pueden incluirse en la imagen del sistema operativo implementada en los sistemas DGX o implementarse mediante Base Command Manager en el momento del arranque.  Se enumeran aquí como referencia; para obtener más información sobre la configuración de nodos e imágenes de software en BCM, consulte lalink:https://docs.nvidia.com/base-command-manager/index.html#overview["Documentación de BCM"] .

@@ -22,18 +22,21 @@ Sathish Thyagarajan, Michael Oglesby, Arpita Mahajan, NetApp
 
 
 
+[[executive-summary]]
 == Resumen ejecutivo
 
 Cada vez son más las organizaciones que aprovechan las aplicaciones de generación aumentada por recuperación (RAG) y los grandes modelos lingüísticos (LLMs) para interpretar las indicaciones de los usuarios y generar respuestas para aumentar la productividad y el valor empresarial. Estas indicaciones y respuestas pueden incluir texto, código, imágenes o incluso estructuras de proteínas terapéuticas recuperadas de la base de conocimientos interna de una organización, lagos de datos, repositorios de código y repositorios de documentos. Este documento cubre el diseño de referencia de la solución NetApp AIPod Mini, que incluye almacenamiento NetApp AFF y servidores con procesadores Intel Xeon 6. Incluye el software de gestión de datos NetApp ONTAP combinado con Intel Advanced Matrix Extensions (Intel AMX) y el software Intel® AI for Enterprise RAG construido sobre Open Platform for Enterprise AI (OPEA). El NetApp AIPod Mini para enterprise RAG permite a las organizaciones aumentar un LLM público en una solución privada de inferencia de IA generativa (GenAI). La solución demuestra una inferencia RAG eficiente y rentable a escala empresarial, diseñada para mejorar la fiabilidad y darte un mejor control sobre tu información propietaria.
 
 
 
+[[intel-storage-partner-validation]]
 == Validación de socios de almacenamiento de Intel
 
 Los servidores equipados con procesadores Intel Xeon 6 están diseñados para manejar cargas de trabajo de inferencia de IA exigentes, utilizando Intel AMX para lograr el máximo rendimiento.  Para permitir un rendimiento y una escalabilidad de almacenamiento óptimos, la solución se ha validado con éxito utilizando NetApp ONTAP, lo que permite a las empresas satisfacer las necesidades de las aplicaciones RAG.  Esta validación se realizó en servidores con procesadores Intel Xeon 6.  Intel y NetApp tienen una sólida asociación centrada en ofrecer soluciones de IA optimizadas, escalables y alineadas con los requisitos comerciales del cliente.
 
 
 
+[[advantages-of-running-rag-systems-with-netapp]]
 == Ventajas de ejecutar sistemas RAG con NetApp
 
 Las aplicaciones RAG implican la recuperación de conocimientos de los repositorios de documentos de las empresas en varios tipos como PDF, texto, CSV o Excel. Estos datos normalmente se almacenan en soluciones como un almacenamiento de objetos S3 o NFS en las instalaciones como fuente de datos. NetApp ha sido líder en gestión de datos, movilidad de datos, gobernanza de datos y tecnologías de seguridad de datos en todo el ecosistema de edge, centro de datos y cloud. NetApp ONTAP data management proporciona almacenamiento de clase empresarial para soportar varios tipos de cargas de trabajo de IA, incluyendo inferencias por lotes y en tiempo real, y ofrece algunos de los siguientes beneficios:
@@ -45,16 +48,19 @@ Las aplicaciones RAG implican la recuperación de conocimientos de los repositor
 
 
 
+[[target-audience]]
 == Público objetivo
 
 Este documento está dirigido a tomadores de decisiones de IA, ingenieros de datos, líderes empresariales y ejecutivos departamentales que desean aprovechar una infraestructura diseñada para brindar soluciones empresariales RAG y GenAI.  El conocimiento previo de inferencia de IA, LLM, Kubernetes, redes y sus componentes ayudará durante la fase de implementación.
 
 
 
+[[technology-requirements]]
 == Requisitos tecnológicos
 
 
 
+[[hardware]]
 === Hardware
 
 
@@ -94,6 +100,7 @@ Figura 3 - Arquitectura de despliegue de AIPod Mini image:aipod-mini-012.png["30
 
 
 
+[[software]]
 === Software
 
 
@@ -150,10 +157,12 @@ El software NetApp Trident es un orquestador de almacenamiento de código abiert
 |===
 
 
+[[solution-deployment]]
 == Implementación de la solución
 
 
 
+[[software-stack]]
 === Pila de software
 
 La solución se implementa en un clúster de Kubernetes que consta de nodos de aplicaciones basados en Intel Xeon.  Se requieren al menos tres nodos para implementar alta disponibilidad básica para el plano de control de Kubernetes.  Validamos la solución utilizando el siguiente diseño de clúster.
@@ -173,6 +182,7 @@ La siguiente figura muestra una "vista de la pila de software" de la solución.i
 
 
 
+[[deployment-steps]]
 === Pasos de implementación
 
 
@@ -291,6 +301,7 @@ Ahora puedes "chatear" con la OPEA for Intel® AI for Enterprise RAG application
 
 
 
+[[sizing-guidance]]
 == Guía de tallas
 
 Como parte de nuestro esfuerzo de validación, realizamos pruebas de rendimiento en coordinación con Intel.  Esta prueba dio como resultado la guía de tamaño que se describe en la siguiente tabla.
@@ -314,18 +325,21 @@ Nota: la guía de dimensionamiento presentada anteriormente se basa en la valida
 
 
 
+[[conclusion]]
 == Conclusión
 
 Los sistemas RAG empresariales y los LLM son tecnologías que trabajan conjuntamente para ayudar a las organizaciones a proporcionar respuestas precisas y conscientes del contexto. Estas respuestas implican la recuperación de información basada en una amplia colección de datos privados e internos de la empresa. Al usar RAG, APIs, incrustaciones vectoriales y sistemas de almacenamiento de alto rendimiento para consultar repositorios de documentos que contienen datos de la empresa, los datos se procesan más rápido y de forma segura. El NetApp AIPod Mini combina la infraestructura de datos inteligente de NetApp con las capacidades de gestión de datos de ONTAP y los procesadores Intel Xeon 6, Intel® AI for Enterprise RAG y la pila de software OPEA para ayudar a desplegar aplicaciones RAG de alto rendimiento y poner a las organizaciones en el camino hacia el liderazgo en IA.
 
 
 
+[[acknowledgment]]
 == Reconocimiento
 
 Este documento es obra de Sathish Thyagarajan, Michael Oglesby y Arpita Mahajan, miembros del equipo de ingeniería de soluciones de NetApp. Los autores también quieren agradecer al equipo de producto de Enterprise AI en Intel—Ajay Mungara, Mikolaj Zyczynski, Igor Konopko, Ramakrishna Karamsetty, Michal Prostko, Anna Alberska, Maciej Cichocki, Shreejan Mistry, Nicholas Rago y Ned Fiori—así como a otros miembros del equipo en NetApp—Lawrence Bunka, Bobby Oommen y Jeff Liborio, por su apoyo y ayuda continuos durante el proceso de validación de la solución.
 
 
 
+[[bill-of-materials]]
 == Lista de materiales
 
 La siguiente fue la lista de materiales utilizada para la validación funcional de esta solución y puede usarse como referencia.  Se podría utilizar cualquier servidor o componente de red (o incluso una red existente con un ancho de banda preferiblemente de 100 GbE) que se ajuste a la siguiente configuración.
@@ -418,12 +432,14 @@ Almacenamiento AFF de NetApp :
 |===
 
 
+[[infra-readiness-checklist]]
 == Lista de comprobación Infra Readiness
 
 Consulta el xref:ai-aipod-mini-infra-readiness.html[NetApp AIPod Mini - Preparación de infraestructura] para más detalles.
 
 
 
+[[where-to-find-additional-information]]
 == Dónde encontrar información adicional
 
 Para obtener más información sobre la información que se describe en este documento, revise los siguientes documentos y/o sitios web:

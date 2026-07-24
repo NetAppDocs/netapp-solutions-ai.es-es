@@ -26,6 +26,7 @@ Los sistemas de almacenamiento de NetApp ofrecen el mismo rendimiento o uno mejo
 
 
 
+[[acknowledgments]]
 == Expresiones de gratitud
 
 * JJ  Falkanger, director sénior de soluciones HPC e IA, Lenovo
@@ -36,6 +37,7 @@ Los sistemas de almacenamiento de NetApp ofrecen el mismo rendimiento o uno mejo
 
 
 
+[[where-to-find-additional-information]]
 == Dónde encontrar información adicional
 
 Para obtener más información sobre la información descrita en este documento, consulte los siguientes documentos y/o sitios web:

@@ -18,6 +18,7 @@ Este documento presenta una lista de comprobación completa para la preparación
 
 
 
+[[business-use-case-readiness]]
 == Preparación de la empresa y casos de uso
 
 * ¿La solución está alineada con los resultados de la línea de negocio (por ejemplo, productividad, servicio al cliente, legal, sanidad, fabricación, sector público)?
@@ -29,6 +30,7 @@ Este documento presenta una lista de comprobación completa para la preparación
 
 
 
+[[technical-infrastructure-requirements]]
 == Requisitos técnicos y de infraestructura
 
 * ¿Tu canalización de datos está lista (preparación de datos, ETL, ingesta segura en la vector DB)?
@@ -41,6 +43,7 @@ Este documento presenta una lista de comprobación completa para la preparación
 
 
 
+[[software-ecosystem-alignment]]
 == Alineación de software y ecosistema
 
 * ¿Tus aplicaciones en contenedores son compatibles con los charts de Kubernetes y Helm proporcionados?
@@ -52,6 +55,7 @@ Este documento presenta una lista de comprobación completa para la preparación
 
 
 
+[[data-governance-security]]
 == Gobernanza y seguridad de datos
 
 * ¿Has activado el control de acceso basado en roles (RBAC) en Kubernetes?
@@ -62,6 +66,7 @@ Este documento presenta una lista de comprobación completa para la preparación
 
 
 
+[[operational-support-considerations]]
 == Consideraciones operativas y de soporte
 
 * ¿Están los administradores formados/capacitados en Kubernetes, Trident CSI y la puesta en marcha de la pila OPEA?
@@ -72,6 +77,7 @@ Este documento presenta una lista de comprobación completa para la preparación
 
 
 
+[[commercial-gtm-alignment]]
 == Alineación comercial y GTM
 
 * ¿Existe una hoja de ruta por fases (departamental → expansión de la IA en toda la empresa)?

@@ -27,6 +27,7 @@ Este documento describe las pautas recomendadas para usar Confluent Tiered Stora
 
 
 
+[[why-confluent-tiered-storage]]
 == ¿Por qué el almacenamiento en niveles de Confluent?
 
 Confluent se ha convertido en la plataforma de transmisión en tiempo real predeterminada para muchas aplicaciones, especialmente para big data, análisis y cargas de trabajo de transmisión.  El almacenamiento en niveles permite a los usuarios separar el procesamiento del almacenamiento en la plataforma Confluent.  Hace que el almacenamiento de datos sea más rentable, le permite almacenar cantidades prácticamente infinitas de datos y escalar cargas de trabajo hacia arriba (o hacia abajo) según demanda, y facilita las tareas administrativas como el reequilibrio de datos e inquilinos.  Los sistemas de almacenamiento compatibles con S3 pueden aprovechar todas estas capacidades para democratizar los datos con todos los eventos en un solo lugar, eliminando la necesidad de una ingeniería de datos compleja.  Para obtener más información sobre por qué debería utilizar almacenamiento por niveles para Kafka, consultelink:https://docs.confluent.io/platform/current/kafka/tiered-storage.html#netapp-object-storage["Este artículo de Confluent"^] .
@@ -35,6 +36,7 @@ NetApp instaclustr también es compatible con Kafka con almacenamiento en nivele
 
 
 
+[[why-netapp-storagegrid-for-tiered-storage]]
 == ¿Por qué NetApp StorageGRID para el almacenamiento en niveles?
 
 StorageGRID es una plataforma de almacenamiento de objetos líder en la industria de NetApp.  StorageGRID es una solución de almacenamiento basada en objetos y definida por software que admite API de objetos estándar de la industria, incluida la API de Amazon Simple Storage Service (S3).  StorageGRID almacena y administra datos no estructurados a escala para proporcionar un almacenamiento de objetos seguro y duradero.  El contenido se coloca en el lugar correcto, en el momento correcto y en el nivel de almacenamiento correcto, lo que optimiza los flujos de trabajo y reduce los costos de los medios enriquecidos distribuidos globalmente.
@@ -43,6 +45,7 @@ El mayor diferenciador de StorageGRID es su motor de políticas de gestión del 
 
 
 
+[[enabling-confluent-tiered-storage]]
 == Habilitación del almacenamiento en niveles confluent
 
 La idea básica del almacenamiento por niveles es separar las tareas de almacenamiento de datos del procesamiento de datos.  Con esta separación, resulta mucho más fácil que el nivel de almacenamiento de datos y el nivel de procesamiento de datos escalen de forma independiente.

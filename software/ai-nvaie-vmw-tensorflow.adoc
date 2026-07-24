@@ -18,12 +18,14 @@ Esta sección describe las tareas que deben realizarse para ejecutar un trabajo 
 
 
 
+[[prerequisites]]
 == Prerrequisitos
 
 Antes de realizar los pasos que se describen en esta sección, asumimos que ya ha creado una plantilla de máquina virtual invitada siguiendo las instrucciones que se describen en lalink:ai-nvaie-vmw-ngcsetup.html["Configuración"] página.
 
 
 
+[[create-guest-vm-from-template]]
 == Crear una máquina virtual invitada a partir de una plantilla
 
 Primero, debes crear una nueva VM invitada a partir de la plantilla que creaste en la sección anterior.  Para crear una nueva VM invitada a partir de su plantilla, inicie sesión en VMware vSphere, haga clic derecho en el nombre de la plantilla, seleccione "Nueva VM a partir de esta plantilla..." y luego siga el asistente.
@@ -32,6 +34,7 @@ image:nvaie-004.png["Figura que muestra el diálogo de entrada/salida o represen
 
 
 
+[[create-and-mount-data-volume]]
 == Crear y montar un volumen de datos
 
 A continuación, debe crear un nuevo volumen de datos en el que almacenar su conjunto de datos de entrenamiento.  Puede crear rápidamente un nuevo volumen de datos utilizando el kit de herramientas NetApp DataOps.  El comando de ejemplo que sigue muestra la creación de un volumen llamado 'imagenet' con una capacidad de 2 TB.
@@ -46,12 +49,14 @@ $ sudo -E netapp_dataops_cli.py mount vol -n imagenet -m ~/imagenet
 ....
 
 
+[[populate-data-volume]]
 == Rellenar volumen de datos
 
 Una vez aprovisionado y montado el nuevo volumen, se puede recuperar el conjunto de datos de entrenamiento de la ubicación de origen y colocarlo en el nuevo volumen.  Por lo general, esto implicará extraer los datos de un lago de datos S3 o Hadoop y, a veces, requerirá la ayuda de un ingeniero de datos.
 
 
 
+[[execute-tensorflow-training-job]]
 == Ejecutar trabajo de entrenamiento de TensorFlow
 
 Ahora, está listo para ejecutar su trabajo de entrenamiento de TensorFlow.  Para ejecutar su trabajo de entrenamiento de TensorFlow, realice las siguientes tareas.

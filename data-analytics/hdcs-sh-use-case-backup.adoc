@@ -18,6 +18,7 @@ En este escenario, el cliente tiene un gran repositorio de Hadoop local y desea 
 
 
 
+[[requirements-and-challenges]]
 == Requisitos y desafíos
 
 Los principales requisitos y desafíos para este caso de uso incluyen:
@@ -35,6 +36,7 @@ Los principales requisitos y desafíos para este caso de uso incluyen:
 
 
 
+[[customers-existing-backup-solutionx]]
 == Solución de respaldo existente del cliente
 
 La siguiente figura muestra la solución de copia de seguridad nativa original de Hadoop.
@@ -63,12 +65,14 @@ Las desventajas de la solución de copia de seguridad nativa original de Hadoop 
 
 
 
+[[backup-solutions]]
 == Soluciones de respaldo
 
 En función de estos desafíos y requisitos, y teniendo en cuenta el sistema de respaldo existente, se sugirieron tres posibles soluciones de respaldo.  Las siguientes subsecciones describen cada una de estas tres soluciones de respaldo diferentes, denominadas solución A a solución C.
 
 
 
+[[solution-a]]
 === Solución A
 
 En la Solución A, el clúster de respaldo Hadoop envía los respaldos secundarios a los sistemas de almacenamiento NFS de NetApp , lo que elimina el requisito de cinta, como se muestra en la siguiente figura.
@@ -114,6 +118,7 @@ En esta solución, se pueden utilizar discos SAN de ONTAP en lugar de JBOD.  Est
 
 
 
+[[solution-b]]
 === Solución B
 
 La solución B agrega un volumen NFS al clúster Hadoop de producción, lo que elimina la necesidad del clúster Hadoop de respaldo, como se muestra en la siguiente figura.
@@ -141,6 +146,7 @@ La desventaja de esta solución es que se implementa en el clúster de producci�
 
 
 
+[[solution-c]]
 === Solución C
 
 En la solución C, los volúmenes SAN de NetApp se aprovisionan directamente al clúster de producción de Hadoop para el almacenamiento HDFS, como se muestra en la siguiente figura.

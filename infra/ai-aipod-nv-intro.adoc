@@ -20,6 +20,7 @@ Ingeniería de soluciones de NetApp
 
 
 
+[[executive-summary]]
 == Resumen ejecutivo
 
 El AIPod de NetApp con sistemas NVIDIA DGX y los sistemas de almacenamiento conectados a la nube de NetApp simplifican las implementaciones de infraestructura para cargas de trabajo de aprendizaje automático (ML) e inteligencia artificial (IA) al eliminar la complejidad del diseño y las conjeturas.  Basado en el diseño NVIDIA DGX BasePOD™ para brindar un rendimiento computacional excepcional para cargas de trabajo de próxima generación, AIPod con sistemas NVIDIA DGX agrega sistemas de almacenamiento NetApp AFF que permiten a los clientes comenzar de a poco y crecer sin interrupciones mientras administran de manera inteligente los datos desde el borde hasta el núcleo, la nube y viceversa.  NetApp AIPod es parte de la cartera más amplia de soluciones de inteligencia artificial de NetApp , que se muestra en la siguiente figura.

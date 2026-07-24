@@ -18,6 +18,7 @@ En esta sección se analiza la recuperación ante desastres (DR) con SnapMirror 
 
 
 
+[[disaster-recovery-using-netapp-snapmirror]]
 == Recuperación ante desastres mediante NetApp SnapMirror
 
 image:vector-database-dr-fsxn-gcnv.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]

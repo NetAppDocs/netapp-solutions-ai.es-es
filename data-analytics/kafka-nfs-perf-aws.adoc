@@ -18,12 +18,14 @@ Se evaluó el rendimiento de un clúster de Kafka con la capa de almacenamiento 
 
 
 
+[[kafka-in-aws-cloud-with-netapp-cloud-volumes-ontap-high-availability-pair-and-single-node]]
 == Kafka en la nube de AWS con NetApp Cloud Volumes ONTAP (par de alta disponibilidad y nodo único)
 
 Se evaluó el rendimiento de un clúster de Kafka con NetApp Cloud Volumes ONTAP (par HA) en la nube de AWS.  Esta evaluación comparativa se describe en las siguientes secciones.
 
 
 
+[[architectural-setup]]
 === Configuración arquitectónica
 
 La siguiente tabla muestra la configuración ambiental para un clúster de Kafka que utiliza NAS.
@@ -48,6 +50,7 @@ La siguiente tabla muestra la configuración ambiental para un clúster de Kafka
 |===
 
 
+[[netapp-cluster-volume-ontap-setup]]
 === Configuración de ONTAP del volumen del clúster de NetApp
 
 . Para el par Cloud Volumes ONTAP HA, creamos dos agregados con tres volúmenes en cada agregado en cada controlador de almacenamiento.  Para cada nodo de Cloud Volumes ONTAP , creamos seis volúmenes en total.
@@ -103,6 +106,7 @@ image:kafka-nfs-029.png["Esta figura representa la arquitectura de un clúster d
 
 
 
+[[openmessage-benchmarking-configurations]]
 === Configuraciones de evaluación comparativa de OpenMessage
 
 . Para un mejor rendimiento de NFS, necesitamos más conexiones de red entre el servidor NFS y el cliente NFS, que se pueden crear utilizando nconnect.  Monte los volúmenes NFS en los nodos del agente con la opción nconnect ejecutando el siguiente comando:
@@ -325,6 +329,7 @@ consumerConfig: |
 
 
 
+[[methodology-of-testing]]
 == Metodología de pruebas
 
 . Se aprovisionó un clúster de Kafka según la especificación descrita anteriormente utilizando Terraform y Ansible.  Terraform se utiliza para construir la infraestructura utilizando instancias de AWS para el clúster de Kafka y Ansible construye el clúster de Kafka en ellas.
@@ -342,6 +347,7 @@ sudo bin/benchmark –drivers driver-kafka/kafka-throughput.yaml workloads/1-top
 
 
 
+[[observation]]
 == Observación
 
 Se utilizaron dos tipos diferentes de controladores para generar cargas de trabajo para evaluar el rendimiento de una instancia de Kafka que se ejecuta en NFS.  La diferencia entre los controladores es la propiedad de vaciado del registro.
