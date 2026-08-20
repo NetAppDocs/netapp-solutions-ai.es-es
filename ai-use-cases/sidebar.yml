@@ -3,6 +3,9 @@ section: ai-use-cases
 title: Casos de uso de IA
 url: "/ai-use-cases/index.html"
 entries:
+- title: Descarga de la caché KV con NetApp
+  pdf-filename: Descarga de la caché KV con NetApp
+  url: "/software/ai-kv-cache-offloading-netapp.html"
 - title: NetApp AIPod Mini para RAG empresarial
   pdf-filename: NetApp AIPod Mini para inferencia RAG
   url: "/infra/ai-minipod.html"
