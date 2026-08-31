@@ -1,0 +1,46 @@
+---
+sidebar: sidebar 
+permalink: infra/ai-eseries-lustre-deploy-hardware.html 
+keywords: Lustre, NetApp E-Series, EF80, hardware deployment, NVMe-oF, LNet 
+summary: Instala y conecta los servidores, las matrices EF80, la red NVMe-oF de backend y la estructura LNet de frontend para un bloque de construcción de Lustre. 
+---
+= Rack y cableado de hardware Lustre
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Instala los servidores Lustre y las matrices EF80 de NetApp, y luego conecta las estructuras NVMe-oF del backend y LNet del frontend para cada building block.
+
+
+
+[[before-you-begin]]
+== Antes de empezar
+
+Consulta los recuentos de HCA, los requisitos de ranuras PCIe, los requisitos de ruta y las directrices sobre MTU en link:ai-eseries-lustre-hw.html["Componentes de hardware"].
+
+.Pasos
+. Instala en rack y conecta todos los servidores Lustre y las matrices de almacenamiento E-Series según la topología de bloques modulares.
++
+image:eseries-lustre-building-block-labeled.png["Bloque de construcción Lustre etiquetado, apilado con dos servidores OSS/MDS y dos arrays EF80"]
+
+. Para cada matriz EF80, conecta el puerto 4a del controlador A al puerto 4a del controlador B y el puerto 4b del controlador A al puerto 4b del controlador B. Estas conexiones dedicadas permiten la duplicación entre controladores y no se usan para el tráfico del host. Consulta link:https://docs.netapp.com/us-en/e-series/install-hw-ef50-ef80/install-cable.html#step-1-cable-the-inter-controller-mirroring-connections["Conecta los cables de las conexiones de duplicación entre los controladores EF50 y EF80"^].
+. Conecta la red NVMe-oF de backend entre los servidores y las arrays según la topología de seis HCA de EF80.
++
+.Cableado trasero EF80 de seis HCA (RoCE o InfiniBand)
+image:eseries-lustre-ef80-6hca-cabling.png["Cableado NVMe-oF de backend EF80 de seis HCA entre dos nodos de servidor OSS/MDS y dos matrices EF80"]
+
+. Conecta las cuatro interfaces LNet frontales (los HCA i1 e i4) de cada servidor Lustre y de los clientes Lustre a la estructura de red dedicada de InfiniBand o RoCE.
+. Al utilizar RoCE, configura la estructura de red para que funcione sin pérdidas con control de flujo prioritario (PFC). Los playbooks de Ansible configuran RoCE sin pérdidas en todas las interfaces del building block.
+
+
+
+
+[[after-you-finish]]
+== Después de que termines
+
+link:ai-eseries-lustre-deploy-prepare.html["Prepara los servidores, las matrices y el nodo de control de Ansible"].

@@ -1,0 +1,107 @@
+---
+sidebar: sidebar 
+permalink: infra/ai-eseries-lustre-deploy-prepare.html 
+keywords: Lustre, NetApp E-Series, Ansible control node, EF80, deployment 
+summary: Prepara las matrices EF80, los servidores Lustre y el nodo de control de Ansible para su implementación. 
+---
+= Prepara el entorno de implementación de Lustre
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Configura el acceso de administración y los ajustes básicos en cada matriz EF80 y servidor Lustre, luego prepara un nodo de control de Ansible para implementar la solución.
+
+
+
+[[prepare-e-series-arrays]]
+== Prepara las cabinas E-Series
+
+.Pasos
+. Configura la interfaz de gestión en cada controlador y comprueba que SANtricity System Manager sea accesible.
+. Establece el nombre de la matriz y las credenciales de administrador que utilizará el inventario de Ansible.
+. Comprueba que la matriz esté en un estado óptimo y que todas las unidades estén presentes y reporten correctamente.
+
+
+Para obtener instrucciones sobre cómo configurar la conexión de gestión, consulta la link:https://docs.netapp.com/us-en/e-series/["Documentación de E-Series"^].
+
+
+
+[[prepare-lustre-servers]]
+== Prepara los servidores Lustre
+
+.Pasos
+. Configura el controlador de gestión de la placa base (BMC) en cada servidor para el acceso fuera de banda y ajusta la configuración del sistema UEFI para obtener el máximo rendimiento.
+. Instala un sistema operativo compatible (RHEL o Rocky Linux), luego configura el nombre de host y el puerto de red de gestión.
+. Prepara todos los paquetes de firmware y software para que cumplan los requisitos de la solución *E-Series Lustre*, tal y como se describe en link:ai-eseries-lustre-sw.html["Componentes de software"].
+
+
+
+
+[[prepare-the-ansible-control-node]]
+== Prepara el nodo de control de Ansible
+
+Designa un sistema Linux, ya sea virtual o físico, con acceso a la red de gestión de todos los servidores Lustre y las matrices E-Series, para que actúe como nodo de control de Ansible.
+
+Los siguientes pasos se refieren a Ubuntu 24.04. Para obtener instrucciones sobre otra distribución de Linux, consulta link:https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html["Documentación de instalación de Ansible"^].
+
+.Pasos
+. Instala Python, pip y el paquete de entorno virtual de Python:
++
+[source, console]
+----
+sudo apt-get install python3 python3-pip python3-setuptools python3-venv
+----
+. Crea y activa un entorno virtual de Python:
++
+[source, console]
+----
+python3 -m venv ~/pyenv
+source ~/pyenv/bin/activate
+----
+. Instala Ansible y los paquetes de Python necesarios en el entorno virtual activado:
++
+[source, console]
+----
+pip install "ansible-core>=2.19" cryptography jinja2 ipaddr netaddr \
+  passlib pyyaml resolvelib
+----
+. Instala la colección Ansible NetApp E-Series Lustre. La instalación de la colección también instala las colecciones de las que depende, incluidas las colecciones SANtricity y Host:
++
+[source, console]
+----
+ansible-galaxy collection install netapp_eseries.lustre
+----
+. Comprueba las versiones instaladas de Ansible, Python y la colección:
++
+[source, console]
+----
+ansible --version
+python3 --version
+ansible-galaxy collection list netapp_eseries.lustre
+----
+. Configura el acceso SSH sin contraseña desde el nodo de control a cada servidor Lustre. Sustituye  `<ip_or_hostname>` por la dirección IP de gestión o el nombre de host de un servidor:
++
+[source, console]
+----
+ssh-keygen
+ssh-copy-id <ip_or_hostname>
+----
++
+Repite  `ssh-copy-id` para cada servidor Lustre.
+
+
+
+
+NOTE: No configures el acceso SSH sin contraseña en las matrices E-Series. Ansible gestiona las matrices a través de la API de servicios web de SANtricity utilizando las credenciales definidas en el inventario.
+
+
+
+[[after-you-finish]]
+== Después de que termines
+
+link:ai-eseries-lustre-deploy-inventory.html["Personaliza el inventario de Ansible"].

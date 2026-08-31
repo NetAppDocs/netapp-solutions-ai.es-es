@@ -1,0 +1,282 @@
+---
+sidebar: sidebar 
+permalink: infra/ai-eseries-lustre-hw.html 
+keywords: Lustre, NetApp E-Series, EF80, hardware, servers, storage, network, NVMe-oF, BYOS 
+summary: Revisa el servidor, la E-Series de NetApp, la distribución de almacenamiento y los requisitos de red para Lustre con E-Series Storage de NetApp. 
+---
+= Lustre con NetApp E-Series Storage: componentes de hardware
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Utiliza estos requisitos de hardware para servidores, E-Series de NetApp, distribución de almacenamiento y redes cuando dimensionas y solicitas Lustre con NetApp E-Series Storage. Para los componentes de software, consulta link:ai-eseries-lustre-sw.html["Componentes de software"].
+
+
+
+[[server-requirements]]
+== Requisitos del servidor
+
+La solución utiliza un modelo «trae tu propio servidor» (BYOS). Cada bloque de construcción requiere dos nodos de servidor OSS/MDS que cumplan o superen las siguientes especificaciones.
+
+
+
+[[node-specifications]]
+=== Especificaciones de los nodos
+
+La siguiente tabla muestra los requisitos mínimos del servidor por cada nodo OSS/MDS.
+
+|===
+| Componente | Requisito 
+
+
+| Cantidad | 2 nodos por building block 
+
+
+| CPU | AMD EPYC o Intel Xeon, 32 núcleos o más 
+
+
+| Memoria | 256 GB DDR5 (mínimo) 
+
+
+| HCA de red | 6 HCA de 200 Gb de doble puerto (véase <<platform-connectivity,Conectividad HCA>>) 
+
+
+| Ranuras PCIe | 2× PCIe Gen5 x16 y 4× PCIe Gen5 x8 (véase <<pcie-slots,Requisitos de las ranuras PCIe>>) 
+
+
+| Unidades de arranque | 2 unidades en RAID 1 (se recomienda RAID por software o por hardware) 
+|===
+NetApp validó la solución usando servidores Lenovo ThinkSystem SR665 V3. Se admiten servidores equivalentes de otros fabricantes siempre que cumplan estos requisitos.
+
+
+
+[[hca-connectivity]]
+[[platform-connectivity]]
+=== Conectividad HCA
+
+En la siguiente tabla se detallan los requisitos de HCA, puerto frontend LNet y ruta NVMe-oF por cada nodo de servidor OSS/MDS.
+
+|===
+| HCA por nodo | Puertos LNet por nodo Lustre | Rutas NVMe-oF por nodo Lustre | Ejemplo HCA 
+
+
+| 6 (12 puertos) | 4 | 8 en total (4 en cada cabina) | MCX755106AS-HEAT (tarjeta PCIe Gen5 de puerto dual de 200 Gb) 
+|===
+NetApp recomienda seis HCA por nodo para maximizar el ancho de banda de las cabinas de almacenamiento EF80.
+
+
+
+[[pcie-slot-requirements]]
+[[pcie-slots]]
+=== Requisitos de las ranuras PCIe
+
+Cada nodo de servidor OSS/MDS de un módulo EF80 alberga seis HCA de puerto doble: dos para LNet y cuatro para NVMe-oF. El ancho de la ranura determina el ancho de banda disponible para cada HCA, así que confirma el ancho eléctrico de cada ranura y cada riser en vez de solo el ancho de la tarjeta. Una tarjeta Gen5 x16 instalada en una ranura Gen5 x8 funciona a x8.
+
+* *HCA de LNet:* Instálalos en ranuras PCIe Gen5 x16 para alcanzar el rendimiento máximo del frontend.
+* *Adaptadores HCA NVMe-oF:* Instálalos en ranuras PCIe Gen5 x8 o PCIe Gen5 x16.
+* *Equilibrio NUMA:* Distribuye los HCA de manera uniforme entre las dos zonas NUMA, de modo que cada zona albergue dos interfaces LNet y cuatro interfaces NVMe-oF.
+
+
+La siguiente tabla muestra las ranuras mínimas para cada nodo de servidor OSS/MDS en un bloque de construcción EF80.
+
+|===
+| Tipo de tráfico | HCA por nodo | Ancho mínimo de la ranura | Ranuras por zona NUMA 
+
+
+| LNet | 2 | PCIe Gen5 x16 | 1 
+
+
+| NVMe-oF | 4 | PCIe Gen5 x8 | 2 
+|===
+Si lo deseas, puedes dividir los puertos de un HCA de doble puerto para que un puerto transporte el tráfico de LNet y el otro transporte el tráfico de NVMe-oF. Instala los cuatro HCA en ranuras PCIe Gen5 x16 para que cada puerto LNet alcance su rendimiento máximo, y luego añade dos HCA más en ranuras Gen5 x8 o Gen5 x16 para los puertos NVMe-oF restantes.
+
+.Ejemplos de configuraciones de elevadores para Lenovo ThinkSystem SR665 V3
+[%collapsible]
+====
+Ambas combinaciones de tubos ascendentes siguientes cumplen los requisitos de ranuras para un bloque de construcción EF80.
+
+*Anchos mínimos de ranura*
+
+Instala un riser BPQU en las posiciones 1 y 2. Cada riser BPQU ofrece una ranura PCIe Gen5 x16 y dos ranuras PCIe Gen5 x8. En conjunto, los risers proporcionan dos ranuras Gen5 x16 para LNet y cuatro ranuras Gen5 x8 para NVMe-oF, repartidas equitativamente entre las zonas NUMA.
+
+image:eseries-lustre-sr665v3-bpqu-6hca-layout.png["Vista trasera de Lenovo ThinkSystem SR665 V3 con los elevadores BPQU en las posiciones 1 y 2, mostrando una ranura PCIe Gen5 x16 y dos ranuras PCIe Gen5 x8 por zona NUMA"]
+
+*Todas las ranuras x16 de Gen5*
+
+Instala un riser BPQV en las posiciones de riser 1 y 2, y un riser BLL9 en la posición de riser 3. Cada riser BPQV proporciona dos ranuras PCIe Gen5 x16. El riser BLL9 proporciona la ranura 7 en la zona NUMA 0 y la ranura 8 en la zona NUMA 1, ambas PCIe Gen5 x16. Esta combinación proporciona seis ranuras Gen5 x16, tres por zona NUMA, y permite dividir el tráfico LNet y NVMe-oF entre los puertos del mismo HCA.
+
+image:eseries-lustre-sr665v3-bpqv-6hca-layout.png["Vista trasera del Lenovo ThinkSystem SR665 V3 con elevadores BPQV en las posiciones 1 y 2 y un elevador BLL9 en la posición 3, mostrando seis ranuras PCIe Gen5 x16 distribuidas de forma equilibrada entre dos zonas NUMA"]
+
+====
+
+
+[[ef80-standard-building-block]]
+== Bloque de construcción estándar EF80
+
+La EF80 es la plataforma estándar validada para esta versión de la solución.
+
+
+
+[[array-specifications]]
+=== Especificaciones de la cabina
+
+La siguiente tabla muestra las especificaciones de la cabina EF80 para un bloque básico (dos cabinas).
+
+|===
+| Componente | Especificación 
+
+
+| Modelo | NetApp EF80 
+
+
+| Factor de forma | Chasis base de 2U, 24 ranuras internas para SSD NVMe 
+
+
+| Controladoras | Controladoras dobles (A y B) 
+
+
+| Unidades | 24 × SSD NVMe por matriz 
+
+
+| Conectividad de E/S | 8× 200 Gb NVMe/IB o NVMe/RoCE puertos de host por cabina en el diseño validado de Lustre 
+|===
+La plataforma EF80 admite hasta doce puertos de host por array cuando se instalan tres módulos de E/S de host de dos puertos en cada controlador. El diseño validado de Lustre utiliza módulos de E/S de host en las ranuras 1 y 2 para ocho puertos de host por array.
+
+Cada cabina EF80 también utiliza el módulo de E/S dedicado de la ranura 4 para la duplicación entre controladores. Conecta el puerto 4a del controlador A al puerto 4a del controlador B, y el puerto 4b del controlador A al puerto 4b del controlador B. Estas conexiones proporcionan duplicación de caché y envío de E/S, y no se usan para el tráfico NVMe-oF del host. Consulta link:https://docs.netapp.com/us-en/e-series/install-hw-ef50-ef80/install-cable.html#step-1-cable-the-inter-controller-mirroring-connections["Conecta los cables de las conexiones de duplicación entre los controladores EF50 y EF80"^].
+
+Para consultar las especificaciones completas de la EF-Series en todos los modelos, consulta la link:https://www.netapp.com/pdf.html?item=/media/14036-ds-4082.pdf["NetApp Ficha técnica de la cabina all-flash EF-Series"^].
+
+
+
+[[drive-layout-24-drives-per-array]]
+=== Distribución de unidades (24 unidades por cabina)
+
+Cada cabina EF80 de un bloque básico utiliza las veinticuatro ranuras para unidades NVMe:
+
+* 4 unidades en RAID 1 para almacenamiento MGS/MDT (grupo de volúmenes compartido o asignación DDP)
+* 10 unidades en RAID 6 para almacenamiento OST (primer grupo OST)
+* 10 unidades en RAID 6 para almacenamiento OST (segundo pool OST)
+
+
+Esta distribución se aplica cuando usas unidades de 3,84 TB, 7,68 TB o 15,3 TB con grupos de volúmenes tradicionales. Cuando uses unidades Capacity Flash (QLC) de 30,7 TB o 61,4 TB, aprovisiona un solo Dynamic Disk Pool en las veinticuatro unidades y crea volúmenes RAID 1 dentro del pool para los volúmenes MGS y MDT, mientras que para los OST usa volúmenes RAID 6 predeterminados.
+
+
+NOTE: Actualmente no se recomiendan las unidades de 1,92 TB para esta solución. Usa una de las capacidades de unidad validadas que se indican arriba.
+
+image:eseries-lustre-ef80-driveslots.png["Distribución de unidades Lustre con 24 unidades NVMe por cabina EF80"]
+
+
+
+[[volume-and-target-counts-base-building-block]]
+=== Recuento de volúmenes y objetivos (elemento básico)
+
+La siguiente tabla muestra los recuentos de MGS, MDT y OST para un bloque de construcción básico.
+
+|===
+| Tipo de objetivo | Recuento por BB | RAID / pool | Notas 
+
+
+| MGS | 1 | RAID 1 | Solo bloque básico; array 1 
+
+
+| MDT | 8 | RAID 1 | 4 por matriz 
+
+
+| OST | 32 | RAID 6 (TLC) o DDP (QLC) | 16 por matriz 
+|===
+Utiliza las siguientes directrices para el ajuste de tamaño de volúmenes como punto de partida en el inventario de Ansible.
+
+|===
+| Volumen | Tamaño recomendado | Notas 
+
+
+| MGS | 5–10 GiB | Solo datos de configuración 
+
+
+| MDT | Capacidad de RAID 1 ÷ número de MDT | Aproximadamente entre 1 y 2 TiB cada uno (valores típicos) 
+
+
+| OST | Capacidad RAID 6 o DDP ÷ número de OST por grupo | Escala con la capacidad de la unidad; consulta link:ai-eseries-lustre-sizing.html["Guía de tallas"] 
+|===
+
+
+[[primary-building-block-volume-distribution]]
+=== Distribución del volumen principal de bloques de construcción
+
+La siguiente figura muestra la ubicación recomendada de los destinos Lustre y la conectividad NVMe-oF entre los nodos de servidor OSS/MDS y las matrices E-Series en un bloque de construcción EF80 básico. En el diagrama, el destino de gestión se indica como *MGT* (destino de gestión); un MGT aloja el servicio MGS (servidor de gestión) al que se hace referencia en otras partes de este documento.
+
+.Distribución de destino de los bloques básicos (EF80)
+image:eseries-lustre-target-distribution.png["Distribución de destinos Lustre y rutas NVMe-oF entre los nodos de servidor OSS/MDS y las cabinas E-Series en un bloque de construcción EF80 básico"]
+
+La siguiente tabla muestra cómo se distribuyen los volúmenes entre las dos matrices y qué servidor prefiere cada destino.
+
+[cols="1,1,1,1,1,2"]
+|===
+| Tipo de objetivo | Matriz 1 | Matriz 2 | Servidor 1 | Servidor 2 | Notas 
+
+
+| MGS | 1 | 0 | 1 | 0 | Solo el bloque básico 
+
+
+| MDT | 4 | 4 | 4 | 4 | Cada servidor prefiere 2 MDT de cada array 
+
+
+| OST | 16 | 16 | 16 | 16 | 8 por grupo RAID 6 × 2 grupos por array, o una asignación equivalente de DDP 
+
+
+| *Volúmenes totales* | *21* | *20* | *21* | *20* |  
+|===
+
+
+[[storage-pool-selection-tlc-vs-qlc]]
+== Selección de grupos de almacenamiento: TLC frente a QLC
+
+Elige el tipo de grupo de E-Series en función de la capacidad de las unidades NVMe de las matrices:
+
+* *Unidades de 3,84 TB, 7,68 TB y 15,3 TB:* Usa *grupos de volúmenes RAID 6* para los volúmenes OST y *grupos de volúmenes RAID 1* para los volúmenes MGS y MDT, o usa DDP para el conjunto de unidades compartidas.
+* *Unidades flash (QLC) con una capacidad de 30,7 TB y 61,4 TB:* Utiliza únicamente *Dynamic Disk Pools (DDP)*. Crea volúmenes RAID 1 dentro del DDP para el almacenamiento de MGS y MDT. Crea volúmenes RAID 6 para el almacenamiento de OST a partir del DDP.
+
+
+Para consultar estimaciones de la capacidad utilizable por módulo según el tamaño y la disposición de la unidad, consulta link:ai-eseries-lustre-sizing.html["Guía de tallas"].
+
+
+
+[[network-requirements]]
+== Requisitos de red
+
+
+
+[[backend-nvme-of]]
+=== Backend (NVMe-oF)
+
+* NVMe/InfiniBand o NVMe/RoCE entre cada nodo OSS/MDS y cada matriz E-Series
+* MTU 9000 en interfaces de backend NVMe/RoCE (típico)
+* Ocho rutas desde cada nodo Lustre hasta las matrices de almacenamiento (cuatro hacia cada matriz)
+* EF80 utiliza seis HCA por nodo (i2, i3, i5 e i6 para NVMe-oF; i1 e i4 para LNet). Conecta el nodo A a los puertos del controlador cuyas etiquetas terminen en `a`, como `1a` y `2a`. Conecta el nodo B a los puertos del controlador cuyas etiquetas terminen en `b`, como `1b` y `2b`. Consulta link:ai-eseries-lustre-deploy-hardware.html["Cableado del backend EF80 de seis HCA"].
+
+
+
+
+[[frontend-lnet]]
+=== Frontend (LNet)
+
+* ¿IPoIB o RoCE para LNet (`@o2ib` tipo de red?
+* MTU 9000 en las interfaces frontend de RoCE (típico)
+* Se recomienda utilizar LNet multirrail cuando se disponga de cuatro puertos front-end (EF80: i1 e i4 HCAs, ambos puertos)
+* Conmutador dedicado InfiniBand o RoCE que conecta los nodos del servidor OSS/MDS y los clientes Lustre
+* Se recomienda RoCE sin pérdidas (PFC) en fabrics RoCE
+
+
+
+
+[[management]]
+=== Gestión
+
+* Red de gestión fuera de banda para los BMC de los servidores y los puertos de gestión de array
+* Red Corosync dedicada o estructura de red de frontend compartida (dependiendo del sitio)
+

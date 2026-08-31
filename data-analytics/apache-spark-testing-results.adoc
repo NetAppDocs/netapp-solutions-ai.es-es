@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: data-analytics/apache-spark-testing-results.html 
 keywords: terasort, teravalidate, teragen, benchmarking, e-series, storagegrid, hadoop, financial sentiment analysis, distributed training, Horovod performance 
-summary: 'Utilizamos los scripts TeraSort y TeraValidate en la herramienta de evaluación comparativa TeraGen para medir la validación del rendimiento de Spark con configuraciones E5760, E5724 y AFF-A800.  Además, se probaron tres casos de uso principales: pipelines de Spark NLP y capacitación distribuida de TensorFlow, capacitación distribuida de Horovod y aprendizaje profundo de múltiples trabajadores usando Keras para predicción de CTR con DeepFM.' 
+summary: Utilizamos los scripts TeraSort y TeraValidate en la herramienta de evaluación comparativa TeraGen para medir la validación del rendimiento de Spark con las configuraciones E5760, E5724 y AFF-A800. 
 ---
 = Resultados de las pruebas
 :hardbreaks:

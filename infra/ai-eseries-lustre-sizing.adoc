@@ -1,0 +1,119 @@
+---
+sidebar: sidebar 
+permalink: infra/ai-eseries-lustre-sizing.html 
+keywords: Lustre, NetApp E-Series, EF80, sizing, scaling, building block, validation, performance, capacity 
+summary: Adapta Size Lustre con los componentes de almacenamiento E-Series de NetApp en función de la capacidad y las necesidades de metadatos, decide cuándo ampliar la escala y analiza los factores que afectan al rendimiento. 
+---
+= Lustre con almacenamiento NetApp E-Series: guía de dimensionamiento
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Adapta Lustre con los bloques de construcción de almacenamiento E-Series de NetApp según la capacidad y las necesidades de metadatos, decide cuándo añadir capacidad y revisa los factores que afectan al rendimiento.
+
+
+
+[[capacity-sizing]]
+== Ajuste de tamaño de la capacidad
+
+Un módulo básico con dos matrices EF80 ofrece la siguiente disposición de destinos de Lustre. Para conocer la ubicación recomendada de los destinos y las rutas NVMe-oF, consulta link:ai-eseries-lustre-hw.html#_primary_building_block_volume_distribution["Distribución del volumen principal de bloques de construcción"] en link:ai-eseries-lustre-hw.html["Componentes de hardware"].
+
+|===
+| Componente | Recuento | Tamaño habitual del volumen (por objetivo) 
+
+
+| MGS | 1 | 5-10 GiB 
+
+
+| MDT | 8 | El tamaño varía en función de la capacidad de la unidad y de la configuración RAID 
+
+
+| OST | 32 | El tamaño varía en función de la capacidad de la unidad y de la configuración RAID 
+|===
+Cada matriz EF80 utiliza veinticuatro unidades NVMe. Las capacidades admitidas son 3,84 TB, 7,68 TB y 15,3 TB con grupos de volúmenes tradicionales (RAID 1 para MGS/MDT y RAID 6 para OST) o DDP, y unidades Capacity Flash (QLC) de 30,7 TB o 61,4 TB solo con DDP. Actualmente no se recomiendan las unidades de 1,92 TB para esta solución. Para conocer la disposición de las ranuras de unidad y la selección de grupos de unidades, consulta link:ai-eseries-lustre-hw.html["Componentes de hardware"].
+
+En la siguiente tabla se indica la capacidad utilizable aproximada de un módulo EF80 (dos matrices, 48 unidades). La capacidad utilizable de la matriz no es la misma que la capacidad utilizable final del sistema de archivos Lustre. La asignación de nodos de información del MDT, los registros en diario, el sobreaprovisionamiento y los porcentajes de volumen de inventario reducen la capacidad disponible para las aplicaciones.
+
+[cols="2,4,2"]
+|===
+| Capacidad de la unidad | Disposición (por matriz) | Capacidad utilizable aproximada (módulo) 
+
+
+| 3,84 TB | RAID 1 (2+2) + RAID 6 (10) + RAID 6 (10) | 138,08 TB 
+
+
+| 3,84 TB | DDP (24 unidades, 2 reservadas) | 133,63 TB 
+
+
+| 7,68 TB | RAID 1 (2+2) + RAID 6 (10) + RAID 6 (10) | 276,35 TB 
+
+
+| 7,68 TB | DDP (24) | 267,47 TB 
+
+
+| 15,3 TB | RAID 1 (2+2) + RAID 6 (10) + RAID 6 (10) | 552,88 TB 
+
+
+| 15,3 TB | DDP (24) | 535,15 TB 
+
+
+| 30,7 TB | Solo DDP | 1.070,35 TB 
+
+
+| 61,4 TB | Solo DDP | 2.162,70 TB 
+|===
+Define los metadatos y los datos por separado y, a continuación, configura los tamaños de los volúmenes en el inventario de Ansible. Las plantillas de implementación formatean los destinos con ldiskfs; MDT utiliza la proporción de nodos de información predeterminada de Lustre, y las plantillas OST establecen `-i 4096`.
+
+* *Metadatos (MDT):* Dimensiona los MDT en función del número de archivos previsto. Calcula aproximadamente el doble del número de archivos previsto para tener margen de crecimiento. Un MDT de tamaño insuficiente puede impedir la creación de nuevos archivos incluso cuando aún quede capacidad en el OST.
+* *Datos (OST):* Determina el tamaño de los OST a partir de la capacidad utilizable y las necesidades de rendimiento.
+* *MGS:* Utiliza un objetivo de gestión pequeño (5-10 GiB) únicamente para la configuración del sistema de archivos.
+
+
+Ajusta los tamaños de volumen MDT y OST en el inventario según la capacidad de la unidad seleccionada. Modifica  `format_options.mkfsoptions` en  `eseries_lustre_filesystem_mdt` o  `eseries_lustre_filesystem_ost` solo cuando un sitio necesite una relación de nodos de información diferente. Para información sobre las relaciones de nodos de información, consulta link:https://wiki.lustre.org/Lustre_Tuning["Lustre Wiki: Ajuste de Lustre"^]. Para saber cuándo añadir bloques de construcción, consulta <<Escalado>>.
+
+
+
+[[scaling]]
+== Escalado
+
+Añade módulos cuando la capacidad o la carga de metadatos lo requiera:
+
+* *Solo OST:* El número de archivos y la carga de metadatos se encuentran dentro de la capacidad actual de MDT, y necesitas más capacidad de datos o un mayor rendimiento agregado. Agrega 32 OST y dos nodos de servidor OSS/MDS.
+* *MDT+OST:* El número de archivos o la tasa de metadatos se está acercando a la capacidad del MDT, o necesitas tanto más rendimiento de metadatos como más capacidad de datos. Añade 8 MDT y 32 OST.
+
+
+Utiliza `mdt.*.md_stats` en los MDT existentes para comprobar si los metadatos están saturados. Limita cada clúster de Pacemaker/Corosync a cinco bloques de construcción (diez nodos de servidor OSS/MDS). Para implementaciones más grandes, distribuye los bloques de construcción de manera uniforme entre varios clústeres de alta disponibilidad (HA). Consulta link:ai-eseries-lustre-architecture.html["Arquitectura de la solución"] para conocer las reglas de escalabilidad.
+
+El siguiente ejemplo muestra un sistema de archivos con un bloque básico y un bloque exclusivo de OST en un clúster HA.
+
+|===
+| Bloque de construcción | Tipo | Servidores | Matrices | MGS | MDT | OST 
+
+
+| BB1 | Base | 2 | 2 | 1 | 8 | 32 
+
+
+| BB2 | Solo OST | 2 | 2 | 0 | 0 | 32 
+
+
+| Total |  | 4 | 4 | 1 | 8 | 64 
+|===
+BB2 registra sus objetivos OST contra el MGS en BB1 usando `mgsnode=`. Los índices OST de BB2 se asignan globalmente (por ejemplo, OST0032 hasta OST0063) para que ningún índice entre en conflicto con BB1.
+
+
+
+[[performance]]
+== Actuación
+
+La validación formal utiliza IOR, mdtest y fio desde clientes Lustre para caracterizar el rendimiento relativo, las IOPS y el comportamiento de los metadatos, y para validar la conmutación por error de HA. Estas pruebas no publican cifras de rendimiento garantizadas. Las pruebas sintéticas miden el comportamiento en el mejor de los casos y pueden no reflejar el rendimiento real de las aplicaciones.
+
+El rendimiento escala aproximadamente con el número de bloques de construcción. Los resultados obtenidos dependen del tipo de unidad y de la configuración del grupo, del número de rutas NVMe-oF, de la estructura LNet y del número de clientes, así como de la proporción entre E/S de datos y E/S de metadatos.
+
+Ponte en contacto con el equipo de tu cuenta de NetApp para obtener recomendaciones sobre el dimensionamiento y el rendimiento específicas para tu carga de trabajo.
+
+Para ver la configuración de las unidades y el número de volúmenes, consulta link:ai-eseries-lustre-hw.html["Componentes de hardware"]. Para ver los pasos de implementación, consulta link:ai-eseries-lustre-deploy.html["Implementa la solución"]. Para ver la guía de inventario a nivel de campo, consulta link:ai-eseries-lustre-deploy-inventory.html["Personaliza el inventario de Ansible de Lustre"].

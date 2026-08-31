@@ -200,7 +200,7 @@ Ejecuta ansible-playbook playbooks/infrastructure.yaml con las etiquetas configu
 ----
 ansible-playbook playbooks/infrastructure.yaml --tags configure,install -i inventory/<cluster-name>/inventory.ini -e @inventory/<cluster-name>/config.yaml
 ----
-Nota: - Si no tienes configurado sudo sin contraseña en tus nodos, entonces necesitas añadir  `--ask-become-pass` a este comando. Cuando uses  `--ask-become-pass`, es fundamental que el usuario ssh tenga la MISMA contraseña en cada nodo. - Consulta  https://github.com/opea-project/Enterprise-RAG/blob/main/deployment/roles/infrastructure/netapp_trident_csi_setup/netapp_trident_integration.md["NetApp Trident CSI Integration para RAG empresarial"^] para más detalles. Consulta  https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html["Documentación de instalación de Trident"^] para más detalles.
+Nota: - Si no tienes configurado sudo sin contraseña en tus nodos, entonces necesitas añadir  `--ask-become-pass` a este comando. Cuando uses `--ask-become-pass`, es fundamental que el usuario ssh tenga la MISMA contraseña en cada nodo. - Consulta https://github.com/opea-project/Enterprise-RAG/blob/main/deployment/roles/infrastructure/netapp_trident_csi_setup/netapp_trident_integration.md["NetApp Trident CSI Integration para RAG empresarial"^] para detalles. Consulta  https://docs.netapp.com/us-en/trident/trident-install/kubernetes-deploy-operator.html["Documentación de instalación de Trident"^] para más detalles.
 
 
 

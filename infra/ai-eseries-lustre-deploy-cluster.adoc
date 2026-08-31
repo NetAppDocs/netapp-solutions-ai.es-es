@@ -1,0 +1,150 @@
+---
+sidebar: sidebar 
+permalink: infra/ai-eseries-lustre-deploy-cluster.html 
+keywords: Lustre, NetApp E-Series, Ansible, DOCA-OFED, Lustre client 
+summary: Implementa el clúster Lustre HA y los clientes utilizando los playbooks de Ansible de NetApp. 
+---
+= Implementa el clúster de alta disponibilidad de Lustre y los clientes
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+:client-tmpl: https://github.com/NetApp/ansible-lustre/blob/release/1.0.0/getting_started/lustre_deployment_template/clients/ROCE_lustre_cluster_clients
+
+
+[role="lead"]
+Prepara el sistema operativo del servidor, instala NVIDIA DOCA-OFED, implementa el clúster Lustre de alta disponibilidad y configura los clientes de Lustre usando los playbooks de Ansible de NetApp.
+
+Antes de empezar, completa y asegura el inventario que se describe en link:ai-eseries-lustre-deploy-inventory.html["Personaliza el inventario de Ansible de Lustre"].
+
+
+
+[[deploy-the-lustre-ha-cluster]]
+== Implementa el clúster de alta disponibilidad de Lustre
+
+.Pasos
+. Desde el directorio  `building_blocks/playbooks` de tu copia de trabajo, prepara el sistema operativo en los servidores Lustre. Sustituye  `<inventory_path>` por la ruta de acceso a tu directorio de inventario personalizado:
++
+[source, console]
+----
+ansible-playbook -i <inventory_path>/lustre_inventory.yml deploy_lustre_os/deploy_lustre_os_playbook.yml
+----
+. Instala NVIDIA DOCA-OFED en cada servidor Lustre. Compila los módulos del kernel con el kernel que instalaste en el paso anterior. Sigue el procedimiento para tu kernel en link:https://networking-docs.nvidia.com/doca/archive/3-2-3/doca-host-installation-and-upgrade#id-(3.2.3-Jun_Oct25LTSU3)DOCA-HostInstallationandUpgrade-DOCAExtraPackageanddoca-kernel-support["Instalación y actualización de NVIDIA DOCA-Host"^]. El siguiente ejemplo muestra una instalación de DOCA-OFED en RHEL o Rocky Linux.
++
+.. Instala el paquete del repositorio principal de DOCA y actualiza la caché de paquetes. Sustituye `<doca_host_package>` por el paquete principal de DOCA correspondiente a tu sistema operativo y arquitectura:
++
+[source, console]
+----
+dnf install -y wget tar
+wget https://www.mellanox.com/downloads/DOCA/<doca_host_package>.rpm
+rpm -i <doca_host_package>.rpm
+dnf clean all
+dnf makecache
+----
+.. Compila los módulos del kernel DOCA para el kernel que está en ejecución. El script muestra la ruta del paquete que crea:
++
+[source, console]
+----
+dnf install -y doca-extra
+/opt/mellanox/doca/tools/doca-kernel-support
+----
+.. Instala el paquete del repositorio de módulos del kernel que creó el script y luego actualiza la caché de paquetes. Reemplaza `<doca_kernel_repo>` con la ruta del paso anterior:
++
+[source, console]
+----
+rpm -Uvh <doca_kernel_repo>.rpm
+dnf makecache
+----
+.. Instala los paquetes de DOCA-OFED para el espacio de usuario, el kernel y NVMe. Sustituye `<kernel_version>` por la versión del kernel que tengas en uso:
++
+[source, console]
+----
+dnf install -y doca-ofed-userspace
+dnf install -y --disablerepo=doca doca-kernel-<kernel_version>
+dnf install -y kmod-mlnx-nvme
+----
+
+
+. Ejecuta el playbook de implementación principal:
++
+[source, console]
+----
+ansible-playbook -i <inventory_path>/lustre_inventory.yml lustre_playbook.yml
+----
++
+
+NOTE: Ajusta  `--forks` según el tamaño de la implementación para controlar cuántos hosts configura Ansible en paralelo. Por ejemplo, añade  `--forks 20` para un clúster más grande.
+
+
+
+El manual de procedimientos aprovisiona grupos de volúmenes E-Series o pools y volúmenes DDP, configura la conectividad de host NVMe-oF, formatea y monta los targets Lustre, configura LNet, aplica ajustes de rendimiento y configura los recursos HA de Pacemaker.
+
+
+NOTE: Una implementación con un bloque de construcción forma un clúster de dos nodos de Pacemaker. Al nodo A se le asigna un voto adicional en caso de conmutación por error. Para lograr el quórum en un clúster de dos nodos, considera configurar un qdevice. Cuando una implementación contiene varios bloques de construcción, cada bloque de construcción aporta un par de servidores de dos nodos al clúster de Pacemaker más grande, hasta el límite de clúster documentado. Revisa la configuración de fencing y quórum en el link:https://github.com/NetApp/ansible-lustre/blob/release/1.0.0/roles/lustre/docs/ha_user_guide.md["Guía de usuario de la administración de HA"^] para que el clúster pueda recuperar de forma segura los objetivos durante una falla de nodo.
+
+
+
+[[deploy-lustre-clients]]
+== Implementar clientes Lustre
+
+Implementa clientes de Lustre en cualquier sistema que requiera acceso al sistema de archivos personalizando la plantilla de implementación del cliente y ejecutando el playbook del cliente.
+
+.Pasos
+. Selecciona un sistema operativo cliente y un kernel compatibles en link:https://wiki.whamcloud.com/display/PUB/Lustre+Support+Matrix["Matriz de compatibilidad de Lustre"^]. Compila e instala los paquetes del cliente Lustre para ese kernel desde link:https://github.com/NetApp/netapp-lustre["netapp-lustre"^] si aún no están instalados.
+. Crea una copia de trabajo del directorio de plantillas `clients`, incluido su archivo compartido `passwords.yml`, y selecciona la plantilla que coincida con tu fabric:
++
+** *InfiniBand:* link:https://github.com/NetApp/ansible-lustre/tree/release/1.0.0/getting_started/lustre_deployment_template/clients/IB_lustre_cluster_clients["IB_lustre_cluster_clients"^]
+** *RoCE:* link:https://github.com/NetApp/ansible-lustre/tree/release/1.0.0/getting_started/lustre_deployment_template/clients/ROCE_lustre_cluster_clients["ROCE_lustre_cluster_clients"^]
+
+
+. Personaliza `lustre_client_inventory.yml`, `host_vars` y `group_vars` para tus clientes. Las referencias de las líneas de la tabla apuntan a los archivos de plantilla de clientes RoCE en la etiqueta `ansible-lustre` `release/1.0.0`; la plantilla de cliente InfiniBand usa las mismas variables salvo donde se indique lo contrario.
++
+[cols="2,3,4,2,4"]
+|===
+| Campo | Variable de Ansible | Archivo de plantilla (`release/1.0.0`) | Ámbito | Notas 
+
+
+| Hosts cliente | `lustre_clients` | link:https://github.com/NetApp/ansible-lustre/blob/release/1.0.0/getting_started/lustre_deployment_template/clients/ROCE_lustre_cluster_clients/lustre_client_inventory.yml#L4["lustre_client_inventory.yml#L4"^] | Por cliente | Enumera el nombre de host de cada cliente. 
+
+
+| Usuario SSH del cliente y contraseña become | `ssh_client_user` / `ssh_client_become_pass` | link:https://github.com/NetApp/ansible-lustre/blob/release/1.0.0/getting_started/lustre_deployment_template/clients/passwords.yml#L2["passwords.yml#L2"^] | A nivel de clúster | Establece la contraseña «become» solo si el usuario SSH no es  `root`. 
+
+
+| Interfaces LNet | `eseries_lustre_lnet` | link:https://github.com/NetApp/ansible-lustre/blob/release/1.0.0/getting_started/lustre_deployment_template/clients/ROCE_lustre_cluster_clients/group_vars/all.yml#L7["group_vars/all.yml#L7"^] | A nivel de clúster | Nombres de las interfaces LNet del lado del cliente (valores en L13). 
+
+
+| Montar los NID de MGS | `lustre_client_mounts.mgsnode` | link:https://github.com/NetApp/ansible-lustre/blob/release/1.0.0/getting_started/lustre_deployment_template/clients/ROCE_lustre_cluster_clients/group_vars/all.yml#L17["group_vars/all.yml#L17"^] | A nivel de clúster | NIDs de MGS utilizados para montar el sistema de archivos (valores en L20). 
+
+
+| Nombre del sistema de archivos | `lustre_client_mounts.fsname` | link:https://github.com/NetApp/ansible-lustre/blob/release/1.0.0/getting_started/lustre_deployment_template/clients/ROCE_lustre_cluster_clients/group_vars/all.yml#L21["group_vars/all.yml#L21"^] | A nivel de clúster | Debe coincidir con el clúster `fsname`. 
+
+
+| Punto de montaje | `lustre_client_mounts.mount_point` | link:https://github.com/NetApp/ansible-lustre/blob/release/1.0.0/getting_started/lustre_deployment_template/clients/ROCE_lustre_cluster_clients/group_vars/all.yml#L22["group_vars/all.yml#L22"^] | A nivel de clúster | Directorio de montaje del cliente. 
+
+
+| Dirección IP de gestión de cliente | `ansible_host` | link:https://github.com/NetApp/ansible-lustre/blob/release/1.0.0/getting_started/lustre_deployment_template/clients/ROCE_lustre_cluster_clients/host_vars/client_01.yml#L4["host_vars/client_01.yml#L4"^] | Repetir para cada cliente | Un archivo `host_vars/client_NN.yml` por cliente. 
+
+
+| Interfaces de la estructura de red de almacenamiento | `eseries_roce_interfaces` | link:https://github.com/NetApp/ansible-lustre/blob/release/1.0.0/getting_started/lustre_deployment_template/clients/ROCE_lustre_cluster_clients/host_vars/client_01.yml#L10["host_vars/client_01.yml#L10"^] | Repetir para cada cliente | Direcciones de la interfaz front-end (valores en L15). La plantilla InfiniBand utiliza  `eseries_ipoib_interfaces` aquí. 
+|===
++
+Repite la configuración para cada cliente. Crea un  `host_vars/client_NN.yml` archivo para cada cliente y añade el host correspondiente a  `lustre_client_inventory.yml`. Rellena el archivo compartido  `clients/passwords.yml` y encríptalo con Ansible Vault antes de ejecutar el playbook del cliente.
+
+. Ejecuta el playbook del cliente desde el directorio de plantillas del cliente:
++
+[source, console]
+----
+ansible-playbook -i lustre_client_inventory.yml lustre_client_playbook.yml
+----
+
+
+La guía de configuración del cliente configura las interfaces de red del cliente y LNet, y puede crear una unidad de montaje persistente de systemd para el sistema de archivos Lustre.
+
+
+
+[[after-you-finish]]
+== Después de que termines
+
+link:ai-eseries-lustre-deploy-verify.html["Verifica la implementación"].

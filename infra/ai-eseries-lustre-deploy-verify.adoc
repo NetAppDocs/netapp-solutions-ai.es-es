@@ -1,0 +1,61 @@
+---
+sidebar: sidebar 
+permalink: infra/ai-eseries-lustre-deploy-verify.html 
+keywords: Lustre, NetApp E-Series, deployment verification, Pacemaker, scaling 
+summary: Comprueba el estado del clúster de Lustre, los puntos de montaje y la capacidad, y amplía el sistema de archivos con bloques de construcción adicionales. 
+---
+= Verifica y amplía la implementación de Lustre
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Comprueba el estado del clúster, los montajes de Lustre y la capacidad del sistema de archivos antes de su uso en producción, luego usa ese mismo inventario para añadir componentes básicos cuando lo necesites.
+
+
+
+[[verify-the-deployment]]
+== Verifica la implementación
+
+.Pasos
+. Desde un servidor Lustre, comprueba que todos los recursos de Pacemaker se hayan iniciado en los nodos previstos:
++
+[source, cli]
+----
+pcs status
+----
+. Desde un cliente de Lustre, comprueba que el sistema de archivos Lustre esté montado:
++
+[source, cli]
+----
+mount -t lustre
+----
+. Desde un cliente de Lustre, comprueba la capacidad del sistema de archivos y que los destinos MDT y OST sean visibles:
++
+[source, cli]
+----
+lfs df -h
+----
+
+
+Para consultar la validación del rendimiento con IOR, mdtest y fio, consulta link:ai-eseries-lustre-sizing.html["Guía de tallas"].
+
+Para realizar pruebas de migración controlada de objetivos o de conmutación por error de HA, sigue los procedimientos en el link:https://github.com/NetApp/ansible-lustre/blob/release/1.0.0/roles/lustre/docs/ha_user_guide.md["Guía de usuario de la administración de HA"^].
+
+
+
+[[expand-the-file-system]]
+== Ampliar el sistema de archivos
+
+Para aumentar la capacidad o el rendimiento de los metadatos, amplía tu inventario actual con un bloque de construcción adicional. No crees un inventario independiente para el nuevo bloque de construcción. El playbook asigna automáticamente índices MDT y OST únicos y registra los nuevos objetivos en el MGS existente.
+
+.Pasos
+. Añade los nuevos hosts, arrays y grupos de recursos (MDT+OST u OST únicamente) al mismo inventario y  `host_vars` y  `group_vars` archivos que usaste para la implementación original.
+. Vuelve a ejecutar el manual de implementación principal con el inventario actualizado.
+
+
+Consulta link:ai-eseries-lustre-architecture.html["Arquitectura de la solución"] para conocer las normas de escalado y link:ai-eseries-lustre-sizing.html["Guía de tallas"] para obtener orientación sobre cuándo añadir cada tipo de bloque de construcción.

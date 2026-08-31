@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: infra/ai-lenovo-edge-results.html 
 keywords: test, results, aff, offline, single-stream, ef 
-summary: 'Se realizaron multitud de pruebas para evaluar el rendimiento de la arquitectura propuesta.  Hay seis cargas de trabajo diferentes (clasificación de imágenes, detección de objetos [pequeños], detección de objetos [grandes], imágenes médicas, conversión de voz a texto y procesamiento del lenguaje natural [PLN]), que puede ejecutar en tres escenarios diferentes: sin conexión, transmisión única y transmisión múltiple.' 
+summary: 'Se han realizado numerosas pruebas para evaluar el rendimiento de la arquitectura propuesta. Hay seis cargas de trabajo diferentes, como la clasificación de imágenes, la detección de objetos pequeños, la detección de objetos grandes, las imágenes médicas, la conversión de voz a texto y el procesamiento de lenguaje natural NLP, que puedes ejecutar en tres escenarios distintos: sin conexión, de flujo único y de flujo múltiple.' 
 ---
 = Resultados de la prueba
 :hardbreaks:

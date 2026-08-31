@@ -1,0 +1,74 @@
+---
+sidebar: sidebar 
+permalink: infra/ai-eseries-lustre-deploy.html 
+keywords: Lustre, NetApp E-Series, EF80, deployment, Ansible, NVMe-oF 
+summary: Sigue el proceso para implementar Lustre con almacenamiento E-Series de NetApp usando la automatización de Ansible de NetApp. 
+---
+= Implementa Lustre con el almacenamiento E-Series de NetApp
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Implementa Lustre con NetApp E-Series Storage completando en orden las tareas de hardware, preparación del entorno, inventario, implementación de Ansible y verificación.
+
+
+
+[[prerequisites]]
+== Prerrequisitos
+
+Antes de iniciar la implementación, asegúrate de lo siguiente:
+
+* Has seguido las instrucciones sobre ajuste de tamaño de volúmenes y módulos de link:ai-eseries-lustre-sizing.html["Guía de tallas"] y has seleccionado hardware que coincide con link:ai-eseries-lustre-hw.html["Componentes de hardware"].
+* Has confirmado que la combinación de servidor, HCA, E-Series, sistema operativo, Lustre, SANtricity OS y DOCA-OFED figura en la lista de *E-Series Lustre* en link:https://imt.netapp.com/imt/#welcome["Herramienta NetApp Interoperability Matrix Tool"^].
+* Todos los nodos de servidor OSS/MDS y las cabinas E-Series para los módulos previstos ya están en las instalaciones y listos para montar en rack.
+* Dispones de credenciales y acceso a la red para los BMC de los servidores, los puertos de gestión de las cabinas y el host que hará las veces de nodo de control de Ansible.
+
+
+
+NOTE: NetApp admite implementar el clúster HA de Lustre y los clientes de Lustre con el link:https://github.com/NetApp/ansible-lustre/tree/release/1.0.0["Colección Ansible de Lustre para E-Series de NetApp"^]. No configures manualmente los destinos de Lustre, LNet, la conectividad de host NVMe-oF ni los recursos de Pacemaker.
+
+
+
+[[deployment-workflow]]
+== Flujo de trabajo de implementación
+
+Realiza las siguientes tareas en el orden indicado:
+
+. link:ai-eseries-lustre-deploy-hardware.html["Rack y cableado de hardware Lustre"].
++
+Instala los servidores Lustre y las cabinas EF80, y luego conecta las estructuras NVMe-oF del backend y LNet del frontend.
+
+. link:ai-eseries-lustre-deploy-prepare.html["Prepara el entorno de implementación de Lustre"].
++
+Configura las cabinas y los servidores, luego instala Ansible y sus dependencias en el nodo de control.
+
+. link:ai-eseries-lustre-deploy-inventory.html["Personaliza el inventario de Ansible de Lustre"].
++
+Selecciona la plantilla para la estructura del sitio y configura los servidores, las cabinas, las redes, los componentes básicos y las credenciales.
+
+. link:ai-eseries-lustre-deploy-cluster.html["Implementa el clúster Lustre de alta disponibilidad y los clientes"].
++
+Prepara el sistema operativo del servidor, instala NVIDIA DOCA-OFED, ejecuta el playbook de implementación principal y configura los clientes de Lustre.
+
+. link:ai-eseries-lustre-deploy-verify.html["Verifica y amplía la implementación de Lustre"].
++
+Comprueba el estado del clúster, los montajes y la capacidad antes de su uso en producción. Amplía el inventario existente cuando el sistema de archivos necesite otro bloque de construcción.
+
+
+
+
+
+[[related-information]]
+== Información relacionada
+
+* link:https://github.com/NetApp/ansible-lustre/tree/release/1.0.0["Colección Ansible de Lustre para E-Series de NetApp"^]
+* link:https://github.com/NetApp/netapp-lustre/tree/master["NetApp repositorio de código fuente de Lustre"^]
+* link:https://github.com/NetApp/ansible-lustre/blob/release/1.0.0/roles/lustre/docs/ha_user_guide.md["Guía de usuario de la administración de HA"^]
+* link:https://github.com/NetApp/ansible-lustre/blob/release/1.0.0/roles/lustre/docs/performance_tuning.md["Guía de ajuste de rendimiento"^]
+* link:https://github.com/NetApp/ansible-lustre/tree/release/1.0.0/getting_started/lustre_deployment_template/clients["Plantillas de implementación de clientes de Lustre"^]
+
