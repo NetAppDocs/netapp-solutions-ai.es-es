@@ -1,0 +1,86 @@
+---
+sidebar: sidebar 
+permalink: infra/ai-pipeline-operational-guide.html 
+keywords:  
+summary:  
+---
+= 9. Guía operativa
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+Karthikeyan Nagalingam, NetApp
+
+Esta guía abarca la ejecución rutinaria, la supervisión, la clasificación de incidencias, la recuperación del entrenamiento, la verificación de archivos, el ajuste de la capacidad y la protección de datos. Úsala junto con los escenarios de configuración de la sección 8 para operar el mismo pipeline de forma coherente en los modos de entrenamiento local, ONTAP S3 y LustreFS.
+
+
+
+[[9-1-execution-walkthrough]]
+== 9.1 guía paso a paso de la ejecución
+
+Inicia una ejecución a través de `trigger++_++and++_++wait++_++ai++_++pipeline++_++sklearn.sh` con una carga útil de `CONF++_++JSON`. El script envía una ejecución manual con un nombre único, realiza consultas periódicas hasta que alcanza un estado terminal y muestra las últimas líneas de los registros locales de las tareas fallidas cuando están disponibles. Cada tarea principal emite un registro de `effective++_++config` al iniciarse para que los operadores puedan verificar la configuración evaluada en lugar de basarse solo en la carga útil enviada.
+
+
+
+[[9-2-monitoring-and-observability]]
+== 9.2 Supervisión y observabilidad
+
+Supervisa el estado del DAG en la UI o la CLI de Airflow y correlaciona esta información con el ID de la ejecución y `run++_++stamp`. Los registros de guard se pueden analizar fácilmente con grep: `++[++data++_++prep++]++ effective++_++config`, `++[++model++_++training++]++ effective++_++config`, `++[++xcp++_++copy++]++ effective++_++config` y `++[++checkpoint++]++ resume++_++summary`. Revisa estas entradas para validar el motor de transformación, el destino XCP seleccionado, la fuente de entrenamiento y la decisión de reutilización de checkpoint para cada ejecución.
+
+
+
+[[9-3-troubleshooting-quick-reference]]
+== 9.3 Referencia rápida para la resolución de problemas
+
+Utiliza esta tabla para relacionar los errores más habituales de las tareas con la primera medida correctiva. Resuelve los problemas de conectividad y montaje del origen antes de volver a intentar una ejecución; si lo intentas de nuevo sin corregir una configuración no válida o un endpoint no disponible, se reproducirá el mismo error.
+
+[cols="34%,33%,33%"]
+|===
+| Síntoma | Causa probable | Resolución 
+
+
+| `Could not resolve XCP S3 credentials` | Falta o es incorrecto `xcp++_++s3++_++profile` en `xcp++_++s3++_++profiles` | Verifica el nombre del perfil y la correspondencia de credenciales 
+
+
+| `no readable Lustre source directory` | LustreFS no está montado o es incorrecto `xcp++_++lustrefs++_++dest++_++path` | Comprueba el tipo de sistema de archivos con  `findmnt -T /mnt/lustre/client -o FSTYPE,TARGET -n`; ruta correcta 
+
+
+| `Missing required text dataset files` | Faltan archivos JSON de texto en el prefijo raw de S3 | Subir `text++_++base.json`, `text++_++finetune.json`, `text++_++infer.json` 
+
+
+| Código de salida de la comprobación previa 1 | No se puede acceder a SSH | Comprueba la conexión `ssh++_++default` y el host/usuario 
+
+
+| Código de salida de la comprobación previa 2 | La ruta NFS no está exportada ni visible | Verifica la exportación con `xcp show ++<++ip++>++` 
+|===
+
+
+[[9-4-checkpoint-operations]]
+== 9.4 Operaciones de checkpoint
+
+La función de puntos de control solo se aplica a `model++_++training`. Configura `training++_++checkpoint++_++reuse++_++mode=resume++_++if++_++exists` para reutilizar un resultado de entrenamiento válido y completado y omitir el entrenamiento redundante del modelo, o usa `verify++_++only` para validar la elegibilidad del punto de control sin omitirlo. Mantén la reutilización desactivada (`off`) durante las pruebas iniciales o siempre que hayan cambiado las entradas de entrenamiento, la configuración o los artefactos esperados.
+
+
+
+[[9-5-manual-archive-operations]]
+== 9.5 Operaciones manuales de archivo
+
+Establece `manual++_++archive++_++enabled=true` y elige `manual++_++archive++_++stage` de forma deliberada. Utiliza `model++_++training` cuando la gobernanza requiera la línea de base del modelo principal en cuanto el entrenamiento se complete correctamente; utiliza `inferencing` cuando el archivo deba incluir las predicciones finales. Una ejecución con `model++_++training` seleccionado continúa con el ajuste fino y la inferencia después de la rama de archivado; simplemente no archiva sus resultados posteriores. Verifica las cargas en el prefijo de StorageGRID con la marca de ejecución y revisa los registros de `++[++manual++_++archive++]++` para ver la etapa seleccionada, los archivos encontrados y el número de cargas.
+
+
+
+[[9-6-scaling-guidance]]
+== 9.6 directrices sobre el escalado
+
+Ajusta `sample++_++count`, `spark++_++driver++_++memory`, `spark++_++executor++_++memory` y `spark++_++timeout++_++secs` al volumen de entrada y al objetivo de nivel de servicio. Empieza con muestras limitadas para validar la forma de los datos y el enrutamiento, y luego usa `sample++_++count=0` para ejecuciones de todas las filas después de que StorageGRID, ONTAP NAS, XCP y el nivel de entrenamiento seleccionado tengan suficiente capacidad y rendimiento.
+
+
+
+[[9-7-backup-and-recovery]]
+== 9.7 Copia de seguridad y recuperación
+
+Protege el depósito de datos preparados del NAS ONTAP con Snapshot y copia de seguridad de ONTAP. Aplica las políticas de protección y retención de StorageGRID a los depósitos sin procesar y de archivo; el depósito de archivo conserva el historial independientemente de la reejecución de la canalización. Combina estas protecciones de almacenamiento con el registro del punto de control de entrenamiento para recuperar los datos correctos del ámbito de ejecución y los artefactos de referencia después de una interrupción a nivel de tarea, host o sitio.

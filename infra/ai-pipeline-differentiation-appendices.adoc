@@ -1,0 +1,105 @@
+---
+sidebar: sidebar 
+permalink: infra/ai-pipeline-differentiation-appendices.html 
+keywords:  
+summary:  
+---
+= 11. NetApp diferenciación y posicionamiento frente a la competencia, apéndices
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+Karthikeyan Nagalingam, NetApp
+
+Esta sección combinada compara la arquitectura con alternativas habituales y ofrece el material de referencia común que utilizan los operadores y los revisores. El factor diferenciador no es un único punto final de almacenamiento, sino la combinación controlada por políticas de StorageGRID, ONTAP NAS, ONTAP S3, LustreFS, XCP y Airflow, que permite que cada fase del ciclo de vida de la IA use un nivel adecuado sin necesidad de reconstruir el flujo de trabajo.
+
+
+
+[[11-1-netapp-differentiation-and-competitive-positioning]]
+== 11.1 Diferenciación y posicionamiento competitivo de NetApp
+
+Esta comparación sitúa la arquitectura frente a alternativas habituales. Su elemento diferenciador no es un único punto final de almacenamiento; es la combinación de StorageGRID, ONTAP NAS, ONTAP S3, LustreFS, XCP y Airflow, controlada por políticas, lo que permite que cada fase del ciclo de vida de la IA utilice un nivel adecuado sin reconstruir el flujo de trabajo.
+
+[cols="34%,33%,33%"]
+|===
+| Enfoque alternativo | Limitación | NetApp Ventajas de la solución 
+
+
+| Pipelines exclusivamente nativos de la nube | Atrapado en un único paradigma de almacenamiento | S3/LustreFS intercambiables mediante configuración 
+
+
+| Canalizaciones basadas en scripts de creación propia | Sin reintentos, puntos de control ni linaje | Airflow organiza de forma nativa {plus} checkpoint/resume 
+
+
+| Arquitecturas de almacenamiento de un solo nivel | Un único perfil de rendimiento/coste para todas las cargas de trabajo | Selección del nivel por ejecución mediante `xcp++_++copy++_++destination` 
+
+
+| Reentrenamiento completo con cada actualización | Alto coste recurrente de computación | Ajuste incremental mediante `partial++_++fit` 
+|===
+
+
+[[11-2-appendices]]
+== 11.2 Apéndices
+
+Los apéndices proporcionan una terminología común y el contexto de control del documento para los lectores que operan, revisan o adaptan este NVA. Mantén actualizado el historial de revisiones cuando cambies el comportamiento documentado, los parámetros, la distribución del almacenamiento o las pruebas de validación.
+
+
+
+[[11-2-1-glossary]]
+=== 11.2.1 Glosario
+
+Estas definiciones establecen significados coherentes para los términos relacionados con el almacenamiento, la orquestación y el linaje de la arquitectura.
+
+[cols="50%,50%"]
+|===
+| Término | Definición 
+
+
+| XCP | Herramienta de NetApp de copia de datos/migración en paralelo de alta velocidad 
+
+
+| ONTAP S3 | El servicio de almacenamiento de objetos compatible con S3 de NetApp en ONTAP 
+
+
+| LustreFS | Sistema de archivos distribuido y paralelo de alto rendimiento 
+
+
+| DAG | Grafo acíclico dirigido: definición del flujo de trabajo de Airflow 
+
+
+| XCom | El mecanismo de Airflow para pasar datos entre tareas 
+
+
+| run++_++stamp | Identificador único con marca de tiempo por ejecución usado para la trazabilidad 
+
+
+| Manifiesto | Registro JSON que describe las entradas, las salidas y la configuración de una etapa 
+|===
+
+
+[[11-2-2-revision-history]]
+=== 11.2.2 Historial de revisiones
+
+Registra cada modificación publicada para conservar el historial de revisión y aprobación del documento.
+
+[cols="25%,25%,25%,25%"]
+|===
+| Versión | Fecha | Autor | Cambiar 
+
+
+| 1,0 | 25 de septiembre de 2026 | Equipo de Arquitectura de Soluciones | NVA inicial lista para su publicación con tablas completas de parámetros y diagramas 
+|===
+
+
+[[11-2-3-contact-us-and-software-requests]]
+=== 11.2.3 Contacto y solicitudes de software
+
+Para solicitar el paquete de software, los DAG de automatización, los scripts de implementación o los artefactos de validación para implementar y validar esta arquitectura, o para enviar comentarios y consultas técnicas, ponte en contacto con el equipo de AI & Data Mobility de NetApp:
+
+* *Correo electrónico:* ng-data-mobility-in-ai-pipeline@netapp.com
+* *Objetivo:* solicitudes de paquetes de software, orientación sobre la implementación, apoyo en la validación de la arquitectura y comentarios técnicos.
+

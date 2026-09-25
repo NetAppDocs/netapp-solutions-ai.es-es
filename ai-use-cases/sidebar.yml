@@ -3,6 +3,36 @@ section: ai-use-cases
 title: Casos de uso de IA
 url: "/ai-use-cases/index.html"
 entries:
+- title: Optimización del flujo de trabajo de IA en las plataformas de almacenamiento
+    de NetApp
+  pdf-filename: Optimización del flujo de trabajo de IA en las plataformas de almacenamiento
+    de NetApp
+  entries:
+  - title: Descripción general
+    url: "/infra/ai-pipeline-overview.html"
+  - title: Resumen ejecutivo
+    url: "/infra/ai-pipeline-executive-summary.html"
+  - title: Descripción general de la solución, valor empresarial y beneficios para
+      el cliente
+    url: "/infra/ai-pipeline-solution-overview.html"
+  - title: Descripción general de la arquitectura
+    url: "/infra/ai-pipeline-architecture.html"
+  - title: NetApp, componentes tecnológicos de terceros y de código abierto
+    url: "/infra/ai-pipeline-netapp-components.html"
+  - title: Diseño de la solución y detalle de la arquitectura de almacenamiento
+    url: "/infra/ai-pipeline-solution-design-and-storage-architecture.html"
+  - title: Movilidad de datos con NetApp XCP
+    url: "/infra/ai-pipeline-data-mobility.html"
+  - title: Arquitectura de implementación
+    url: "/infra/ai-pipeline-deployment-architecture.html"
+  - title: Referencia de configuración
+    url: "/infra/ai-pipeline-configuration-reference.html"
+  - title: Guía operativa
+    url: "/infra/ai-pipeline-operational-guide.html"
+  - title: Consideraciones de seguridad, validación y pruebas
+    url: "/infra/ai-pipeline-security-considerations-validation-testing.html"
+  - title: NetApp diferenciación y posicionamiento frente a la competencia, apéndices
+    url: "/infra/ai-pipeline-differentiation-appendices.html"
 - title: Descarga de la caché KV con NetApp
   pdf-filename: Descarga de la caché KV con NetApp
   url: "/software/ai-kv-cache-offloading-netapp.html"
