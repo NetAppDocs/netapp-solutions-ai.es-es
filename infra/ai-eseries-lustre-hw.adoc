@@ -149,7 +149,7 @@ La plataforma EF80 admite hasta doce puertos de host por array cuando se instala
 
 Cada cabina EF80 también utiliza el módulo de E/S dedicado de la ranura 4 para la duplicación entre controladores. Conecta el puerto 4a del controlador A al puerto 4a del controlador B, y el puerto 4b del controlador A al puerto 4b del controlador B. Estas conexiones proporcionan duplicación de caché y envío de E/S, y no se usan para el tráfico NVMe-oF del host. Consulta link:https://docs.netapp.com/us-en/e-series/install-hw-ef50-ef80/install-cable.html#step-1-cable-the-inter-controller-mirroring-connections["Conecta los cables de las conexiones de duplicación entre los controladores EF50 y EF80"^].
 
-Para consultar las especificaciones completas de la EF-Series en todos los modelos, consulta la link:https://www.netapp.com/pdf.html?item=/media/14036-ds-4082.pdf["NetApp Ficha técnica de la cabina all-flash EF-Series"^].
+Para consultar las especificaciones completas de la EF-Series en todos los modelos, consulta la link:https://www.netapp.com/pdf.html?item=/media/19339-ds-4082.pdf["NetApp Ficha técnica de la cabina all-flash EF-Series"^].
 
 
 

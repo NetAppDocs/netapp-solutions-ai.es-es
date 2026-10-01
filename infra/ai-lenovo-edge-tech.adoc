@@ -108,7 +108,7 @@ image:ai-edge-007.png["Figura que muestra el diálogo de entrada/salida o repres
 
 
 
-NOTE: Para obtener más información, consulte la https://www.netapp.com/pdf.html?item=/media/19339-DS-4082.pdf["Hoja de datos de las matrices all-flash EF600, F300, EF570 y EF280 de la serie EF de NetApp"^] .
+NOTE: Para más información, consulta el  https://www.netapp.com/pdf.html?item=/media/19339-ds-4082.pdf["Hoja de datos de las matrices all-flash EF600, F300, EF570 y EF280 de la serie EF de NetApp"^].
 
 
 

@@ -42,7 +42,7 @@ GPFS de IBM es un sistema de archivos empresarial que ofrece una alternativa a H
 [[netapp-in-place-analytics-module]]
 === Módulo de análisis local de NetApp
 
-El módulo de análisis local de NetApp (NIPAM) funciona como controlador para que los clústeres de Hadoop accedan a datos NFS.  Tiene cuatro componentes: un grupo de conexiones, un NFS InputStream, un caché de controladores de archivos y un NFS OutputStream. Para obtener más información, consulte  https://www.netapp.com/pdf.html?item=/media/16351-tr-4382pdf.pdf[] .
+El módulo In-Place Analytics Module (NIPAM) de NetApp actúa como controlador para que los clústeres de Hadoop accedan a datos NFS. Tiene cuatro componentes: un grupo de conexiones, un InputStream de NFS, una caché de identificadores de archivo y un OutputStream de NFS. Para obtener más información, consulta https://www.netapp.com/pdf.html?item=/media/16351-tr-4382.pdf[].
 
 
 
