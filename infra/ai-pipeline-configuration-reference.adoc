@@ -15,6 +15,7 @@ summary:
 
 Karthikeyan Nagalingam, NetApp
 
+[role="lead"]
 La referencia de configuración describe los parámetros de tiempo de ejecución que controlan la ingesta de datos, la preparación de datos, la movilidad de XCP, el entrenamiento, la creación de puntos de control y el archivado. El bucket NAS de ONTAP se usa principalmente como la capa de preparación de datos y de staging de XCP para facilitar la capacidad de soporte y la portabilidad. En el uso de producción en tiempo real, los mismos datos preparados también pueden consumirse a través de rutas de acceso directas compatibles con RDMA cuando eso se adapta mejor a los requisitos de la carga de trabajo y la latencia.
 
 '''

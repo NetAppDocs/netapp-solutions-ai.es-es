@@ -15,6 +15,7 @@ summary:
 
 Karthikeyan Nagalingam, NetApp
 
+[role="lead"]
 En esta sección combinada se abordan los controles necesarios para operar el pipeline de IA de forma segura, así como las actividades de validación que se utilizan para demostrar que el diseño se comporta según lo previsto en entornos representativos. La misma separación de nivel de almacenamiento, el modelo de acceso con privilegios mínimos, la lógica de puntos de control y el linaje limitado al ámbito de ejecución que se utilizan en el pipeline también sirven de base para el plan de validación y las medidas de protección operativas.
 
 

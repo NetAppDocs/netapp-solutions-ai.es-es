@@ -15,6 +15,7 @@ summary:
 
 Karthikeyan Nagalingam, NetApp
 
+[role="lead"]
 Esta guía abarca la ejecución rutinaria, la supervisión, la clasificación de incidencias, la recuperación del entrenamiento, la verificación de archivos, el ajuste de la capacidad y la protección de datos. Úsala junto con los escenarios de configuración de la sección 8 para operar el mismo pipeline de forma coherente en los modos de entrenamiento local, ONTAP S3 y LustreFS.
 
 

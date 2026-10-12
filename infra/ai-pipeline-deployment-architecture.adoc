@@ -15,6 +15,7 @@ summary:
 
 Karthikeyan Nagalingam, NetApp
 
+[role="lead"]
 En esta sección se definen la ubicación de la infraestructura, las dependencias de software y la conectividad de red necesarias para operar el pipeline. La implementación separa la orquestación de Airflow del host de movilidad de datos XCP, al tiempo que conecta ambos componentes a StorageGRID, ONTAP NAS y el destino de entrenamiento seleccionado de ONTAP S3 o LustreFS.
 
 

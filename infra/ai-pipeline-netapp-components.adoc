@@ -15,6 +15,9 @@ summary:
 
 Karthikeyan Nagalingam, NetApp
 
+[role="lead"]
+La solución de canalización de datos de IA utiliza componentes de NetApp, de terceros y de código abierto.
+
 [cols="50%,50%"]
 |===
 | Componente | Función en la solución 

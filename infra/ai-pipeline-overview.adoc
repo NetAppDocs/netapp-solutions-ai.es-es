@@ -15,6 +15,7 @@ summary:
 
 Karthikeyan Nagalingam, NetApp
 
+[role="lead"]
 Esta arquitectura validada presenta un flujo de datos de IA gobernado y adaptado al nivel de almacenamiento, orquestado por Apache Airflow. La solución ingiere datos tabulares y de texto sin procesar desde NetApp StorageGRID, prepara conjuntos de datos determinísticos y manifiestos en un bucket NAS de ONTAP, y usa NetApp XCP para mover los datos preparados a NetApp ONTAP S3 o a LustreFS según la configuración en tiempo de ejecución. Luego entrena y ajusta de forma incremental modelos de scikit-learn, genera predicciones, guarda puntos de control de los resultados de entrenamiento correctos y archiva modelos, métricas, manifiestos y pruebas de predicción en StorageGRID. La arquitectura ofrece ejecución reproducible, ubicación de almacenamiento configurable, protecciones contra fallos, recuperación basada en puntos de control y un linaje auditable en todo el ciclo de vida de la IA. Está pensada para arquitectos, ingenieros de datos, ingenieros de ML y equipos de infraestructura que necesitan un patrón repetible de implementación y validación para flujos de datos de IA en los niveles de almacenamiento de NetApp.
 
 '''
