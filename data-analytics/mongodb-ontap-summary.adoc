@@ -1,0 +1,35 @@
+---
+sidebar: sidebar 
+permalink: data-analytics/mongodb-ontap-summary.html 
+keywords: mongodb, ontap, summary, conclusion 
+summary: Esta página resume las ventajas validadas de MongoDB en NetApp ONTAP. 
+---
+= Resumen
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta arquitectura de referencia ofrece una solución completa para implementar de forma eficiente una base de datos NoSQL MongoDB virtualizada y de escalado horizontal en una infraestructura de datos inteligente de NetApp. En la arquitectura probada, que combinaba la tecnología de almacenamiento de NetApp con VMware vSphere, las máquinas virtuales y las bases de datos de MongoDB se alojaban en una cabina all-flash AFF de NetApp. NetApp SnapCenter gestiona las copias de seguridad, y SnapMirror las replica en Amazon FSx for NetApp ONTAP en AWS para la recuperación ante desastres.
+
+Esta solución validó las siguientes ventajas clave:
+
+* Alto rendimiento predecible con una latencia siempre baja, lo que proporciona tiempos de respuesta muy rápidos a las aplicaciones de análisis basadas en MongoDB más exigentes.
+* La deduplicación y la compresión en línea hacen que MongoDB en almacenamiento flash sea rentable.
+* Clonación de bases de datos instantánea, con gestión eficiente del espacio, que agiliza la configuración de entornos de desarrollo y pruebas y de control de calidad sin necesidad de almacenamiento adicional.
+* Copia de seguridad y recuperación basadas en copias Snapshot de NetApp con gestión eficiente del espacio y en la replicación remota a la nube.
+
+
+Más allá de los resultados de la validación, NetApp AFF complementa a MongoDB con las siguientes capacidades clave:
+
+* Una cabina all-flash con capacidad de ampliación vertical y escalado horizontal que te permite ampliar el almacenamiento de forma modular con MongoDB.
+* Operaciones sin interrupciones que garantizan el máximo tiempo de actividad y una alta disponibilidad.
+
+
+En las pruebas de rendimiento de YCSB, NetApp AFF obtuvo excelentes resultados, lo que demuestra que es una cabina all-flash de alto rendimiento y rentable para el escalado horizontal de las implementaciones de MongoDB.
+
+Este informe también describe dos casos de uso de clientes: servir Digital Advisor desde MongoDB Atlas y la copia de seguridad y recuperación empresarial con MongoDB Ops Manager. Para Ops Manager, ofrece directrices de diseño, aún por evaluar, sobre la incorporación de NetApp SnapCenter para copias Snapshot a nivel de almacenamiento, recuperación rápida y recuperación ante desastres.

@@ -1,0 +1,92 @@
+---
+sidebar: sidebar 
+permalink: data-analytics/mongodb-ontap-solution-overview.html 
+keywords: mongodb, ontap, aff, snapcenter, fsx for ontap, netapp console 
+summary: Esta página describe la solución completa de MongoDB en la infraestructura de datos inteligente de NetApp y los productos de NetApp que se usan en ella. 
+---
+= Descripción general de la solución
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+En la solución completa que se muestra en la siguiente figura, MongoDB virtualizado se aloja en almacenamiento NetApp AFF-A30 y en VMware vSphere. La misma solución se aplica al almacenamiento AFF más reciente. La cabina NetApp AFF ofrece baja latencia, deduplicación y compresión en línea para proporcionar un alto rendimiento y reducir los requisitos de almacenamiento flash.
+
+NetApp SnapCenter software de backup proporciona el marco para invocar al instante copias Snapshot y clones de NetApp. Estos crean copias sin coste de todo el entorno para usarlas en backup y recuperación. SnapCenter también gestiona la replicación remota de todo el entorno mediante SnapMirror a Amazon FSx for NetApp ONTAP en Amazon Web Services (AWS). Los datos replicados pueden utilizarse para la recuperación ante desastres y en entornos de desarrollo y pruebas.
+
+.Solución completa para MongoDB en la infraestructura de datos inteligente de NetApp
+image:mongodb-ontap-001.png["Solución completa para MongoDB en la infraestructura de datos inteligente de NetApp. Un conjunto de réplicas de MongoDB local se ejecuta en un par AFF A-Series ONTAP HA, que se replica con SnapMirror a Amazon FSx for NetApp ONTAP en AWS y a un sitio secundario AFF o FAS, todo ello gestionado desde el plano de control en la nube."]
+
+
+
+[[netapp-intelligent-data-infrastructure]]
+== NetApp infraestructura de datos inteligente
+
+NetApp intelligent data infrastructure es el enfoque actual de NetApp para la gestión de datos. Aúna el almacenamiento de datos, los servicios de datos y las operaciones de las cargas de trabajo en los sistemas on-premises y en las principales nubes públicas, para que las organizaciones puedan gestionar, proteger, proteger y acceder a sus datos de la misma manera dondequiera que se encuentren. Se basa en el concepto NetApp Data Fabric utilizado en ediciones anteriores de este informe.
+
+En el caso de MongoDB, esto significa que las capacidades de gestión de datos de ONTAP mencionadas en este informe, como las copias de Snapshot, los clones y la replicación, se aplican de la misma manera a las bases de datos en servidores físicos, infraestructura virtualizada e instancias en la nube.
+
+
+NOTE: Los nombres y las versiones de los productos de este informe reflejan la validación original y podrían diferir de las ofertas actuales de NetApp.
+
+
+
+[[netapp-all-flash-fas]]
+== NetApp All Flash FAS
+
+NetApp All Flash FAS (AFF) es una familia de sistemas empresariales de almacenamiento all-flash que ejecutan ONTAP. La cartera actual de AFF incluye sistemas A-Series para cargas de trabajo sensibles al rendimiento y sistemas C-Series para flash optimizada para capacidad. La validación de este informe usó un AFF-A30, y las mismas funcionalidades de ONTAP están disponibles en los modelos AFF actuales.
+
+AFF ofrece las siguientes funcionalidades para MongoDB:
+
+* Ejecuta bases de datos sensibles a la latencia en flash con tiempos de respuesta predecibles.
+* Reduce la capacidad flash necesaria usando la eficiencia de datos en línea, incluida la deduplicación, la compresión y la compactación. El ahorro real depende de los datos de tu implementación.
+* Escala vertical u horizontalmente como clúster y mueve datos entre nodos sin interrupciones.
+* Protege los datos con las copias de Snapshot de NetApp, SnapRestore y la replicación de SnapMirror, que están integradas en ONTAP.
+* Gestiona los sistemas con ONTAP System Manager y automatiza las operaciones a través de la API de REST de ONTAP.
+
+
+Para obtener más información sobre AFF, consulta la link:http://www.netapp.com/us/products/storage-systems/all-flash-fas/["AFF de NetApp"^] página del producto.
+
+
+
+[[amazon-fsx-for-netapp-ontap]]
+[[amazon-fsx-for-ontap]]
+== Amazon FSx for NetApp ONTAP
+
+Amazon FSx for NetApp ONTAP es un servicio de AWS totalmente gestionado basado en ONTAP, por lo que la misma gestión de datos de ONTAP que se utiliza en el array AFF está disponible para MongoDB en AWS. AWS opera el sistema de archivos y tú gestionas volúmenes, copias de Snapshot, clones y relaciones de SnapMirror con la consola de AWS, la CLI de ONTAP, ONTAP System Manager, NetApp Console o la API de REST de ONTAP.
+
+FSx for ONTAP ofrece las capacidades de ONTAP utilizadas en este informe: copias Snapshot, volúmenes FlexClone, replicación de SnapMirror y funciones de eficiencia de datos, como deduplicación, compresión y compactación. En esta solución, FSx for ONTAP es el destino de SnapMirror para backup y recuperación ante desastres desde la cabina AFF local, y el origen de los clones de desarrollo y pruebas de MongoDB en la nube.
+
+La validación original utilizó una instancia de ONTAP basada en software en AWS. Comprueba el dimensionamiento, el rendimiento y la disponibilidad de funciones para tu implementación de FSx for ONTAP.
+
+
+
+[[netapp-console]]
+== NetApp Console
+
+NetApp Console ofrece un único plano de control para gestionar datos en entornos ONTAP tanto on-premises como en la nube. Se utiliza para detectar y gestionar sistemas Amazon FSx for NetApp ONTAP y sistemas ONTAP on-premises.
+
+NetApp Console ofrece las siguientes funciones clave:
+
+* Simplifica la detección y la gestión de los sistemas de archivos de Amazon FSx for NetApp ONTAP.
+* Ofrece un punto de control centralizado para los sistemas ONTAP en las instalaciones y en la nube.
+* Configura y supervisa la replicación de SnapMirror entre la cabina AFF local y cloud ONTAP para backup y recuperación ante desastres.
+* Ofrece servicios de backup y recuperación para volúmenes ONTAP.
+* Admite entornos híbridos que incluyen ONTAP local y Amazon FSx for NetApp ONTAP.
+
+
+
+
+[[netapp-snapcenter]]
+[[snapcenter]]
+== NetApp SnapCenter
+
+NetApp SnapCenter es el software unificado y escalable de NetApp para la protección de datos consistente con las aplicaciones en entornos físicos y virtualizados. Utiliza las tecnologías ONTAP Snapshot, SnapRestore, SnapMirror y FlexClone para realizar copias de seguridad, restaurar y clonar datos de aplicaciones, así como para replicarlos con fines de recuperación ante desastres. Para implementaciones virtualizadas de MongoDB, SnapCenter ofrece copias de seguridad y recuperación instantáneas de MongoDB VMs y bases de datos, y puede crear clones rápidos del entorno virtualizado de MongoDB para su uso en desarrollo y pruebas y QA.
+
+SnapCenter protege las aplicaciones mediante complementos. MongoDB es uno de los complementos compatibles con NetApp, junto con ORASCPM (Oracle Applications), SAP ASE, SAP MaxDB y el complemento de almacenamiento. Instalas el complemento desde la página Add Host en SnapCenter y funciona tanto en hosts Windows como Linux. Con el complemento instalado, puedes usar SnapCenter para hacer copias de seguridad, restaurar y clonar MongoDB, replicar conjuntos de backups en otro volumen con SnapMirror y realizar la replicación de backups de disco a disco con SnapVault.
+
+El soporte de SnapCenter cubre el marco de trabajo de complementos, el motor principal y las API asociadas. No cubre el código fuente de los complementos ni los scripts creados sobre el marco de trabajo. Comprueba que tu topología y las versiones de MongoDB sean compatibles antes de planificar una implementación. Si una configuración no es compatible, automatiza las operaciones de ONTAP Snapshot, FlexClone y SnapMirror mediante la API de REST de ONTAP para lograr el mismo flujo de trabajo de backup, clonación y replicación.

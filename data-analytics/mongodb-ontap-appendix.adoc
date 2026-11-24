@@ -1,0 +1,116 @@
+---
+sidebar: sidebar 
+permalink: data-analytics/mongodb-ontap-appendix.html 
+keywords: mongodb, quiesce, balancer, sharding, commands, appendix 
+summary: Este apéndice enumera los comandos quiesce y balancer, así como los comandos del clúster de MongoDB utilizados en la validación. 
+---
+= Apéndice
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+En este apéndice se listan los comandos quiesce y balancer, así como los comandos de MongoDB usados en la validación.
+
+
+
+[[quiesce-and-balancer-commands]]
+== Comandos Quiesce y balancer
+
+La validación utilizó scripts de Python 2.7 en los servidores de aplicaciones de MongoDB como comandos quiesce, unquiesce y pre-exit; esos scripts no se incluyen. Para evitar esa dependencia, configura los hooks con los comandos `mongosh` de xref:mongodb-ontap-solution-validation.html#snapcenter-backup[Haz una copia de seguridad con SnapCenter]. Instala `mongosh` en el host que ejecuta los comandos y adapta las opciones de host, puerto y autenticación a tu implementación. Los scripts de validación utilizaban una versión anterior de PyMongo que proporciona la clase `Connection`; Python 2 y `Connection` ya no son compatibles.
+
+[cols="35%,65%"]
+|===
+| Script utilizado en la validación | Operación 
+
+
+| `wait-for-cleared-locks.py` | Espera a que se libere el bloqueo del balanceador y, a continuación, detén el balanceador. En `mongosh`, ejecuta `sh.stopBalancer()`, que también espera a que termine cualquier ronda de equilibrio en curso. 
+
+
+| `start-balancer.py` | Reinicia el balanceador. En `mongosh`, ejecuta `sh.startBalancer()`. 
+
+
+| `fsync-lock.py` | Vacía las escrituras en disco y bloquea las nuevas escrituras cuando la copia de seguridad requiera poner en pausa el sistema, incluidos los datos y el journal de WiredTiger en volúmenes independientes sin una Snapshot de grupo de consistencia. En `mongosh`, ejecuta `db.fsyncLock()` en cada miembro del que se va a realizar la copia de seguridad. 
+
+
+| `fsync-unlock.py` | Libera todos los bloqueos de escritura adquiridos para la copia de seguridad, incluso tras un fallo. En `mongosh`, ejecuta `db.fsyncUnlock()`. 
+|===
+
+
+[[mongodb-operations]]
+== Operaciones con MongoDB
+
+Las siguientes operaciones configuran el clúster fragmentado y le añaden dos fragmentos. Los comandos y la salida se capturaron con MongoDB 3.0.7 y el shell heredado `mongo`. En las versiones actuales de MongoDB, usa `mongosh`, implementa los servidores de configuración como un conjunto de réplicas (inícialos con `--configsvr` y `--replSet`, y pasa el nombre del conjunto de réplicas a `mongos` con `--configdb`) y omite la opción `--rest` eliminada.
+
+. Comprueba las particiones montadas para la base de datos MongoDB en cada miembro del shard (`mdb-srv-1`, `mdb-srv-10`, `mdb-srv-11`, `mdb-srv-2`, `mdb-srv-20`, y `mdb-srv-21`). Cada miembro monta un sistema de archivos XFS en `/data`:
++
+[listing]
+----
+[mongodb@mdb-srv-1 db_wt]$ df -h /data
+[mongodb@mdb-srv-1 db_wt]$ cat /etc/fstab | grep sdb
+/dev/sdb1 /data xfs defaults 0 0
+----
+. En cada miembro del shard, crea las carpetas necesarias, establece la propiedad y los permisos, e inicia `mongod`. Para el primer shard, los miembros son `mdb-srv-1`, `mdb-srv-10` y `mdb-srv-11`. Por ejemplo, en `mdb-srv-1`:
++
+[listing]
+----
+[root@mdb-srv-1 ~]# mkdir -p /mongodb/data
+[root@mdb-srv-1 ~]# mkdir -p /data/db_wt
+[root@mdb-srv-1 ~]# chown -R mongodb:mongodb /mongodb
+[root@mdb-srv-1 ~]# chown -R mongodb:mongodb /data
+[root@mdb-srv-1 ~]# chmod -R 700 /mongodb
+[mongodb@mdb-srv-1 ~]$ mongod --replSet shard1/mdb-srv-10,mdb-srv-11 --journal --rest --shardsvr --fork --storageEngine wiredTiger --dbpath /data/db_wt --logpath /mongodb/data/mongod.log --directoryperdb
+----
+. Inicia los servidores de configuración (`mdb-cfg-1`, `mdb-cfg-2` y `mdb-cfg-3`) en el puerto 27019. Crea `/mongodb/data/configdb` con propiedad de `mongodb` y permisos 700 primero:
++
+[listing]
+----
+[mongodb@mdb-cfg-3 ~]$ mongod --configsvr --dbpath /mongodb/data/configdb --port 27019 --fork --logpath /mongodb/data/arbiter.log
+----
+. Inicia el `mongos` proceso en cada servidor de aplicaciones (`mdb-ms-1` y `mdb-ms-2`), y comprueba que está a la escucha en el puerto 27017:
++
+[listing]
+----
+[mongodb@mdb-ms-1 ~]$ mongos --configdb mdb-cfg-1:27019,mdb-cfg-2:27019,mdb-cfg-3:27019 --logpath /mongodb/data/mongos.log --fork --port 27017
+----
+. Conéctate al servidor primario del shard (`mdb-srv-1`) desde el servidor de aplicaciones e inicia el conjunto de réplicas con el comando `rs.initiate(cfg)`:
++
+[listing]
+----
+[mongodb@mdb-ms-1 ~]$ mongo mdb-srv-1:27018/admin
+> var cfg = { _id: "shard1", members: [ { _id: 0, host: "mdb-srv-1:27018" }, { _id: 1, host: "mdb-srv-10:27018" }, { _id: 2, host: "mdb-srv-11:27018" } ] };
+> rs.initiate(cfg);
+----
+. Comprueba el estado del conjunto de réplicas desde el miembro del shard:
++
+[listing]
+----
+[mongodb@mdb-srv-1 ~]$ mongo --host mdb-srv-1 --port 27018
+shard1:PRIMARY> rs.printReplicationInfo()
+PRIMARY> rs.status()
+----
+. Añade el primer fragmento desde el servidor de aplicaciones. Si vuelves a añadir el mismo fragmento desde otro servidor de aplicaciones, MongoDB indica que el fragmento ya existe:
++
+[listing]
+----
+[mongodb@mdb-ms-1 ~]$ mongo mdb-ms-1:27017/admin
+mongos> db.adminCommand( { addShard : "shard1/mdb-srv-1:27018,mdb-srv-10:27018,mdb-srv-11:27018" } )
+----
+. Comprueba el estado de la fragmentación:
++
+[listing]
+----
+mongos> sh.status();
+----
+. Añade el segundo shard. Prepara `mdb-srv-2`, `mdb-srv-20` y `mdb-srv-21` del mismo modo que el primer shard, inicia su conjunto de réplicas y añádelo:
++
+[listing]
+----
+mongos> db.adminCommand( { addShard : "shard2/mdb-srv-2:27018,mdb-srv-20:27018,mdb-srv-21:27018" } )
+----
+. Ejecuta `sh.status()` de nuevo para confirmar que ambos fragmentos (`shard1` y `shard2`) aparecen en la lista. Añadir fragmentos no distribuye automáticamente los datos de las colecciones. Para la configuración de MongoDB 3.0.7 que se muestra aquí, habilita la fragmentación en la base de datos con `sh.enableSharding()`, selecciona una clave de fragmentación adecuada y crea cualquier índice necesario, y fragmenta cada colección prevista con `sh.shardCollection()`.
+

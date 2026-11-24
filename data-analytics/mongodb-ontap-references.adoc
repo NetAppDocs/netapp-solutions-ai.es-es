@@ -1,0 +1,61 @@
+---
+sidebar: sidebar 
+permalink: data-analytics/mongodb-ontap-references.html 
+keywords: mongodb, references, acknowledgements, additional information 
+summary: En esta página se reconoce a quienes han contribuido a este informe y se enumeran las referencias y la información adicional. 
+---
+= Agradecimientos y referencias
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+En esta página damos las gracias a las personas que han colaborado en este informe y te indicamos dónde puedes encontrar información adicional.
+
+
+
+[[acknowledgements]]
+== Expresiones de gratitud
+
+Los autores agradecen a las siguientes personas sus contribuciones a este informe:
+
+* Sheena Badani, directora de Tecnología y Socios VAR, MongoDB
+* Nilesh Bagad, gerente sénior de producto, análisis de Big Data, NetApp
+* Scott Lane, gerente sénior de Ingeniería de cargas de trabajo, NetApp
+* Chris Lemmons, director de marketing técnico de DSG para cargas de trabajo de procesamiento empresarial, NetApp
+* Sathish Thyagarajan, ingeniero técnico de marketing, AI/Data Pipeline Team, NetApp
+* Kevin Hoke, director de Ingeniería de Soluciones, NetApp
+* Saji Joseph, director de Ingeniería de Software, NetApp
+* Ross Ackerman, director sénior de experiencia del cliente, NetApp
+* Mark Kwasnick, arquitecto de software de Active IQ Analytics, NetApp
+* Dinaharan Ayyalusamy, ingeniero sénior de DevOps, Ingeniería de plataformas para desarrolladores, NetApp
+* Jeffrey Gonzales, ingeniero principal de soluciones, NetApp
+* AJ Mahajan, director sénior de Ingeniería de Soluciones, NetApp
+* Rodrigo Nascimento, director técnico de Vortex TI
+
+
+
+
+[[references]]
+== Referencias
+
+Para obtener más información sobre la información descrita en este documento, consulta los siguientes documentos y sitios web:
+
+* link:https://www.mongodb.com/docs/manual/core/introduction/["Introducción a MongoDB"^]
+* link:https://www.mongodb.com/docs/manual/["El manual de MongoDB"^]
+* link:https://www.mongodb.com/docs/manual/core/wiredtiger/["WiredTiger motor de almacenamiento"^]
+* link:https://docs.mongodb.org/manual/core/sharded-cluster-architectures-production/["Arquitectura del clúster de producción"^]
+* link:https://docs.mongodb.org/manual/reference/program/mongoperf/["mongoperf"^]
+* link:https://www.mongodb.com/partners/netapp["Página de socios de MongoDB de NetApp"^]
+* link:https://github.com/brianfrankcooper/YCSB/wiki["YCSB"^]
+* link:http://www.netapp.com/us/products/storage-systems/all-flash-fas/["AFF de NetApp"^]
+* link:https://docs.netapp.com/us-en/snapcenter/protect-nsp/netapp_supported_plugins_overview.html["NetApp SnapCenter complementos para aplicaciones compatibles con NetApp"^]
+* link:https://docs.netapp.com/us-en/ontap/peering/index.html["Clúster ONTAP y emparejamiento de SVM"^]
+* link:http://mysupport.netapp.com/["Soporte de NetApp"^]
+
+
+Consulta link:http://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad (IMT) de NetApp"^] para validar que las versiones exactas del producto y de las funciones descritas en este documento sean compatibles con tu entorno específico. La NetApp IMT define los componentes y las versiones de los productos que se pueden utilizar para crear configuraciones compatibles con NetApp. Los resultados concretos dependen de la instalación de cada cliente, de acuerdo con las especificaciones publicadas.
